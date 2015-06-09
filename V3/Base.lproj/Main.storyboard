@@ -209,19 +209,15 @@
                                 <segue destination="pGg-6v-bdr" kind="custom" identifier="dismissAndCancel" customClass="DismissSegue" id="rJK-zQ-gcW"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="pM5-uL-ZZa">
-                            <connections>
-                                <segue destination="pGg-6v-bdr" kind="custom" identifier="dismissAndSave" customClass="DismissSegue" id="BaI-Pa-0CE"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="searchBarView" destination="yY8-01-KTH" id="xG5-Jr-85c"/>
+                        <segue destination="pGg-6v-bdr" kind="custom" identifier="dismissAndSave" customClass="DismissSegue" id="sV8-Bo-2JZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0aD-A1-qOH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1381" y="854"/>
+            <point key="canvasLocation" x="1385" y="860"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
