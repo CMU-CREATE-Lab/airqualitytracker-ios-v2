@@ -178,8 +178,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yY8-01-KTH">
-                                <rect key="frame" x="39" y="84" width="560" height="40"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yY8-01-KTH">
+                                <rect key="frame" x="39" y="40" width="560" height="40"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="560" id="UJb-cy-022"/>
@@ -187,32 +187,14 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="450" id="zlP-j5-2y5"/>
                                 </constraints>
                             </view>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="name: " borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6B7-eI-1s6">
-                                <rect key="frame" x="33" y="406" width="543" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="coordinate:" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u4Y-x5-a28">
-                                <rect key="frame" x="39" y="449" width="529" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="yY8-01-KTH" firstAttribute="top" secondItem="3Qv-Iq-cax" secondAttribute="bottom" constant="20" id="2Nq-43-LFZ"/>
                             <constraint firstItem="xge-C4-SqW" firstAttribute="top" secondItem="yY8-01-KTH" secondAttribute="bottom" constant="479" id="3pq-xk-bed"/>
                             <constraint firstAttribute="trailingMargin" secondItem="yY8-01-KTH" secondAttribute="trailing" constant="-15" id="ADI-JS-NNR"/>
-                            <constraint firstItem="6B7-eI-1s6" firstAttribute="top" secondItem="3Qv-Iq-cax" secondAttribute="bottom" constant="342" id="B6f-An-qGb"/>
                             <constraint firstItem="yY8-01-KTH" firstAttribute="leading" secondItem="g2Q-EW-uf5" secondAttribute="leadingMargin" constant="23" id="HfY-pm-oNz"/>
-                            <constraint firstItem="u4Y-x5-a28" firstAttribute="top" secondItem="6B7-eI-1s6" secondAttribute="bottom" constant="13" id="LrL-T6-aS6"/>
-                            <constraint firstItem="u4Y-x5-a28" firstAttribute="leading" secondItem="g2Q-EW-uf5" secondAttribute="leadingMargin" constant="23" id="Vt0-Oe-Rkz"/>
-                            <constraint firstItem="xge-C4-SqW" firstAttribute="top" secondItem="6B7-eI-1s6" secondAttribute="bottom" constant="164" id="ZCu-FK-jA6"/>
-                            <constraint firstItem="xge-C4-SqW" firstAttribute="top" secondItem="u4Y-x5-a28" secondAttribute="bottom" constant="121" id="ciB-7d-cM0"/>
                             <constraint firstItem="xge-C4-SqW" firstAttribute="top" secondItem="yY8-01-KTH" secondAttribute="bottom" constant="509" id="feN-cE-xbI"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="6B7-eI-1s6" secondAttribute="trailing" constant="8" id="p5M-jp-oeV"/>
-                            <constraint firstItem="6B7-eI-1s6" firstAttribute="leading" secondItem="g2Q-EW-uf5" secondAttribute="leadingMargin" constant="17" id="rXr-7G-43M"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="u4Y-x5-a28" secondAttribute="trailing" constant="16" id="u71-Hi-3Ok"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -234,8 +216,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="coordinateLabel" destination="u4Y-x5-a28" id="R9b-iq-RH9"/>
-                        <outlet property="descriptionLabel" destination="6B7-eI-1s6" id="kDV-es-tg6"/>
                         <outlet property="searchBarView" destination="yY8-01-KTH" id="xG5-Jr-85c"/>
                     </connections>
                 </viewController>

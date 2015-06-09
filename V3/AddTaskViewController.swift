@@ -14,8 +14,10 @@ var searcher : UISearchController!
 class AddTaskViewController: UIViewController, UISearchBarDelegate {
 
     
-    @IBOutlet weak var descriptionLabel: UITextField!
-    @IBOutlet weak var coordinateLabel: UITextField!
+//    @IBOutlet weak var descriptionLabel: UITextField!
+//    @IBOutlet weak var coordinateLabel: UITextField!
+    var descriptionLabel: String!
+    var coordinateLabel: String!
     @IBOutlet weak var searchBarView: UIView!
     
     let googleAPI = GoogleAPI()
@@ -45,10 +47,10 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
         println("in searchBarTextDidEndEditing")
         if src.selected! {
             var positionInArray = src.selectedIndex.row
-            descriptionLabel.text=src.areaNamesArray[positionInArray]
+            descriptionLabel = src.areaNamesArray[positionInArray]
             
             googleAPI.fetchPlacesDetail(src.placeIdArray[positionInArray]){ place in
-                self.coordinateLabel.text="lat,lon \(place!.coordinate.latitude), \(place!.coordinate.longitude)"
+                self.coordinateLabel = "lat,lon \(place!.coordinate.latitude), \(place!.coordinate.longitude)"
             }
         }
     }
@@ -61,7 +63,7 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.identifier == "dismissAndSave" {
-            let location = LocationForList(description: descriptionLabel.text, placeID: coordinateLabel.text)
+            let location = LocationForList(description: descriptionLabel, placeID: coordinateLabel)
             LocationStore.sharedInstance.add(location)
         }
     }

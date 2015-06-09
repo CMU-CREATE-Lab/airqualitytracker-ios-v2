@@ -20,7 +20,7 @@
 		407D87421B260988001C38B2 /* V3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407D87411B260988001C38B2 /* V3Tests.swift */; };
 		409207791B26A6B2000CE42B /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409207781B26A6B2000CE42B /* AddTaskViewController.swift */; };
 		4092077B1B26A807000CE42B /* DismissSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4092077A1B26A807000CE42B /* DismissSegue.swift */; };
-		4092077D1B26B4A7000CE42B /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4092077C1B26B4A7000CE42B /* Task.swift */; };
+		4092077D1B26B4A7000CE42B /* LocationForList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4092077C1B26B4A7000CE42B /* LocationForList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +51,7 @@
 		407D87411B260988001C38B2 /* V3Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V3Tests.swift; sourceTree = "<group>"; };
 		409207781B26A6B2000CE42B /* AddTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
 		4092077A1B26A807000CE42B /* DismissSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissSegue.swift; sourceTree = "<group>"; };
-		4092077C1B26B4A7000CE42B /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		4092077C1B26B4A7000CE42B /* LocationForList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationForList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +79,7 @@
 				407D872B1B260987001C38B2 /* MasterViewController.swift */,
 				407D872D1B260987001C38B2 /* DetailViewController.swift */,
 				40086C811B27592B00BD4B62 /* GoogleAPIHelper.swift */,
-				4092077C1B26B4A7000CE42B /* Task.swift */,
+				4092077C1B26B4A7000CE42B /* LocationForList.swift */,
 				40086C881B275A3D00BD4B62 /* LocationStore.swift */,
 				4092077A1B26A807000CE42B /* DismissSegue.swift */,
 			);
@@ -258,7 +258,7 @@
 				40086C891B275A3D00BD4B62 /* LocationStore.swift in Sources */,
 				409207791B26A6B2000CE42B /* AddTaskViewController.swift in Sources */,
 				407D872C1B260987001C38B2 /* MasterViewController.swift in Sources */,
-				4092077D1B26B4A7000CE42B /* Task.swift in Sources */,
+				4092077D1B26B4A7000CE42B /* LocationForList.swift in Sources */,
 				407D872A1B260987001C38B2 /* AppDelegate.swift in Sources */,
 				40086C821B27592B00BD4B62 /* GoogleAPIHelper.swift in Sources */,
 				40086C841B27594700BD4B62 /* GoogleAPICall.swift in Sources */,
