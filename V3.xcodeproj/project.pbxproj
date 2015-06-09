@@ -416,6 +416,7 @@
 				407D87471B260988001C38B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		407D87481B260988001C38B2 /* Build configuration list for PBXNativeTarget "V3Tests" */ = {
 			isa = XCConfigurationList;
@@ -424,6 +425,7 @@
 				407D874A1B260988001C38B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

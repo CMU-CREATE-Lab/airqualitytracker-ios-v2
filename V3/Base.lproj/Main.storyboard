@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="rS3-R9-Ivy">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Master-->
@@ -18,6 +19,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eq9-QA-ai8" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-148" y="64"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="CV8-m2-rMN">
+            <objects>
+                <navigationController id="L3q-cr-4ad" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="w6w-XQ-0HZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Vik-aj-o2f" kind="relationship" relationship="rootViewController" id="7gf-qy-lhz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DQx-uw-a0M" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="600" y="854"/>
         </scene>
         <!--Master-->
         <scene sceneID="VgW-fR-Quf">
@@ -56,7 +73,13 @@
                             <outlet property="delegate" destination="pGg-6v-bdr" id="Y6K-Cp-Qkv"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Master" id="tQt-TN-PWz"/>
+                    <navigationItem key="navigationItem" title="Master" id="tQt-TN-PWz">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="dDI-OJ-TLQ">
+                            <connections>
+                                <segue destination="L3q-cr-4ad" kind="presentation" identifier="showAddTask" id="GmS-Iw-lNg"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Cn-md-YlS" sceneMemberID="firstResponder"/>
             </objects>
@@ -97,6 +120,51 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lrm-kH-fPn" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1343" y="64"/>
+        </scene>
+        <!--Add Task-->
+        <scene sceneID="m7w-jQ-Vzf">
+            <objects>
+                <viewController id="Vik-aj-o2f" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3Qv-Iq-cax"/>
+                        <viewControllerLayoutGuide type="bottom" id="xge-C4-SqW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="g2Q-EW-uf5">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Title" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8UU-ox-Yb4">
+                                <rect key="frame" x="16" y="139" width="568" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="NX1-8n-Agp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Notes" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YN2-cI-7ZA">
+                                <rect key="frame" x="16" y="210" width="568" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="h4e-4m-9fF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="YN2-cI-7ZA" firstAttribute="top" secondItem="8UU-ox-Yb4" secondAttribute="bottom" constant="21" id="61i-Qr-z3a"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="8UU-ox-Yb4" secondAttribute="trailing" id="KrX-QU-iRC"/>
+                            <constraint firstItem="YN2-cI-7ZA" firstAttribute="leading" secondItem="g2Q-EW-uf5" secondAttribute="leadingMargin" id="Mnp-28-Luv"/>
+                            <constraint firstItem="8UU-ox-Yb4" firstAttribute="top" secondItem="3Qv-Iq-cax" secondAttribute="bottom" constant="75" id="bXT-2o-Qo0"/>
+                            <constraint firstItem="8UU-ox-Yb4" firstAttribute="leading" secondItem="g2Q-EW-uf5" secondAttribute="leadingMargin" id="mrH-30-TCc"/>
+                            <constraint firstItem="YN2-cI-7ZA" firstAttribute="trailing" secondItem="g2Q-EW-uf5" secondAttribute="trailingMargin" id="zw5-ak-PHl"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add Task" id="HP8-Ch-7Um"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0aD-A1-qOH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1381" y="854"/>
         </scene>
     </scenes>
 </document>
