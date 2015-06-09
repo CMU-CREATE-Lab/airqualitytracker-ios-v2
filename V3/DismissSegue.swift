@@ -8,12 +8,8 @@
 
 import UIKit
 
-//class DismissSegue: UIStoryboardSegue {
-//   
-//}
 
 @objc(DismissSegue) class DismissSegue: UIStoryboardSegue {
-//class DismissSegue: UIStoryboardSegue{
 
     override func perform() {
         if let controller = sourceViewController.presentingViewController {

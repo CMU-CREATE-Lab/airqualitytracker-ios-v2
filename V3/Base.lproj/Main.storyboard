@@ -162,7 +162,7 @@
             </objects>
             <point key="canvasLocation" x="1341" y="32"/>
         </scene>
-        <!--Add Task-->
+        <!--Add Locations-->
         <scene sceneID="m7w-jQ-Vzf">
             <objects>
                 <viewController id="Vik-aj-o2f" customClass="AddTaskViewController" customModule="V3" customModuleProvider="target" sceneMemberID="viewController">
@@ -174,34 +174,50 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Notes" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YN2-cI-7ZA">
-                                <rect key="frame" x="16" y="210" width="568" height="30"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yY8-01-KTH">
+                                <rect key="frame" x="39" y="84" width="560" height="40"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="h4e-4m-9fF"/>
+                                    <constraint firstAttribute="width" constant="560" id="UJb-cy-022"/>
+                                    <constraint firstAttribute="height" constant="40" id="Ybk-Nw-XB6"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="450" id="zlP-j5-2y5"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            </view>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="name: " borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6B7-eI-1s6">
+                                <rect key="frame" x="33" y="406" width="543" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Title" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8UU-ox-Yb4">
-                                <rect key="frame" x="16" y="139" width="568" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="NX1-8n-Agp"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="coordinate:" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u4Y-x5-a28">
+                                <rect key="frame" x="39" y="449" width="529" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="YN2-cI-7ZA" firstAttribute="top" secondItem="8UU-ox-Yb4" secondAttribute="bottom" constant="21" id="61i-Qr-z3a"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="8UU-ox-Yb4" secondAttribute="trailing" id="KrX-QU-iRC"/>
-                            <constraint firstItem="YN2-cI-7ZA" firstAttribute="leading" secondItem="g2Q-EW-uf5" secondAttribute="leadingMargin" id="Mnp-28-Luv"/>
-                            <constraint firstItem="8UU-ox-Yb4" firstAttribute="top" secondItem="3Qv-Iq-cax" secondAttribute="bottom" constant="75" id="bXT-2o-Qo0"/>
-                            <constraint firstItem="8UU-ox-Yb4" firstAttribute="leading" secondItem="g2Q-EW-uf5" secondAttribute="leadingMargin" id="mrH-30-TCc"/>
-                            <constraint firstItem="YN2-cI-7ZA" firstAttribute="trailing" secondItem="g2Q-EW-uf5" secondAttribute="trailingMargin" id="zw5-ak-PHl"/>
+                            <constraint firstItem="yY8-01-KTH" firstAttribute="top" secondItem="3Qv-Iq-cax" secondAttribute="bottom" constant="20" id="2Nq-43-LFZ"/>
+                            <constraint firstItem="xge-C4-SqW" firstAttribute="top" secondItem="yY8-01-KTH" secondAttribute="bottom" constant="479" id="3pq-xk-bed"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="yY8-01-KTH" secondAttribute="trailing" constant="-15" id="ADI-JS-NNR"/>
+                            <constraint firstItem="6B7-eI-1s6" firstAttribute="top" secondItem="3Qv-Iq-cax" secondAttribute="bottom" constant="342" id="B6f-An-qGb"/>
+                            <constraint firstItem="yY8-01-KTH" firstAttribute="leading" secondItem="g2Q-EW-uf5" secondAttribute="leadingMargin" constant="23" id="HfY-pm-oNz"/>
+                            <constraint firstItem="u4Y-x5-a28" firstAttribute="top" secondItem="6B7-eI-1s6" secondAttribute="bottom" constant="13" id="LrL-T6-aS6"/>
+                            <constraint firstItem="u4Y-x5-a28" firstAttribute="leading" secondItem="g2Q-EW-uf5" secondAttribute="leadingMargin" constant="23" id="Vt0-Oe-Rkz"/>
+                            <constraint firstItem="xge-C4-SqW" firstAttribute="top" secondItem="6B7-eI-1s6" secondAttribute="bottom" constant="164" id="ZCu-FK-jA6"/>
+                            <constraint firstItem="xge-C4-SqW" firstAttribute="top" secondItem="u4Y-x5-a28" secondAttribute="bottom" constant="121" id="ciB-7d-cM0"/>
+                            <constraint firstItem="xge-C4-SqW" firstAttribute="top" secondItem="yY8-01-KTH" secondAttribute="bottom" constant="509" id="feN-cE-xbI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6B7-eI-1s6" secondAttribute="trailing" constant="8" id="p5M-jp-oeV"/>
+                            <constraint firstItem="6B7-eI-1s6" firstAttribute="leading" secondItem="g2Q-EW-uf5" secondAttribute="leadingMargin" constant="17" id="rXr-7G-43M"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="u4Y-x5-a28" secondAttribute="trailing" constant="16" id="u71-Hi-3Ok"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="3pq-xk-bed"/>
+                                <exclude reference="feN-cE-xbI"/>
+                            </mask>
+                        </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Add Task" id="HP8-Ch-7Um">
+                    <navigationItem key="navigationItem" title="Add Locations" id="HP8-Ch-7Um">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="9x3-ma-08l">
                             <connections>
                                 <segue destination="pGg-6v-bdr" kind="custom" identifier="dismissAndCancel" customClass="DismissSegue" id="rJK-zQ-gcW"/>
@@ -214,8 +230,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="notesField" destination="YN2-cI-7ZA" id="0EW-Zc-GMk"/>
-                        <outlet property="titleField" destination="8UU-ox-Yb4" id="sRa-Id-0h4"/>
+                        <outlet property="coordinateLabel" destination="u4Y-x5-a28" id="R9b-iq-RH9"/>
+                        <outlet property="descriptionLabel" destination="6B7-eI-1s6" id="kDV-es-tg6"/>
+                        <outlet property="searchBarView" destination="yY8-01-KTH" id="xG5-Jr-85c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0aD-A1-qOH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -224,6 +241,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="RxB-wf-QIq"/>
+        <segue reference="rJK-zQ-gcW"/>
     </inferredMetricsTieBreakers>
 </document>

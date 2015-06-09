@@ -13,7 +13,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var detailDescriptionLabel: UILabel!
 
 
-    var detailItem: Task? {
+    var detailItem: LocationForList? {
         didSet {
             // Update the view.
             self.configureView()
@@ -22,9 +22,9 @@ class DetailViewController: UIViewController {
 
     func configureView() {
         // Update the user interface for the detail item.
-        if let detail: Task = self.detailItem {
+        if let detail: LocationForList = self.detailItem {
             if let label = self.detailDescriptionLabel {
-                label.text = detail.title
+                label.text = detail.description
             }
         }
     }

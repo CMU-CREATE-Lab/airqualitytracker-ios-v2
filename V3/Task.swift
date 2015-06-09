@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct Task {
-    let title: String
-    let notes: String
+struct LocationForList {
+    let description: String
+    let placeID: String
     
-    init(title: String, notes: String) {
-        self.title = title
-        self.notes = notes
+    init(description: String, placeID: String) {
+        self.description = description
+        self.placeID = placeID
     }
 }

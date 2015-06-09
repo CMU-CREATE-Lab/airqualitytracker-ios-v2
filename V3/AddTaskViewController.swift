@@ -8,27 +8,61 @@
 
 import UIKit
 
-class AddTaskViewController: UIViewController {
+var searcher : UISearchController!
 
-    @IBOutlet weak var titleField: UITextField!
+
+class AddTaskViewController: UIViewController, UISearchBarDelegate {
+
     
-    @IBOutlet weak var notesField: UITextField!
+    @IBOutlet weak var descriptionLabel: UITextField!
+    @IBOutlet weak var coordinateLabel: UITextField!
+    @IBOutlet weak var searchBarView: UIView!
+    
+    let googleAPI = GoogleAPI()
+    let src = AutoCompleteController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        //implelemting search bar
+        searcher = UISearchController(searchResultsController: src)
+        searcher.searchResultsUpdater = src
+        searcher.searchBar.delegate = self
+        searchBarView.addSubview(searcher.searchBar)
+        searcher.searchBar.sizeToFit()
+        searcher.dimsBackgroundDuringPresentation = true
+        searcher.searchBar.translucent = true
+        searcher.searchBar.barStyle = UIBarStyle.BlackTranslucent
     }
-
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar){
+        println("in search is finished: Search Bar Search Button Clicked")
+        searcher.active = false
+        
+    }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar){
+        println("in searchBarTextDidEndEditing")
+        if src.selected! {
+            var positionInArray = src.selectedIndex.row
+            descriptionLabel.text=src.areaNamesArray[positionInArray]
+            
+            googleAPI.fetchPlacesDetail(src.placeIdArray[positionInArray]){ place in
+                self.coordinateLabel.text="lat,lon \(place!.coordinate.latitude), \(place!.coordinate.longitude)"
+            }
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.identifier == "dismissAndSave" {
-            let task = Task(title: titleField.text, notes: notesField.text)
-            TaskStore.sharedInstance.add(task)
+            let location = LocationForList(description: descriptionLabel.text, placeID: coordinateLabel.text)
+            LocationStore.sharedInstance.add(location)
         }
     }
     

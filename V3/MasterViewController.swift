@@ -21,12 +21,6 @@ class MasterViewController: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
-
-//        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
-//        self.navigationItem.rightBarButtonItem = addButton
-
-    
-    
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,20 +28,14 @@ class MasterViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    //MN: insert the locations and air quality here
-//    func insertNewObject(sender: AnyObject) {
-//        objects.insert(NSDate(), atIndex: 0)
-//        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-//        self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-//    }
 
     // MARK: - Segues
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow() {
-                let task = TaskStore.sharedInstance.get(indexPath.row)
-                (segue.destinationViewController as! DetailViewController).detailItem = task
+                let location = LocationStore.sharedInstance.get(indexPath.row)
+                (segue.destinationViewController as! DetailViewController).detailItem = location
             }
         }
     }
@@ -59,15 +47,16 @@ class MasterViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return TaskStore.sharedInstance.count
+        return LocationStore.sharedInstance.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
 
-        let task = TaskStore.sharedInstance.get(indexPath.row)
-        cell.textLabel?.text = task.title
-        cell.detailTextLabel?.text = task.notes
+        let location = LocationStore.sharedInstance.get(indexPath.row)
+        println("location.description is \(location.description)")
+        cell.textLabel?.text = location.description
+        cell.detailTextLabel?.text = location.placeID
         
         return cell
     }
@@ -84,7 +73,7 @@ class MasterViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            TaskStore.sharedInstance.removeTaskAtIndex(indexPath.row)
+            LocationStore.sharedInstance.removeTaskAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.

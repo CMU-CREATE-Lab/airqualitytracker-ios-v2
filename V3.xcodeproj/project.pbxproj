@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		40086C821B27592B00BD4B62 /* GoogleAPIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40086C811B27592B00BD4B62 /* GoogleAPIHelper.swift */; };
+		40086C841B27594700BD4B62 /* GoogleAPICall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40086C831B27594700BD4B62 /* GoogleAPICall.swift */; };
+		40086C861B27596200BD4B62 /* AutoCompleteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40086C851B27596200BD4B62 /* AutoCompleteController.swift */; };
+		40086C891B275A3D00BD4B62 /* LocationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40086C881B275A3D00BD4B62 /* LocationStore.swift */; };
 		407D872A1B260987001C38B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407D87291B260987001C38B2 /* AppDelegate.swift */; };
 		407D872C1B260987001C38B2 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407D872B1B260987001C38B2 /* MasterViewController.swift */; };
 		407D872E1B260987001C38B2 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407D872D1B260987001C38B2 /* DetailViewController.swift */; };
@@ -17,7 +21,6 @@
 		409207791B26A6B2000CE42B /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409207781B26A6B2000CE42B /* AddTaskViewController.swift */; };
 		4092077B1B26A807000CE42B /* DismissSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4092077A1B26A807000CE42B /* DismissSegue.swift */; };
 		4092077D1B26B4A7000CE42B /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4092077C1B26B4A7000CE42B /* Task.swift */; };
-		4092077F1B26B4CB000CE42B /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4092077E1B26B4CB000CE42B /* TaskStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +34,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		40086C811B27592B00BD4B62 /* GoogleAPIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleAPIHelper.swift; sourceTree = "<group>"; };
+		40086C831B27594700BD4B62 /* GoogleAPICall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleAPICall.swift; sourceTree = "<group>"; };
+		40086C851B27596200BD4B62 /* AutoCompleteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoCompleteController.swift; sourceTree = "<group>"; };
+		40086C881B275A3D00BD4B62 /* LocationStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationStore.swift; sourceTree = "<group>"; };
 		407D87241B260987001C38B2 /* V3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = V3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		407D87281B260987001C38B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		407D87291B260987001C38B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -45,7 +52,6 @@
 		409207781B26A6B2000CE42B /* AddTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
 		4092077A1B26A807000CE42B /* DismissSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissSegue.swift; sourceTree = "<group>"; };
 		4092077C1B26B4A7000CE42B /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
-		4092077E1B26B4CB000CE42B /* TaskStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +72,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		40086C801B27576D00BD4B62 /* Top level  */ = {
+			isa = PBXGroup;
+			children = (
+				407D87291B260987001C38B2 /* AppDelegate.swift */,
+				407D872B1B260987001C38B2 /* MasterViewController.swift */,
+				407D872D1B260987001C38B2 /* DetailViewController.swift */,
+				40086C811B27592B00BD4B62 /* GoogleAPIHelper.swift */,
+				4092077C1B26B4A7000CE42B /* Task.swift */,
+				40086C881B275A3D00BD4B62 /* LocationStore.swift */,
+				4092077A1B26A807000CE42B /* DismissSegue.swift */,
+			);
+			name = "Top level ";
+			sourceTree = "<group>";
+		};
+		40086C871B2759F000BD4B62 /* Search Controller  */ = {
+			isa = PBXGroup;
+			children = (
+				409207781B26A6B2000CE42B /* AddTaskViewController.swift */,
+				40086C831B27594700BD4B62 /* GoogleAPICall.swift */,
+				40086C851B27596200BD4B62 /* AutoCompleteController.swift */,
+			);
+			name = "Search Controller ";
+			sourceTree = "<group>";
+		};
 		407D871B1B260987001C38B2 = {
 			isa = PBXGroup;
 			children = (
@@ -87,14 +117,9 @@
 		407D87261B260987001C38B2 /* V3 */ = {
 			isa = PBXGroup;
 			children = (
-				407D87291B260987001C38B2 /* AppDelegate.swift */,
-				407D872B1B260987001C38B2 /* MasterViewController.swift */,
-				407D872D1B260987001C38B2 /* DetailViewController.swift */,
+				40086C801B27576D00BD4B62 /* Top level  */,
 				407D872F1B260987001C38B2 /* Main.storyboard */,
-				4092077C1B26B4A7000CE42B /* Task.swift */,
-				4092077E1B26B4CB000CE42B /* TaskStore.swift */,
-				4092077A1B26A807000CE42B /* DismissSegue.swift */,
-				409207781B26A6B2000CE42B /* AddTaskViewController.swift */,
+				40086C871B2759F000BD4B62 /* Search Controller  */,
 				407D87321B260987001C38B2 /* Images.xcassets */,
 				407D87341B260987001C38B2 /* LaunchScreen.xib */,
 				407D87271B260987001C38B2 /* Supporting Files */,
@@ -230,11 +255,14 @@
 			files = (
 				407D872E1B260987001C38B2 /* DetailViewController.swift in Sources */,
 				4092077B1B26A807000CE42B /* DismissSegue.swift in Sources */,
+				40086C891B275A3D00BD4B62 /* LocationStore.swift in Sources */,
 				409207791B26A6B2000CE42B /* AddTaskViewController.swift in Sources */,
 				407D872C1B260987001C38B2 /* MasterViewController.swift in Sources */,
 				4092077D1B26B4A7000CE42B /* Task.swift in Sources */,
 				407D872A1B260987001C38B2 /* AppDelegate.swift in Sources */,
-				4092077F1B26B4CB000CE42B /* TaskStore.swift in Sources */,
+				40086C821B27592B00BD4B62 /* GoogleAPIHelper.swift in Sources */,
+				40086C841B27594700BD4B62 /* GoogleAPICall.swift in Sources */,
+				40086C861B27596200BD4B62 /* AutoCompleteController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
