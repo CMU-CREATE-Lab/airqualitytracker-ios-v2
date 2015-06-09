@@ -12,10 +12,7 @@ var searcher : UISearchController!
 
 
 class AddTaskViewController: UIViewController, UISearchBarDelegate {
-
     
-//    @IBOutlet weak var descriptionLabel: UITextField!
-//    @IBOutlet weak var coordinateLabel: UITextField!
     var descriptionLabel: String! = ""
     var coordinateLabel: String! = ""
     
@@ -70,7 +67,7 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.identifier == "dismissAndSave" {
 //            if (description == "" || placeID == ""){
-            let location = LocationForList(description: descriptionLabel, placeID: coordinateLabel)
+            let location = LocationForList(description: descriptionLabel, coordinate: coordinateLabel)
             LocationStore.sharedInstance.add(location)
         }
     }

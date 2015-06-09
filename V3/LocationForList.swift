@@ -10,10 +10,10 @@ import Foundation
 
 struct LocationForList {
     let description: String
-    let placeID: String
+    let coordinate: String
     
-    init(description: String, placeID: String) {
+    init(description: String, coordinate: String) {
         self.description = description
-        self.placeID = placeID
+        self.coordinate = coordinate
     }
 }

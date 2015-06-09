@@ -203,16 +203,11 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Add Locations" id="HP8-Ch-7Um">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="9x3-ma-08l">
-                            <connections>
-                                <segue destination="pGg-6v-bdr" kind="custom" identifier="dismissAndCancel" customClass="DismissSegue" id="rJK-zQ-gcW"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Add Locations" id="HP8-Ch-7Um"/>
                     <connections>
                         <outlet property="searchBarView" destination="yY8-01-KTH" id="xG5-Jr-85c"/>
                         <segue destination="pGg-6v-bdr" kind="custom" identifier="dismissAndSave" customClass="DismissSegue" id="sV8-Bo-2JZ"/>
+                        <segue destination="pGg-6v-bdr" kind="custom" identifier="dismissAndCancel" customClass="DismissSegue" id="iPd-ve-imy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0aD-A1-qOH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -221,6 +216,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="rJK-zQ-gcW"/>
+        <segue reference="iPd-ve-imy"/>
     </inferredMetricsTieBreakers>
 </document>

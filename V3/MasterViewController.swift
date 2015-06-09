@@ -10,9 +10,6 @@ import UIKit
 
 class MasterViewController: UITableViewController {
 
-//    var objects = [AnyObject]()
-
-
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -56,7 +53,7 @@ class MasterViewController: UITableViewController {
         let location = LocationStore.sharedInstance.get(indexPath.row)
         println("location.description is \(location.description)")
         cell.textLabel?.text = location.description
-        cell.detailTextLabel?.text = location.placeID
+        cell.detailTextLabel?.text = location.coordinate
         
         return cell
     }
