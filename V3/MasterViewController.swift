@@ -51,7 +51,6 @@ class MasterViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
 
         let location = LocationStore.sharedInstance.get(indexPath.row)
-        println("location.description is \(location.description)")
         cell.textLabel?.text = location.description
         cell.detailTextLabel?.text = location.coordinate
         

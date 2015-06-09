@@ -13,13 +13,15 @@ var searcher : UISearchController!
 
 class AddTaskViewController: UIViewController, UISearchBarDelegate {
     
-    var descriptionLabel: String! = ""
-    var coordinateLabel: String! = ""
+
     
     @IBOutlet weak var searchBarView: UIView!
     
     let googleAPI = GoogleAPI()
     let src = AutoCompleteController()
+    
+    var descriptionLabel: String! = ""
+    var coordinateLabel: String! = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,10 +49,11 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
             descriptionLabel = src.areaNamesArray[positionInArray]
             
             googleAPI.fetchPlacesDetail(src.placeIdArray[positionInArray]){ place in
-                self.coordinateLabel = "lat,lon \(place!.coordinate.latitude), \(place!.coordinate.longitude)"
+                self.coordinateLabel = place!.coordinateForList
+                
+                //MN: calling the segue here as the user is done with search
+                self.performSegueWithIdentifier("dismissAndSave", sender: self)
             }
-            performSegueWithIdentifier("dismissAndSave", sender: self)
-
         }
     }
     
@@ -66,22 +69,9 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.identifier == "dismissAndSave" {
-//            if (description == "" || placeID == ""){
             let location = LocationForList(description: descriptionLabel, coordinate: coordinateLabel)
             LocationStore.sharedInstance.add(location)
         }
     }
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

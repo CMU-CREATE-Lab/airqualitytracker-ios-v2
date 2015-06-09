@@ -21,6 +21,8 @@ class NameAndID {
 class Detail {
     let address :String
     let coordinate:CLLocationCoordinate2D
+    let coordinateForList: String
+    
     init(dictionary:NSDictionary){
         
         address  = dictionary["formatted_address"] as! String
@@ -28,6 +30,8 @@ class Detail {
         let lat = location["lat"] as! CLLocationDegrees
         let lng = location["lng"] as! CLLocationDegrees
         coordinate = CLLocationCoordinate2DMake(lat, lng)
-        println("Detail: address \(address)") //extract the zip code here if needed
+        coordinateForList = "\(String(stringInterpolationSegment: lat))" + "," + "\(String(stringInterpolationSegment: lng))"
+        
+        println("Detail: address \(address), coordinateForList \(coordinateForList)") //extract the zip code here if needed
     }
 }

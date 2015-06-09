@@ -6,7 +6,9 @@
 //  Copyright (c) 2015 Speck Sensor. All rights reserved.
 //
 
+import UIKit
 import Foundation
+import CoreLocation
 
 struct LocationForList {
     let description: String

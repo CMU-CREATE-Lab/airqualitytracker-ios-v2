@@ -60,8 +60,7 @@ class GoogleAPI {
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             if let json = NSJSONSerialization.JSONObjectWithData(data, options:nil, error:nil) as? NSDictionary {
                 if let results = json["result"] as? NSDictionary {
-                    place = Detail(dictionary: results)
-                    
+                    place = Detail(dictionary: results)                    
                 }
             }
             dispatch_async(dispatch_get_main_queue()) {
