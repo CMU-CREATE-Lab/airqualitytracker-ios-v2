@@ -25,6 +25,7 @@ class DetailViewController: UIViewController {
         if let detail: LocationForList = self.detailItem {
             if let label = self.detailDescriptionLabel {
                 label.text = detail.description
+                println("in detailViewController \(detail.coordinate)")
             }
         }
     }

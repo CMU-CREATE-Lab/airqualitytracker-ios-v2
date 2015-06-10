@@ -16,6 +16,11 @@ class MasterViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //MN: change with current location paramters
+        let currentLocation = LocationForList(description: "Alcatraz Island,CA", coordinate: "37.7749295,-122.4194155")
+        LocationStore.sharedInstance.add(currentLocation)
+        
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
     }

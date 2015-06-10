@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Speck Sensor. All rights reserved.
 //
 
+
+//bug for pittsburgh -> pittsburgh locksmith (nil value) 
 import UIKit
 
 var searcher : UISearchController!

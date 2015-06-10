@@ -19,6 +19,7 @@ class LocationStore {
     var locations: [LocationForList] = []
     
     func add(locationNameAndID: LocationForList) {
+        println("locations list is \(locations)")
         locations.append(locationNameAndID)
     }
     
