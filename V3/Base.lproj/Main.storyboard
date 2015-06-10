@@ -153,13 +153,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Average" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zVC-cu-IBu">
-                                <rect key="frame" x="459" y="355" width="49.5" height="17"/>
+                                <rect key="frame" x="459.5" y="355" width="49.5" height="17"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maximum" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O0L-o2-btJ">
-                                <rect key="frame" x="449" y="409" width="59" height="17"/>
+                                <rect key="frame" x="449.5" y="409" width="59" height="17"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -177,13 +177,19 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="500" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hDN-JM-mI8">
-                                <rect key="frame" x="540" y="358" width="37" height="26"/>
+                                <rect key="frame" x="540.5" y="358" width="37" height="26"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="22"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="500" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sBj-0F-1fq">
-                                <rect key="frame" x="540" y="417" width="37" height="26"/>
+                                <rect key="frame" x="540.5" y="417" width="37" height="26"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Health Advice" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hh5-OV-flk">
+                                <rect key="frame" x="261.5" y="479" width="130.5" height="26"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="22"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -193,12 +199,10 @@
                         <constraints>
                             <constraint firstItem="hDt-tj-oDG" firstAttribute="top" secondItem="vvO-fj-EKg" secondAttribute="bottom" constant="58" id="0t1-fj-utX"/>
                             <constraint firstItem="sBj-0F-1fq" firstAttribute="leading" secondItem="O0L-o2-btJ" secondAttribute="trailing" constant="31.5" id="1fY-W6-PWN"/>
-                            <constraint firstItem="a0L-h9-sNL" firstAttribute="top" secondItem="GMZ-NT-eys" secondAttribute="bottom" constant="242" id="64O-2b-c5j"/>
-                            <constraint firstItem="hDt-tj-oDG" firstAttribute="top" secondItem="vvO-fj-EKg" secondAttribute="bottom" constant="88" id="8on-uR-KG1"/>
                             <constraint firstItem="Lei-5M-9Gs" firstAttribute="top" secondItem="cIm-e0-J51" secondAttribute="bottom" constant="20" id="B4o-Kd-dAH"/>
                             <constraint firstItem="qVS-XH-Jjb" firstAttribute="top" secondItem="hDt-tj-oDG" secondAttribute="bottom" constant="45" id="Emk-Ec-Dp8"/>
                             <constraint firstItem="O0L-o2-btJ" firstAttribute="top" secondItem="zVC-cu-IBu" secondAttribute="bottom" constant="37" id="FuC-PU-hja"/>
-                            <constraint firstItem="GMZ-NT-eys" firstAttribute="top" secondItem="hDt-tj-oDG" secondAttribute="bottom" constant="19" id="KX5-4F-1Wi"/>
+                            <constraint firstItem="vvO-fj-EKg" firstAttribute="centerX" secondItem="hh5-OV-flk" secondAttribute="centerX" id="J3Q-90-00X"/>
                             <constraint firstItem="qVS-XH-Jjb" firstAttribute="leading" secondItem="GMZ-NT-eys" secondAttribute="trailing" constant="31" id="QAw-0K-Zjd"/>
                             <constraint firstItem="hDN-JM-mI8" firstAttribute="leading" secondItem="zVC-cu-IBu" secondAttribute="trailing" constant="31" id="QHv-Gw-3VV"/>
                             <constraint firstItem="GMZ-NT-eys" firstAttribute="top" secondItem="hDt-tj-oDG" secondAttribute="bottom" constant="42" id="Rnx-hr-e3A"/>
@@ -207,7 +211,6 @@
                             <constraint firstItem="HXW-Qk-gRq" firstAttribute="top" secondItem="qVS-XH-Jjb" secondAttribute="bottom" constant="33" id="V6R-Yo-NkO"/>
                             <constraint firstItem="OjH-1b-xgT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MMQ-IT-qOo" secondAttribute="leadingMargin" constant="90" id="VyJ-da-Jpg"/>
                             <constraint firstItem="HXW-Qk-gRq" firstAttribute="leading" secondItem="HrQ-ll-Wsh" secondAttribute="trailing" constant="14" id="W7B-0i-Ryx"/>
-                            <constraint firstItem="hDt-tj-oDG" firstAttribute="top" secondItem="vvO-fj-EKg" secondAttribute="bottom" constant="88" id="Ygj-k5-EMz"/>
                             <constraint firstItem="Lei-5M-9Gs" firstAttribute="leading" secondItem="MMQ-IT-qOo" secondAttribute="leadingMargin" constant="20" id="YkD-Dd-Nkt"/>
                             <constraint firstItem="vvO-fj-EKg" firstAttribute="top" secondItem="OjH-1b-xgT" secondAttribute="bottom" constant="7.5" id="bCg-KC-cSs"/>
                             <constraint firstItem="OjH-1b-xgT" firstAttribute="top" secondItem="Lei-5M-9Gs" secondAttribute="bottom" constant="40" id="eQN-B9-JA2"/>
@@ -218,27 +221,12 @@
                             <constraint firstAttribute="trailingMargin" secondItem="zVC-cu-IBu" secondAttribute="trailing" constant="75" id="mfn-3z-gYP"/>
                             <constraint firstItem="zVC-cu-IBu" firstAttribute="top" secondItem="hDt-tj-oDG" secondAttribute="bottom" constant="42" id="mib-KE-R1C"/>
                             <constraint firstItem="HrQ-ll-Wsh" firstAttribute="leading" secondItem="MMQ-IT-qOo" secondAttribute="leadingMargin" constant="20" id="mp5-OX-W46"/>
+                            <constraint firstItem="hh5-OV-flk" firstAttribute="top" secondItem="vvO-fj-EKg" secondAttribute="bottom" constant="250" id="nIl-8r-SzL"/>
                             <constraint firstItem="OjH-1b-xgT" firstAttribute="top" secondItem="cIm-e0-J51" secondAttribute="bottom" constant="86" id="p5x-6a-8Y0"/>
-                            <constraint firstItem="vvO-fj-EKg" firstAttribute="centerX" secondItem="hDt-tj-oDG" secondAttribute="centerX" id="qDt-CZ-4ZX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="O0L-o2-btJ" secondAttribute="trailing" constant="75.5" id="rMk-HL-ccq"/>
                             <constraint firstItem="sBj-0F-1fq" firstAttribute="top" secondItem="hDN-JM-mI8" secondAttribute="bottom" constant="33" id="tJC-Vz-MCO"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="GMZ-NT-eys" secondAttribute="trailing" constant="463" id="wTY-Dr-SvF"/>
                             <constraint firstItem="GMZ-NT-eys" firstAttribute="leading" secondItem="MMQ-IT-qOo" secondAttribute="leadingMargin" constant="20" id="wmE-Sw-ZpY"/>
-                            <constraint firstItem="GMZ-NT-eys" firstAttribute="leading" secondItem="MMQ-IT-qOo" secondAttribute="leadingMargin" constant="43" id="xZz-pB-MWY"/>
-                            <constraint firstItem="vvO-fj-EKg" firstAttribute="centerX" secondItem="hDt-tj-oDG" secondAttribute="centerX" constant="-13.5" id="z23-z6-CaP"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="qDt-CZ-4ZX"/>
-                                <exclude reference="z23-z6-CaP"/>
-                                <exclude reference="KX5-4F-1Wi"/>
-                                <exclude reference="wTY-Dr-SvF"/>
-                                <exclude reference="xZz-pB-MWY"/>
-                                <exclude reference="8on-uR-KG1"/>
-                                <exclude reference="Ygj-k5-EMz"/>
-                                <exclude reference="64O-2b-c5j"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Detail" id="cra-N8-TIN"/>
                     <connections>
