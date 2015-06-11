@@ -8,22 +8,27 @@
 
 import UIKit
 
-class MasterViewController: UITableViewController {
+class MasterViewController: UITableViewController{
 
     override func awakeFromNib() {
         super.awakeFromNib()
     }
 
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        //MN: change with current location paramters
-        let currentLocation = LocationForList(description: "Alcatraz Island,CA", coordinate: "37.7749295,-122.4194155")
-        LocationStore.sharedInstance.add(currentLocation)
+    
+        let initialLocation = LocationForList(description: "Alcatraz Island, CA", coordinate: "40.4437514575563,-79.9465463763799")
+    
+        LocationStore.sharedInstance.add(initialLocation)
         
         // Do any additional setup after loading the view, typically from a nib.
+        
+        super.viewDidLoad()
+
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
     }
+
+   
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
