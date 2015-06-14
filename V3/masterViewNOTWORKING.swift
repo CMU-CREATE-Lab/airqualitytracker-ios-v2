@@ -7,6 +7,8 @@
 //
 
 //not working initializes current location only after a field is added
+//IMPORTANT: see https://teamtreehouse.com/forum/swift-weather-app-reload-data
+
 
 import UIKit
 import CoreLocation

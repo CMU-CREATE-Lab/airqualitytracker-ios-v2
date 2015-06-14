@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Speck Sensor. All rights reserved.
 //
 
+//IMPORTANT: see https://teamtreehouse.com/forum/swift-weather-app-reload-data
+
 import UIKit
 
 class MasterViewController: UITableViewController{
