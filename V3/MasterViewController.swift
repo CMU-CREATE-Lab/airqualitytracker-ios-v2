@@ -27,11 +27,6 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
         
         getCurrentLocality()
         
-        getCurrentAirQuality()
-
-        let initialLocation = LocationForList(description: self.currentLocation, coordinate: "\(self.airQuality)")
-        LocationStore.sharedInstance.add(initialLocation)
-        
         super.viewDidLoad()
         
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
@@ -96,104 +91,34 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
                
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     self.currentLocation = "\(currentLocality.name)"
-                })
-                
-                
-            }
-                
-            
-            else {
-                
-                let issue = UIAlertController(title: "Error", message: "Error in connection", preferredStyle: .Alert)
-                
-                let okIssue = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                issue.addAction(okIssue)
-                
-                let cancelIssue = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
-                issue.addAction(cancelIssue)
-                
-                self.presentViewController(issue, animated: true, completion: nil)
-                
-                
-            }
-            
-        })
-        
-        downloadTask.resume()
-    }
-    
-    func getCurrentAirQuality() -> Void {
-        
-        var currentLatitude = latitude
-        var currentLongitude = longitude
-        
-        
-        var currentDate = NSDate()
-        var currentDateInSeconds = currentDate.timeIntervalSince1970
-        var last24Hours = currentDateInSeconds - (60 * 60 * 24)
-        
-        var (latMin, latMax, lonMin, lonMax) = createBoundingBox(currentLatitude, currentLongitude: currentLongitude)
-        
-        
-        let airQualityURL = NSURL(string: "https://esdr.cmucreatelab.org/api/v1/feeds?whereAnd=productId=11,latitude%3E=\(latMin),latitude%3C=\(latMax),longitude%3E=\(lonMin),longitude%3C=\(lonMax),maxTimeSecs%3E=\(last24Hours)&fields=id,name,latitude,longitude,channelBounds")
-        
-        let sharedSession = NSURLSession.sharedSession()
-        let downloadTask: NSURLSessionDownloadTask = sharedSession.downloadTaskWithURL(airQualityURL!, completionHandler: { (data: NSURL!, response: NSURLResponse!, error: NSError!) -> Void in
-            
-            if(error != nil) {
-                println(error.localizedDescription)
-            }
-            
-            if (error == nil) {
-                let dataObject = NSData(contentsOfURL: data)
-                let airQualityDictionary: NSDictionary =
-                NSJSONSerialization.JSONObjectWithData(dataObject!, options: nil, error: nil) as! NSDictionary //casting
-                
-                let currentAir = CurrentAirQuality(airQualityDictionary: airQualityDictionary, currentLatitude: currentLatitude, currentLongitude: currentLongitude)
-                //                println("stations with PM: \(currentAir.pmStations)")
-                
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    self.airQuality = currentAir.closestStationID
-                })
-                
-            }
-            else {
-                let issue = UIAlertController(title: "Error", message: "Error in connection", preferredStyle: .Alert)
-                
-                let okIssue = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                issue.addAction(okIssue)
-                
-                let cancelIssue = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
-                issue.addAction(cancelIssue)
-                
-                self.presentViewController(issue, animated: true, completion: nil)
-                
-                
-            }
-            
-        })
-        
-        
-        
-        downloadTask.resume()
-    }
-    
-    func createBoundingBox(currentLatitude: Double, currentLongitude: Double) -> (Double, Double, Double, Double){
-        var distance = 10 //in kilometers
-        var radius = 6371 //in km
-        var angularRadius: Double = Double(distance * 100) / Double(radius) //check this
-        var latMin = currentLatitude - angularRadius
-        var latMax = currentLatitude + angularRadius
-        
-        var latT = asin(sin(currentLatitude)/cos(angularRadius))
-        var deltaLon = acos( (cos(angularRadius) - (sin(latT) * sin(currentLatitude))) / (cos(latT) * cos(currentLatitude)))
-        var lonMin = currentLongitude - deltaLon
-        var lonMax = currentLongitude + deltaLon
-        
-        return (latMin, latMax, lonMin, lonMax)
-        
-    }
+                    let initialLocation = LocationForList(description: self.currentLocation, AQI: "111") //MN: CHANGE
+                    LocationStore.sharedInstance.add(initialLocation)
 
+                })
+                
+                
+            }
+                
+            
+            else {
+                
+                let issue = UIAlertController(title: "Error", message: "Error in connection", preferredStyle: .Alert)
+                
+                let okIssue = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                issue.addAction(okIssue)
+                
+                let cancelIssue = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+                issue.addAction(cancelIssue)
+                
+                self.presentViewController(issue, animated: true, completion: nil)
+                
+                
+            }
+            
+        })
+        
+        downloadTask.resume()
+    }
     
     func refresh() {
         getCurrentLocality()
@@ -233,7 +158,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
         
         let location = LocationStore.sharedInstance.get(indexPath.row)
         cell.textLabel?.text = location.description
-        cell.detailTextLabel?.text = location.coordinate
+        cell.detailTextLabel?.text = location.AQI
         
         return cell
     }

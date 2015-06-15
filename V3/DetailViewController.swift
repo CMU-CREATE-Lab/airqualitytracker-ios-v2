@@ -37,17 +37,7 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate {
             if let locationName = self.detailDescriptionLabel {
                 
                 locationName.text = detail.description
-                var coordinateS = detail.coordinate
-                var coordinateSeperator = detail.coordinate.rangeOfString(",")
-                var coordinateSeparatorindex: Int = distance(coordinateS.startIndex, coordinateSeperator!.startIndex)
-                
-                var latitudeS = coordinateS.substringWithRange(Range<String.Index>(start: coordinateS.startIndex, end: coordinateSeperator!.startIndex))
-
-                var longitudeS = coordinateS.substringWithRange(Range<String.Index>(start: advance(coordinateS.startIndex, coordinateSeparatorindex + 1), end: advance(coordinateS.endIndex, -1)))
-                
-                latitude = NSString(string: latitudeS).doubleValue
-                longitude = NSString(string: longitudeS).doubleValue
-
+                self.airQualityStationID.text = detail.AQI
             }
         }
     }
@@ -56,7 +46,7 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate {
         
         self.configureView()
 
-        getCurrentAirQuality()
+//        getCurrentAirQuality()
         
         getCurrentWeatherData()
 

@@ -28,6 +28,7 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
     var longitude: Double = 0.0
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         //implelemting search bar
@@ -53,10 +54,13 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
             descriptionLabel = src.areaNamesArray[positionInArray]
             
             googleAPI.fetchPlacesDetail(src.placeIdArray[positionInArray]){ place in
-                self.coordinateLabel = place!.coordinateForList
+//                self.coordinateLabel = place!.coordinateForList
                 
-                self.latitude = place!.coordinate.latitude
-                self.longitude = place!.coordinate.longitude
+                self.latitude = place!.coordinate.latitude as Double
+                self.longitude = place!.coordinate.longitude as Double
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.getCurrentAirQuality()
+                    })
                 
                 //MN: calling the segue here as the user is done with search
                 self.performSegueWithIdentifier("dismissAndSave", sender: self)
@@ -64,6 +68,56 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
         }
     }
     
+    
+    func getCurrentAirQuality() -> Void {
+        
+        var currentLatitude = latitude
+        var currentLongitude = longitude
+        
+        
+        var currentDate = NSDate()
+        var currentDateInSeconds = currentDate.timeIntervalSince1970
+        var last24Hours = currentDateInSeconds - (60 * 60 * 24)
+        
+        var (latMin, latMax, lonMin, lonMax) = createBoundingBox(currentLatitude, currentLongitude: currentLongitude)
+        
+        
+        let airQualityURL = NSURL(string: "https://esdr.cmucreatelab.org/api/v1/feeds?whereAnd=productId=11,latitude%3E=\(latMin),latitude%3C=\(latMax),longitude%3E=\(lonMin),longitude%3C=\(lonMax),maxTimeSecs%3E=\(last24Hours)&fields=id,name,latitude,longitude,channelBounds")
+        
+        let sharedSession = NSURLSession.sharedSession()
+        let downloadTask: NSURLSessionDownloadTask = sharedSession.downloadTaskWithURL(airQualityURL!, completionHandler: { (data: NSURL!, response: NSURLResponse!, error: NSError!) -> Void in
+        
+                let dataObject = NSData(contentsOfURL: data)
+                let airQualityDictionary: NSDictionary =
+                NSJSONSerialization.JSONObjectWithData(dataObject!, options: nil, error: nil) as! NSDictionary //casting
+                
+                let currentAir = CurrentAirQuality(airQualityDictionary: airQualityDictionary, currentLatitude: currentLatitude, currentLongitude: currentLongitude)
+                
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    println("AddTASKVC closest air quality station is \(currentAir.closestStationID)")
+                    self.coordinateLabel = "\(currentAir.closestStationID)"
+                    println("Self coordinate label is \(self.coordinateLabel)")
+                })
+        })
+        downloadTask.resume()
+    }
+    
+    func createBoundingBox(currentLatitude: Double, currentLongitude: Double) -> (Double, Double, Double, Double){
+        var distance = 10 //in kilometers
+        var radius = 6371 //in km
+        var angularRadius: Double = Double(distance * 100) / Double(radius) //check this
+        var latMin = currentLatitude - angularRadius
+        var latMax = currentLatitude + angularRadius
+        
+        var latT = asin(sin(currentLatitude)/cos(angularRadius))
+        var deltaLon = acos( (cos(angularRadius) - (sin(latT) * sin(currentLatitude))) / (cos(latT) * cos(currentLatitude)))
+        var lonMin = currentLongitude - deltaLon
+        var lonMax = currentLongitude + deltaLon
+        
+        return (latMin, latMax, lonMin, lonMax)
+        
+    }
+
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         performSegueWithIdentifier("dismissAndCancel", sender: self)
     }
@@ -76,7 +130,8 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.identifier == "dismissAndSave" {
-            let location = LocationForList(description: descriptionLabel, coordinate: coordinateLabel)
+            println("HERE: des is \(descriptionLabel) and AQI is \(self.coordinateLabel)")
+            let location = LocationForList(description: descriptionLabel, AQI: self.coordinateLabel)
             LocationStore.sharedInstance.add(location)
         }
     }
