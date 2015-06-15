@@ -23,8 +23,9 @@ class DetailViewController: UIViewController {
     func configureView() {
         // Update the user interface for the detail item.
         if let detail: LocationForList = self.detailItem {
-            if let label = self.detailDescriptionLabel {
-                label.text = detail.description
+            if let name = self.detailDescriptionLabel {
+                name.text = detail.description
+                let coordinates = detail.coordinate
                 println("in detailViewController \(detail.coordinate)")
             }
         }
