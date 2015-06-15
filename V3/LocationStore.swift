@@ -19,9 +19,7 @@ class LocationStore {
     var locations: [LocationForList] = []
     
     func add(locationNameAndID: LocationForList) {
-        println("locations list is \(locations)")
         locations.append(locationNameAndID)
-        println("now locations list is \(locations)")
     }
     
     func replace(locationNameAndID: LocationForList, atIndex index: Int) {

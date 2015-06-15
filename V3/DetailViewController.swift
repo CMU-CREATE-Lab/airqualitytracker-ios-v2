@@ -166,7 +166,7 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate {
                     var temperature = "\u{00B0} F"
                     self.temperatureLabel.text = "\(currentWeather.temperature)" + "\(temperature)"
                     print("before summary")
-                    self.summaryLabel.text = "\(currentWeather.summary)"
+//                    self.summaryLabel.text = "\(currentWeather.summary)"
                     print("After summary")
                     self.ozoneLabel.text = "\(currentWeather.ozone)"
                     })

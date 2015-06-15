@@ -24,6 +24,8 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
     
     var descriptionLabel: String! = ""
     var coordinateLabel: String! = ""
+    var latitude: Double = 0.0
+    var longitude: Double = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +54,9 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
             
             googleAPI.fetchPlacesDetail(src.placeIdArray[positionInArray]){ place in
                 self.coordinateLabel = place!.coordinateForList
+                
+                self.latitude = place!.coordinate.latitude
+                self.longitude = place!.coordinate.longitude
                 
                 //MN: calling the segue here as the user is done with search
                 self.performSegueWithIdentifier("dismissAndSave", sender: self)
