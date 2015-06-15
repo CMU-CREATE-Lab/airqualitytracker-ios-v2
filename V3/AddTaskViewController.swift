@@ -23,7 +23,7 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
     let src = AutoCompleteController()
     
     var descriptionLabel: String! = ""
-    var coordinateLabel: String! = ""
+    var AQILabel: String!
     var latitude: Double = 0.0
     var longitude: Double = 0.0
     
@@ -43,18 +43,15 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar){
-        println("in search is finished: Search Bar Search Button Clicked")
         searcher.active = false
     }
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar){
-        println("in searchBarTextDidEndEditing")
         if src.selected! {
             var positionInArray = src.selectedIndex.row
             descriptionLabel = src.areaNamesArray[positionInArray]
             
             googleAPI.fetchPlacesDetail(src.placeIdArray[positionInArray]){ place in
-//                self.coordinateLabel = place!.coordinateForList
                 
                 self.latitude = place!.coordinate.latitude as Double
                 self.longitude = place!.coordinate.longitude as Double
@@ -92,13 +89,15 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
                 NSJSONSerialization.JSONObjectWithData(dataObject!, options: nil, error: nil) as! NSDictionary //casting
                 
                 let currentAir = CurrentAirQuality(airQualityDictionary: airQualityDictionary, currentLatitude: currentLatitude, currentLongitude: currentLongitude)
-                
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    println("AddTASKVC closest air quality station is \(currentAir.closestStationID)")
-                    self.coordinateLabel = "\(currentAir.closestStationID)"
-                    println("Self coordinate label is \(self.coordinateLabel)")
+            
+            //sync because need to complete this process before any other thread is executed
+                dispatch_sync(dispatch_get_main_queue(), { () -> Void in
+                    self.AQILabel = "\(currentAir.closestStationID)"
+                    let location = LocationForList(description: self.descriptionLabel, AQI: self.AQILabel)
+                    LocationStore.sharedInstance.add(location)
                 })
         })
+        
         downloadTask.resume()
     }
     
@@ -129,11 +128,6 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
 
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        if segue.identifier == "dismissAndSave" {
-            println("HERE: des is \(descriptionLabel) and AQI is \(self.coordinateLabel)")
-            let location = LocationForList(description: descriptionLabel, AQI: self.coordinateLabel)
-            LocationStore.sharedInstance.add(location)
-        }
     }
 
 }
