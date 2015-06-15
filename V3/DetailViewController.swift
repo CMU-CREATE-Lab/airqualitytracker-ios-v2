@@ -6,6 +6,9 @@
 //  Copyright (c) 2015 Speck Sensor. All rights reserved.
 //
 
+
+//IDEA FOR current location bug: initialize with a variable Current Location. then when the user clicks it, it goes to the detail view controller. there refresh the location just like you did in V2 and then display it. That way, no problem refreshing. But do this after the normal detail view controller is working. 
+
 import UIKit
 
 class DetailViewController: UIViewController {
