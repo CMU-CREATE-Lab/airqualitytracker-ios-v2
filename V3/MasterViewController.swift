@@ -17,7 +17,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     var latitude: Double = 0
     var longitude: Double = 0
     var currentLocation: String = ""
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -68,7 +68,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     func getCurrentLocality() -> Void {
         
         setupLocation()
-
+        
         
         var currentLatitude = latitude
         var currentLongitude = longitude
@@ -123,7 +123,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     
     func refresh() {
         getCurrentLocality()
-
+        
     }
     
     
@@ -186,7 +186,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
 }
 
 
-//// MARC :- original master view controller 
+//// MARC :- original master view controller
 ////  MasterViewController.swift
 ////  V3
 ////
@@ -205,20 +205,20 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
 //    }
 //
 //    override func viewDidLoad() {
-//    
+//
 //        let initialLocation = LocationForList(description: "Alcatraz Island, CA", coordinate: "40.4437514575563,-79.9465463763799")
-//    
+//
 //        LocationStore.sharedInstance.add(initialLocation)
-//        
+//
 //        // Do any additional setup after loading the view, typically from a nib.
-//        
+//
 //        super.viewDidLoad()
 //
 //        self.navigationItem.leftBarButtonItem = self.editButtonItem()
 //    }
 //
-//   
-//    
+//
+//
 //
 //    override func didReceiveMemoryWarning() {
 //        super.didReceiveMemoryWarning()
@@ -253,7 +253,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
 //        let location = LocationStore.sharedInstance.get(indexPath.row)
 //        cell.textLabel?.text = location.description
 //        cell.detailTextLabel?.text = location.coordinate
-//        
+//
 //        return cell
 //    }
 //
@@ -266,7 +266,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
 //        self.tableView.reloadData()
 ////        self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
 //    }
-//    
+//
 //    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
 //        if editingStyle == .Delete {
 //            LocationStore.sharedInstance.removeTaskAtIndex(indexPath.row)

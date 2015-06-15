@@ -7,22 +7,22 @@
 //
 
 
-//IDEA FOR current location bug: initialize with a variable Current Location. then when the user clicks it, it goes to the detail view controller. there refresh the location just like you did in V2 and then display it. That way, no problem refreshing. But do this after the normal detail view controller is working. 
+//IDEA FOR current location bug: initialize with a variable Current Location. then when the user clicks it, it goes to the detail view controller. there refresh the location just like you did in V2 and then display it. That way, no problem refreshing. But do this after the normal detail view controller is working.
 
 import UIKit
 
 class DetailViewController: UIViewController {
-
+    
     @IBOutlet weak var detailDescriptionLabel: UILabel!
-
-
+    
+    
     var detailItem: LocationForList? {
         didSet {
             // Update the view.
             self.configureView()
         }
     }
-
+    
     func configureView() {
         // Update the user interface for the detail item.
         if let detail: LocationForList = self.detailItem {
@@ -39,12 +39,12 @@ class DetailViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         self.configureView()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    
 }
 
