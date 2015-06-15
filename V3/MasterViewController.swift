@@ -130,7 +130,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
             let currentAir = CurrentAirQuality(airQualityDictionary: airQualityDictionary, currentLatitude: currentLatitude, currentLongitude: currentLongitude)
             
             self.airQuality = currentAir.closestStationID
-            let location = LocationForList(description: self.currentLocation, AQI: "\(self.airQuality)")
+            let location = LocationForList(description: "Current Location", AQI: "\(self.airQuality)")
             LocationStore.sharedInstance.add(location)
         })
         
