@@ -13,12 +13,15 @@ struct Current {
     
     var temperature: Int
     var summary: String
+    var ozone: Int
     
     init(weatherDictionary: NSDictionary) {
         let currentWeather = weatherDictionary["currently"] as! NSDictionary
         
         temperature = currentWeather["temperature"] as! Int
+        print("before summary")
         summary = currentWeather["summary"] as! String
-        
+        print("After summary")
+        ozone = currentWeather["ozone"] as! Int
     }
 }

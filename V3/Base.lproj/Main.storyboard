@@ -230,7 +230,10 @@
                     </view>
                     <navigationItem key="navigationItem" title="Detail" id="cra-N8-TIN"/>
                     <connections>
+                        <outlet property="airQualityStationID" destination="OjH-1b-xgT" id="ahc-gZ-XeD"/>
                         <outlet property="detailDescriptionLabel" destination="Lei-5M-9Gs" id="sCT-F7-F6f"/>
+                        <outlet property="ozoneLabel" destination="qVS-XH-Jjb" id="zmi-cO-y3c"/>
+                        <outlet property="temperatureLabel" destination="hDt-tj-oDG" id="CYw-Rc-AJf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lrm-kH-fPn" sceneMemberID="firstResponder"/>
