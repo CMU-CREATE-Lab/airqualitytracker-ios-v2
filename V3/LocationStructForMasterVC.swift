@@ -14,8 +14,10 @@ struct LocationForList {
     
     var description: String
     var AQI: String
+    var lat: Double
+    var long: Double
     
-    init(description: String, AQI: String) {        
+    init(description: String, AQI: String, lat: Double, long: Double) {
         //doing this string arithmetic to ensure that only the first location identifier is displayed 
         //for example: If the user searches for CREATE Lab, Forbes Avenue, Pittsburgh, PA, the app will only dispay CREATE LAB
         
@@ -23,15 +25,14 @@ struct LocationForList {
 
         if (identifierSeparator == nil){
             self.description = description
-
         }
         
         else {
             var shortDescription = description.substringWithRange(Range<String.Index>(start: description.startIndex, end: identifierSeparator!.startIndex))
             self.description = shortDescription
-
         }
-        
-         self.AQI = AQI
+        self.AQI = AQI
+        self.lat = lat
+        self.long = long
     }
 }

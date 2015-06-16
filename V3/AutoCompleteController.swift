@@ -6,6 +6,8 @@
 
 import UIKit
 
+//This is intended for the search feature of the app. This controller helps in the auto complete results from the search bar. 
+
 class AutoCompleteController: UITableViewController {
     var areaNamesArray : [String] = []
     var placeIdArray : [String] = []
@@ -16,7 +18,6 @@ class AutoCompleteController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         
     }
@@ -47,10 +48,7 @@ class AutoCompleteController: UITableViewController {
         selectedIndex=indexPath
         selected = true
         searcher.active=false
-        
     }
-    
-    
 }
 
 extension AutoCompleteController : UISearchResultsUpdating {
@@ -65,7 +63,6 @@ extension AutoCompleteController : UISearchResultsUpdating {
             }
             
             self.filteredData = self.areaNamesArray
-            
             self.tableView.reloadData()
         }
     }

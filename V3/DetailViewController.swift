@@ -37,6 +37,8 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate {
             if let locationName = self.detailDescriptionLabel {
                 locationName.text = detail.description
                 self.airQualityStationID.text = detail.AQI
+                latitude = detail.lat
+                longitude = detail.long
             }
         }
     }
@@ -44,26 +46,22 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         
         self.configureView()
-        
         getCurrentWeatherData()
-
-        
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
     
+    //MARK: - gets the current weather data based on the coordinates
     func getCurrentWeatherData() -> Void {
         
-        var currentLatitude = latitude
+        var currentLatitude =  latitude
         var currentLongitude = longitude
         
         let apiKey = "87224a504c9c40fe40c2166ff8fb846c"
 
         
         let baseURL = NSURL(string: "https://api.forecast.io/forecast/\(apiKey)/")
-        
         let forecastURL = NSURL(string: "\(currentLatitude),\(currentLongitude)", relativeToURL: baseURL)
-        
         
         let sharedSession = NSURLSession.sharedSession()
         let downloadTask: NSURLSessionDownloadTask = sharedSession.downloadTaskWithURL(forecastURL!, completionHandler: { (location: NSURL!, response: NSURLResponse!, error: NSError!) -> Void in
@@ -76,15 +74,14 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate {
                 let currentWeather = Current(weatherDictionary: weatherDictionary)
                 
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    var temperature = "\u{00B0} F"
+                    var temperature = "\u{00B0} F" //symbol for degree F
                     self.temperatureLabel.text = "\(currentWeather.temperature)" + "\(temperature)"
-                    print("before summary")
-//                    self.summaryLabel.text = "\(currentWeather.summary)"
-                    print("After summary")
+//                      self.summaryLabel.text = "\(currentWeather.summary)"
                     self.ozoneLabel.text = "\(currentWeather.ozone)"
-                    })
+                })
                 
             }
+                
             else {
                 let issue = UIAlertController(title: "Error", message: "Error in connection", preferredStyle: .Alert)
                 

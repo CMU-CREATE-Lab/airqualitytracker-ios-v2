@@ -33,9 +33,9 @@ class GoogleAPI {
         placesTask = session.dataTaskWithURL(NSURL(string: urlString)!) {data, response, error in
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             self.namesAndIDs = [NameAndID]()
-            if let dataObject = NSJSONSerialization.JSONObjectWithData(data, options:nil, error:nil) as? NSDictionary {
-                if let results = dataObject["predictions"] as? NSArray {
-                    for rawPlace:AnyObject in results {
+            if let dataObject = NSJSONSerialization.JSONObjectWithData(data, options:nil, error:nil) as? NSDictionary{
+                if let results = dataObject["predictions"] as? NSArray{
+                    for rawPlace:AnyObject in results{
                         let place = NameAndID(dictionary: rawPlace as! NSDictionary)
                         self.namesAndIDs.append(place)
                     }
@@ -69,6 +69,4 @@ class GoogleAPI {
         }
         placesTask.resume()
     }
-    
-    
 }

@@ -16,6 +16,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     var locationManager = CLLocationManager()
     var latitude: Double = 0
     var longitude: Double = 0
+    
     var currentLocation: String = ""
     var airQuality: Int = 0
     
@@ -31,37 +32,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
     }
     
-    func setupLocation(){
-        self.locationManager.requestWhenInUseAuthorization()
-        self.locationManager.requestAlwaysAuthorization()
-        
-        if (CLLocationManager.locationServicesEnabled()){
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-            locationManager.requestAlwaysAuthorization()
-            
-            //MN: ask about distance filter
-            locationManager.distanceFilter = 1000
-            
-            //MN: ask about start and significant change
-            locationManager.startUpdatingLocation()
-            //locationManager.startMonitoringSignificantLocationChanges()
-            if locationManager.location != nil {
-                latitude = locationManager.location.coordinate.latitude
-                longitude = locationManager.location.coordinate.longitude
-            }
-            
-        }
-        
-    }
-    
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        var locValue:CLLocationCoordinate2D = manager.location.coordinate
-        latitude = locValue.latitude
-        longitude = locValue.longitude
-    }
-    
-    
+    //MARK: - gets current coordinates
     func getCurrentLocality() -> Void {
         
         setupLocation()
@@ -103,6 +74,37 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
         downloadTask.resume()
     }
     
+    func setupLocation(){
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.requestAlwaysAuthorization()
+        
+        if (CLLocationManager.locationServicesEnabled()){
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+            locationManager.requestAlwaysAuthorization()
+            
+            //MN: ask about distance filter
+            locationManager.distanceFilter = 1000
+            
+            //MN: ask about start and significant change
+            locationManager.startUpdatingLocation()
+            //locationManager.startMonitoringSignificantLocationChanges()
+            if locationManager.location != nil {
+                latitude = locationManager.location.coordinate.latitude
+                longitude = locationManager.location.coordinate.longitude
+            }
+            
+        }
+        
+    }
+    
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        var locValue:CLLocationCoordinate2D = manager.location.coordinate
+        latitude = locValue.latitude
+        longitude = locValue.longitude
+    }
+
+    
     //MARK: - AirQuaility For Current Locality
     
     func getCurrentAirQuality() -> Void {
@@ -130,7 +132,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
             let currentAir = CurrentAirQuality(airQualityDictionary: airQualityDictionary, currentLatitude: currentLatitude, currentLongitude: currentLongitude)
             
             self.airQuality = currentAir.closestStationID
-            let location = LocationForList(description: "Current Location", AQI: "\(self.airQuality)")
+            let location = LocationForList(description: "Current Location", AQI: "\(self.airQuality)", lat: self.latitude, long: self.longitude)
             LocationStore.sharedInstance.add(location)
         })
         

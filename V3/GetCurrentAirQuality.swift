@@ -19,11 +19,9 @@ struct CurrentAirQuality {
     
     init(airQualityDictionary: NSDictionary, currentLatitude: Double, currentLongitude: Double){
         stationData = airQualityDictionary["data"]! as AnyObject
-        //        println("station data is \(stationData)")
         rowArray = stationData["rows"] as! Array<NSDictionary>
         pmStations = findStationsWithPM(rowArray)
         distanceAndIdArray = findDistanceAndIdArray(pmStations, dataArray: rowArray, latRef: currentLatitude, lonRef: currentLongitude)
-        
         closestStationID = findClosestPMStation(distanceAndIdArray)
         
     }
@@ -41,22 +39,18 @@ struct CurrentAirQuality {
                 tempChannelBounds = tempDict["channelBounds"] as! NSDictionary
                 tempChannels = tempChannelBounds["channels"] as! NSDictionary
                 
-                
                 if let val:AnyObject = tempChannels["PM2_5"] {
                     pmStationIndexArray.append(i)
                 }
                 else if let val:AnyObject = tempChannels["PM25B_UG_M3"] {
                     pmStationIndexArray.append(i)
                 }
-                    
                 else if let val:AnyObject = tempChannels["PM25_FL_PERCENT"] {
                     pmStationIndexArray.append(i)
                 }
-                    
                 else if let val:AnyObject = tempChannels["PM25_UG_M3"] {
                     pmStationIndexArray.append(i)
                 }
-                
             }
         }
             
@@ -78,7 +72,6 @@ struct CurrentAirQuality {
         var pmStationLength = pmStations.count
         
         if (pmStationLength > 1){
-            
             for i in 0...(pmStations.count - 1){
                 tempData = rowArray[pmStations[i]] as NSDictionary
                 lat = tempData["latitude"] as! Double
@@ -87,16 +80,12 @@ struct CurrentAirQuality {
                 currId = tempData["id"] as! Int
                 distanceAndIds += [(currDistance, currId)]
             }
-            
         }
             
         else{
             distanceAndIds = []
         }
-        
-        //       println("distance and ids \(distanceAndIds)")
         return distanceAndIds
-        
     }
     
     //from Rosetta Code wiki
@@ -132,7 +121,7 @@ struct CurrentAirQuality {
                     minimumStationID = tempID
                 }
             }
-            //            println("ID of the closest statio is \(minimumStationID)")
+
         }
             
         else{

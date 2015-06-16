@@ -16,8 +16,8 @@ class NameAndID {
         description = dictionary["description"] as! String
         place_id = dictionary["place_id"] as! String
     }
-    
 }
+
 class Detail {
     let address :String
     let coordinate:CLLocationCoordinate2D

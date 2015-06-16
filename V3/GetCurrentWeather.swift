@@ -17,7 +17,6 @@ struct Current {
     
     init(weatherDictionary: NSDictionary) {
         let currentWeather = weatherDictionary["currently"] as! NSDictionary
-        
         temperature = currentWeather["temperature"] as! Int
         print("before summary")
         summary = currentWeather["summary"] as! String

@@ -19,12 +19,10 @@ struct CurrentGeocode {
     
     
     init(geoCodeDictionary: NSDictionary) {
-        
         currentLocalityArray = geoCodeDictionary["geonames"]![0] as! NSDictionary
         name = currentLocalityArray["name"] as! String
         stateName = currentLocalityArray["adminName1"] as? String
         stateCode = getStateCode(stateName!)
-        
     }
     
     func getStateCode(stateFullName: String) -> String {

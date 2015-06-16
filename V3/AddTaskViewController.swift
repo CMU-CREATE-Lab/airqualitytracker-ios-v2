@@ -93,7 +93,7 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
             //sync because need to complete this process before any other thread is executed
                 dispatch_sync(dispatch_get_main_queue(), { () -> Void in
                     self.AQILabel = "\(currentAir.closestStationID)"
-                    let location = LocationForList(description: self.descriptionLabel, AQI: self.AQILabel)
+                    let location = LocationForList(description: self.descriptionLabel, AQI: self.AQILabel, lat: self.latitude, long: self.longitude)
                     LocationStore.sharedInstance.add(location)
                 })
         })
