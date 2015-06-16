@@ -84,45 +84,9 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="System Settings" id="O8f-DP-Ru5">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="pVT-XE-ykx">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pVT-XE-ykx" id="XqS-Bn-lcS">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="System Permissions" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JK2-Tb-K3P">
-                                                    <rect key="frame" x="34" y="8" width="156" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="JK2-Tb-K3P" firstAttribute="leading" secondItem="XqS-Bn-lcS" secondAttribute="leadingMargin" constant="26" id="3w7-r4-KSd"/>
-                                                <constraint firstItem="JK2-Tb-K3P" firstAttribute="top" secondItem="XqS-Bn-lcS" secondAttribute="topMargin" id="RUM-Pb-cAi"/>
-                                                <constraint firstItem="JK2-Tb-K3P" firstAttribute="leading" secondItem="XqS-Bn-lcS" secondAttribute="leadingMargin" constant="26" id="dnh-8Y-cq5"/>
-                                                <constraint firstItem="JK2-Tb-K3P" firstAttribute="top" secondItem="XqS-Bn-lcS" secondAttribute="topMargin" id="lV9-Bu-DcQ"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="JK2-Tb-K3P" secondAttribute="trailing" constant="402" id="n5t-Rn-hbA"/>
-                                                <constraint firstAttribute="centerY" secondItem="JK2-Tb-K3P" secondAttribute="centerY" constant="3.5" id="vj8-KB-2lK"/>
-                                            </constraints>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="3w7-r4-KSd"/>
-                                                    <exclude reference="RUM-Pb-cAi"/>
-                                                    <exclude reference="dnh-8Y-cq5"/>
-                                                    <exclude reference="lV9-Bu-DcQ"/>
-                                                    <exclude reference="n5t-Rn-hbA"/>
-                                                    <exclude reference="vj8-KB-2lK"/>
-                                                </mask>
-                                            </variation>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
                             <tableViewSection headerTitle="About" id="MUT-Gn-SGd">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="LlQ-nI-oqX">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="LlQ-nI-oqX">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LlQ-nI-oqX" id="az4-dX-uun">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -183,6 +147,9 @@
                             <outlet property="delegate" destination="Z5c-Dn-xC5" id="Htg-bu-KWy"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem id="4cL-eQ-fb0"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="kAb-PL-Rc3">
                         <barButtonItem key="leftBarButtonItem" title="Air Quality" id="9wl-Gc-W5E">
                             <connections>
@@ -190,6 +157,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="unitConversionControl" destination="E3e-O7-b3e" id="rww-QO-GYI"/>
                     </connections>
