@@ -501,7 +501,11 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="About Speck™" id="a4B-Zd-bn7">
-                        <barButtonItem key="leftBarButtonItem" title="Settings" id="yTt-1I-yL3"/>
+                        <barButtonItem key="leftBarButtonItem" title="Settings" id="yTt-1I-yL3">
+                            <connections>
+                                <segue destination="Z5c-Dn-xC5" kind="show" identifier="segueFromAboutSpeckToSettings" id="jbu-8D-3I6"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -510,7 +514,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0ig-Sw-dMN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1345" y="777"/>
+            <point key="canvasLocation" x="1482" y="765"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lcy-K7-kU5">
@@ -534,5 +538,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="hWM-lf-OAO"/>
+        <segue reference="jbu-8D-3I6"/>
     </inferredMetricsTieBreakers>
 </document>
