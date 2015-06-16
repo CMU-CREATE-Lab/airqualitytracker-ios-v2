@@ -25,7 +25,6 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     }
     
     override func viewDidLoad() {
-        
         getCurrentLocality()
         getCurrentAirQuality()
         super.viewDidLoad()
