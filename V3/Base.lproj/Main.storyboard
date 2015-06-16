@@ -42,6 +42,9 @@
                                                         <segment title="℉"/>
                                                         <segment title="℃"/>
                                                     </segments>
+                                                    <connections>
+                                                        <action selector="unitConversionTriggered:" destination="Z5c-Dn-xC5" eventType="valueChanged" id="d1k-tW-5Cv"/>
+                                                    </connections>
                                                 </segmentedControl>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Temperature Unit " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBk-c3-WIg">
                                                     <rect key="frame" x="0.0" y="0.0" width="137" height="21"/>
@@ -187,6 +190,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="unitConversionControl" destination="E3e-O7-b3e" id="rww-QO-GYI"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cHC-5O-SuB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

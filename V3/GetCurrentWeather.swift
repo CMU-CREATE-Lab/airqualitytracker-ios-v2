@@ -11,16 +11,26 @@ import UIKit
 
 struct Current {
     
-    var temperature: Int
+    var temperature: Int = 0
     var summary: String
     var ozone: Int
     
     init(weatherDictionary: NSDictionary) {
-        let currentWeather = weatherDictionary["currently"] as! NSDictionary
-        temperature = currentWeather["temperature"] as! Int
-        print("before summary")
+        var currentWeather = weatherDictionary["currently"] as! NSDictionary
         summary = currentWeather["summary"] as! String
-        print("After summary")
         ozone = currentWeather["ozone"] as! Int
+        var tempTemperature = currentWeather["temperature"] as! Int
+        if (SettingsViewController.variables.unit == false){
+            temperature = convertToCelcius(tempTemperature)
+        }
+        else{
+            temperature = tempTemperature
+        }
+
+    }
+    
+    func convertToCelcius(farhenheit: Int) -> Int {
+        var celcius: Double = (Double(farhenheit) - 32.0) * (5/9)
+        return Int(celcius)
     }
 }

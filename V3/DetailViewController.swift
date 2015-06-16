@@ -73,9 +73,19 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate {
                 
                 let currentWeather = Current(weatherDictionary: weatherDictionary)
                 
+                var temperatureSymbol: String
+                if (SettingsViewController.variables.unit == true){
+                    temperatureSymbol = "\u{00B0} F" //symbol for degree F
+                }
+                
+                else{
+                    temperatureSymbol = "\u{00B0} C" //symbol for degree C
+                }
+
+                
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    var temperature = "\u{00B0} F" //symbol for degree F
-                    self.temperatureLabel.text = "\(currentWeather.temperature)" + "\(temperature)"
+
+                    self.temperatureLabel.text = "\(currentWeather.temperature)" + "\(temperatureSymbol)"
 //                      self.summaryLabel.text = "\(currentWeather.summary)"
                     self.ozoneLabel.text = "\(currentWeather.ozone)"
                 })

@@ -9,30 +9,31 @@
 import UIKit
 
 class SettingsViewController: UITableViewController {
+
+    @IBOutlet weak var unitConversionControl: UISegmentedControl!
     
+    //storing unit in a struct because it is a flag for the unit selected by the user. This way the value of unit can be passed to other view controllers easily.
+    struct variables{
+        static var unit: Bool = true //true = F, false = C
+    }
     
-//    @IBOutlet weak var unitConversionControl: UISegmentedControl!
-//
-//    var unit: Bool = true //true = F, false = C
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-//    
-//    @IBAction func unitConversionTriggered(sender: UISegmentedControl) {
-//        
-//        switch unitConversionControl.selectedSegmentIndex {
-//        case 0:
-//            self.unit = true
-//            println("unit converted to Celcius")
-//        
-//        case 1:
-//            self.unit = false
-//            println("unit converted to Farhenheit")
-//        default:
-//            break
-//        }
-//    }
     
+    @IBAction func unitConversionTriggered(sender: UISegmentedControl) {
+        switch unitConversionControl.selectedSegmentIndex {
+        case 0:
+            variables.unit = true
+            println("unit converted to Celcius")
+            
+        case 1:
+            variables.unit = false
+            println("unit converted to Farhenheit")
+        default:
+            break
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
