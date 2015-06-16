@@ -29,7 +29,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
         getCurrentLocality()
         getCurrentAirQuality()
         super.viewDidLoad()
-        self.navigationItem.leftBarButtonItem = self.editButtonItem()
+//        self.navigationItem.leftBarButtonItem = self.editButtonItem()
     }
     
     //MARK: - gets current coordinates
