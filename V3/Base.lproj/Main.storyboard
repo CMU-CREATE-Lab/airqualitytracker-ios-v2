@@ -271,6 +271,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="settingsButton" destination="yEd-gQ-xZh" id="jII-2H-l7A"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Cn-md-YlS" sceneMemberID="firstResponder"/>
             </objects>
@@ -475,7 +478,7 @@
         <!--About Speck-->
         <scene sceneID="ec4-m2-FGd">
             <objects>
-                <viewController title="About Speck" automaticallyAdjustsScrollViewInsets="NO" id="CWE-o2-imw" sceneMemberID="viewController">
+                <viewController title="About Speck" automaticallyAdjustsScrollViewInsets="NO" id="CWE-o2-imw" customClass="AboutSpeckViewController" customModule="V3" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bqC-0F-bTL"/>
                         <viewControllerLayoutGuide type="bottom" id="9xo-t9-WVC"/>
@@ -501,6 +504,9 @@
                         <barButtonItem key="leftBarButtonItem" title="Settings" id="yTt-1I-yL3"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="settingsButton" destination="yTt-1I-yL3" id="i5v-7x-Qem"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0ig-Sw-dMN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

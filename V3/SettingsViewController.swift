@@ -14,7 +14,7 @@ class SettingsViewController: UITableViewController {
     
     //storing unit in a struct because it is a flag for the unit selected by the user. This way the value of unit can be passed to other view controllers easily.
     struct variables{
-        static var unit: Bool = true //true = F, false = C
+        static var unit: Bool = true//true = F, false = C
     }
     
     override func viewDidLoad() {
@@ -25,11 +25,11 @@ class SettingsViewController: UITableViewController {
         switch unitConversionControl.selectedSegmentIndex {
         case 0:
             variables.unit = true
-            println("unit converted to Celcius")
-            
+            println("unit converted to Farhenheit")
         case 1:
             variables.unit = false
-            println("unit converted to Farhenheit")
+            println("unit converted to Celcius")
+
         default:
             break
         }

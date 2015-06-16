@@ -12,6 +12,7 @@
 		40086C861B27596200BD4B62 /* AutoCompleteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40086C851B27596200BD4B62 /* AutoCompleteController.swift */; };
 		40086C891B275A3D00BD4B62 /* LocationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40086C881B275A3D00BD4B62 /* LocationStore.swift */; };
 		404104E51B30C78A001864F4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404104E41B30C78A001864F4 /* SettingsViewController.swift */; };
+		404104E81B30D4DD001864F4 /* AboutSpeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404104E71B30D4DD001864F4 /* AboutSpeckViewController.swift */; };
 		407D872A1B260987001C38B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407D87291B260987001C38B2 /* AppDelegate.swift */; };
 		407D872C1B260987001C38B2 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407D872B1B260987001C38B2 /* MasterViewController.swift */; };
 		407D872E1B260987001C38B2 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407D872D1B260987001C38B2 /* DetailViewController.swift */; };
@@ -43,6 +44,7 @@
 		40086C851B27596200BD4B62 /* AutoCompleteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoCompleteController.swift; sourceTree = "<group>"; };
 		40086C881B275A3D00BD4B62 /* LocationStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationStore.swift; sourceTree = "<group>"; };
 		404104E41B30C78A001864F4 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		404104E71B30D4DD001864F4 /* AboutSpeckViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutSpeckViewController.swift; sourceTree = "<group>"; };
 		407D87241B260987001C38B2 /* V3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = V3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		407D87281B260987001C38B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		407D87291B260987001C38B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -85,9 +87,9 @@
 			children = (
 				407D87291B260987001C38B2 /* AppDelegate.swift */,
 				407D872B1B260987001C38B2 /* MasterViewController.swift */,
+				404104E71B30D4DD001864F4 /* AboutSpeckViewController.swift */,
 				407D872D1B260987001C38B2 /* DetailViewController.swift */,
 				4092077A1B26A807000CE42B /* DismissSegue.swift */,
-				404104E41B30C78A001864F4 /* SettingsViewController.swift */,
 			);
 			name = "Top level ";
 			sourceTree = "<group>";
@@ -100,6 +102,14 @@
 				40086C851B27596200BD4B62 /* AutoCompleteController.swift */,
 			);
 			name = "Search Controller ";
+			sourceTree = "<group>";
+		};
+		404104E61B30D449001864F4 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				404104E41B30C78A001864F4 /* SettingsViewController.swift */,
+			);
+			name = Settings;
 			sourceTree = "<group>";
 		};
 		407D871B1B260987001C38B2 = {
@@ -125,6 +135,7 @@
 			children = (
 				40086C801B27576D00BD4B62 /* Top level  */,
 				407D872F1B260987001C38B2 /* Main.storyboard */,
+				404104E61B30D449001864F4 /* Settings */,
 				40F963391B29E92700E0284B /* Data Analysis  */,
 				40F11EC51B28D4DB005961A5 /* Structs */,
 				40086C871B2759F000BD4B62 /* Search Controller  */,
@@ -285,6 +296,7 @@
 				4092077B1B26A807000CE42B /* DismissSegue.swift in Sources */,
 				40086C891B275A3D00BD4B62 /* LocationStore.swift in Sources */,
 				40F963361B29E8AE00E0284B /* GetCurrentGeocode.swift in Sources */,
+				404104E81B30D4DD001864F4 /* AboutSpeckViewController.swift in Sources */,
 				409207791B26A6B2000CE42B /* AddTaskViewController.swift in Sources */,
 				407D872C1B260987001C38B2 /* MasterViewController.swift in Sources */,
 				4092077D1B26B4A7000CE42B /* LocationStructForMasterVC.swift in Sources */,

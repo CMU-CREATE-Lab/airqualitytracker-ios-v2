@@ -20,11 +20,20 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     var currentLocation: String = ""
     var airQuality: Int = 0
     
+    @IBOutlet weak var settingsButton: UIBarButtonItem!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
     
     override func viewDidLoad() {
+        
+        //changing the settings button to a settings cog wheel logo
+        self.settingsButton.title = NSString(string: "\u{2699}") as String
+        if let font = UIFont(name: "Helvetica", size: 24.0) {
+            self.settingsButton.setTitleTextAttributes([NSFontAttributeName: font], forState: UIControlState.Normal)
+        }
+        
         getCurrentLocality()
         getCurrentAirQuality()
         super.viewDidLoad()
