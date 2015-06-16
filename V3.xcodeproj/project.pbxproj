@@ -24,6 +24,7 @@
 		40F963341B29E88800E0284B /* GetCurrentAirQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F963331B29E88800E0284B /* GetCurrentAirQuality.swift */; };
 		40F963361B29E8AE00E0284B /* GetCurrentGeocode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F963351B29E8AE00E0284B /* GetCurrentGeocode.swift */; };
 		40F963381B29E8CD00E0284B /* GetCurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F963371B29E8CD00E0284B /* GetCurrentWeather.swift */; };
+		40FC4F671B30BEF5002E8785 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FC4F661B30BEF5002E8785 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		40F963331B29E88800E0284B /* GetCurrentAirQuality.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetCurrentAirQuality.swift; sourceTree = "<group>"; };
 		40F963351B29E8AE00E0284B /* GetCurrentGeocode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetCurrentGeocode.swift; sourceTree = "<group>"; };
 		40F963371B29E8CD00E0284B /* GetCurrentWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetCurrentWeather.swift; sourceTree = "<group>"; };
+		40FC4F661B30BEF5002E8785 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = ../SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 				40F11EC51B28D4DB005961A5 /* Structs */,
 				40086C871B2759F000BD4B62 /* Search Controller  */,
 				407D87321B260987001C38B2 /* Images.xcassets */,
+				40FC4F661B30BEF5002E8785 /* SettingsViewController.swift */,
 				407D87341B260987001C38B2 /* LaunchScreen.xib */,
 				407D87271B260987001C38B2 /* Supporting Files */,
 			);
@@ -287,6 +290,7 @@
 				4092077D1B26B4A7000CE42B /* LocationStructForMasterVC.swift in Sources */,
 				407D872A1B260987001C38B2 /* AppDelegate.swift in Sources */,
 				40086C821B27592B00BD4B62 /* GoogleAPIStructs.swift in Sources */,
+				40FC4F671B30BEF5002E8785 /* SettingsViewController.swift in Sources */,
 				40F963381B29E8CD00E0284B /* GetCurrentWeather.swift in Sources */,
 				40086C841B27594700BD4B62 /* GoogleAPICall.swift in Sources */,
 				40F963341B29E88800E0284B /* GetCurrentAirQuality.swift in Sources */,
