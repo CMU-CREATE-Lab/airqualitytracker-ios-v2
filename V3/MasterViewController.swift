@@ -20,6 +20,10 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     var currentLocation: String = ""
     var airQuality: Int = 0
     
+    var currentTemperature: String  = ""
+    var currentOzone: String = ""
+    var currentTime: String = ""
+    
     @IBOutlet weak var settingsButton: UIBarButtonItem!
     
     override func awakeFromNib() {
@@ -35,6 +39,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
         }
         
         getCurrentLocality()
+        getCurrentWeatherData()
         getCurrentAirQuality()
         tableView.delegate = self
         tableView.dataSource = self
@@ -142,8 +147,11 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
             let currentAir = CurrentAirQuality(airQualityDictionary: airQualityDictionary, currentLatitude: currentLatitude, currentLongitude: currentLongitude)
             
             self.airQuality = currentAir.closestStationID
-            let location = LocationForList(description: "Current Location", AQI: "\(self.airQuality)", lat: self.latitude, long: self.longitude)
+            println("sending data to struct from MVC")
+            let location = LocationForList(description: "Current Location", AQI: "\(self.airQuality)", lat: self.latitude, long: self.longitude, temp: self.currentTemperature, Oz: self.currentOzone)
             LocationStore.sharedInstance.add(location)
+            println("##################################")
+
         })
         
         downloadTask.resume()
@@ -165,6 +173,67 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
         
     }
     
+    //MARK: - gets the current weather data based on the coordinates
+    func getCurrentWeatherData() -> Void {
+        
+        var currentLatitude =  latitude
+        var currentLongitude = longitude
+        
+        let apiKey = "87224a504c9c40fe40c2166ff8fb846c"
+        
+        
+        let baseURL = NSURL(string: "https://api.forecast.io/forecast/\(apiKey)/")
+        let forecastURL = NSURL(string: "\(currentLatitude),\(currentLongitude)", relativeToURL: baseURL)
+        
+        let sharedSession = NSURLSession.sharedSession()
+        let downloadTask: NSURLSessionDownloadTask = sharedSession.downloadTaskWithURL(forecastURL!, completionHandler: { (location: NSURL!, response: NSURLResponse!, error: NSError!) -> Void in
+            
+            if (error == nil) {
+                let dataObject = NSData(contentsOfURL: location)
+                let weatherDictionary: NSDictionary =
+                NSJSONSerialization.JSONObjectWithData(dataObject!, options: nil, error: nil) as! NSDictionary //casting
+                
+                let currentWeather = Current(weatherDictionary: weatherDictionary)
+                
+                var temperatureSymbol: String
+                if (SettingsViewController.variables.unit == true){
+                    temperatureSymbol = "\u{00B0} F" //symbol for degree F
+                }
+                    
+                else{
+                    temperatureSymbol = "\u{00B0} C" //symbol for degree C
+                }
+                
+                
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    
+                    self.currentTemperature = "\(currentWeather.temperature)" + "\(temperatureSymbol)"
+                    
+                    self.currentOzone = "\(currentWeather.ozone)"
+                })
+                
+            }
+                
+            else {
+                let issue = UIAlertController(title: "Error", message: "Error in connection", preferredStyle: .Alert)
+                
+                let okIssue = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                issue.addAction(okIssue)
+                
+                let cancelIssue = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+                issue.addAction(cancelIssue)
+                
+                self.presentViewController(issue, animated: true, completion: nil)
+                
+            }
+            
+        })
+        
+        
+        
+        downloadTask.resume()
+    }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -192,7 +261,6 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return LocationStore.sharedInstance.count
     }
-    @IBOutlet var cityLabel: UILabel!
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CustomTableViewCell", forIndexPath: indexPath) as! CustomTableViewCell
@@ -200,6 +268,12 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
 
         cell.cityLabel?.text = location.description
         cell.aqiLabel?.text = location.AQI
+        if (location.description == "Current Location"){
+            cell.temperatureLabel?.text = self.currentTemperature
+        }
+        else{
+            cell.temperatureLabel?.text = location.temp
+        }
 
         return cell
     }

@@ -10,8 +10,11 @@ import UIKit
 
 class CustomTableViewCell: UITableViewCell {
 
-    @IBOutlet var aqiLabel: UILabel!
+    @IBOutlet var aqiLabel: UILabel!    
+
+    @IBOutlet var temperatureLabel: UILabel!
     @IBOutlet var cityLabel: UILabel!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

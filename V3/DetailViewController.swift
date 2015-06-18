@@ -19,6 +19,7 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var summaryLabel: UILabel!
     @IBOutlet weak var ozoneLabel: UILabel!
+    var callCurrentWeather: Bool = false
     
     var latitude: Double = 0.0
     var longitude: Double = 0.0
@@ -39,6 +40,14 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate {
                 self.airQualityStationID.text = detail.AQI
                 latitude = detail.lat
                 longitude = detail.long
+                if (detail.description != "Current Location"){
+                    self.temperatureLabel.text = detail.temp
+                    self.ozoneLabel.text = detail.Oz
+                    callCurrentWeather = false
+                }
+                else{
+                    callCurrentWeather = true
+                }
             }
         }
     }
@@ -46,7 +55,9 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         
         self.configureView()
-        getCurrentWeatherData()
+        if (callCurrentWeather == true){
+            getCurrentWeatherData()
+        }
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }

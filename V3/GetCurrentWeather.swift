@@ -11,6 +11,7 @@ import UIKit
 
 struct Current {
     
+    var currentTime: String?
     var temperature: Int = 0
     var summary: String
     var ozone: Int
@@ -26,6 +27,9 @@ struct Current {
         else{
             temperature = tempTemperature
         }
+        
+        let currentTimeIntVale = currentWeather["time"] as! Int
+        currentTime = dateStringFromUnixTime(currentTimeIntVale)
 
     }
     
@@ -33,4 +37,15 @@ struct Current {
         var celcius: Double = (Double(farhenheit) - 32.0) * (5/9)
         return Int(celcius)
     }
+    
+    func dateStringFromUnixTime(unixTime: Int) -> String {
+        let timeInSeconds = NSTimeInterval(unixTime)
+        let weatherDate = NSDate(timeIntervalSince1970: timeInSeconds)
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.timeStyle = .ShortStyle
+        
+        return dateFormatter.stringFromDate(weatherDate)
+    }
+
 }

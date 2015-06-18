@@ -204,27 +204,49 @@
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HIHEIHE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UNS-YD-ak5">
-                                            <rect key="frame" x="484" y="58" width="67" height="20.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SAMPLE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UNS-YD-ak5">
+                                            <rect key="frame" x="499" y="58" width="68" height="20"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M87-Cz-QeJ">
-                                            <rect key="frame" x="78" y="58" width="42" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SAMPLE SAMPLE SAM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sZU-GE-moy">
+                                            <rect key="frame" x="19" y="57" width="182" height="20"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21 F" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4cq-iw-hqN">
+                                            <rect key="frame" x="86" y="79" width="28.5" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailingMargin" secondItem="UNS-YD-ak5" secondAttribute="trailing" constant="41" id="NYQ-LQ-lDo"/>
+                                        <constraint firstItem="sZU-GE-moy" firstAttribute="leading" secondItem="4cq-iw-hqN" secondAttribute="leading" id="2St-e2-fqG"/>
+                                        <constraint firstItem="4cq-iw-hqN" firstAttribute="top" secondItem="sZU-GE-moy" secondAttribute="bottom" constant="3" id="2sE-Hk-jAa"/>
+                                        <constraint firstItem="sZU-GE-moy" firstAttribute="top" secondItem="d3P-M7-ByW" secondAttribute="topMargin" constant="49" id="EKx-VT-HMA"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="UNS-YD-ak5" secondAttribute="trailing" constant="25" id="NYQ-LQ-lDo"/>
+                                        <constraint firstItem="sZU-GE-moy" firstAttribute="centerX" secondItem="4cq-iw-hqN" secondAttribute="centerX" constant="9.75" id="QOc-dU-f8c"/>
+                                        <constraint firstItem="4cq-iw-hqN" firstAttribute="top" secondItem="sZU-GE-moy" secondAttribute="bottom" constant="2" id="emb-FG-EL9"/>
+                                        <constraint firstItem="4cq-iw-hqN" firstAttribute="top" secondItem="d3P-M7-ByW" secondAttribute="topMargin" constant="72" id="fJs-Kq-QJs"/>
                                         <constraint firstItem="UNS-YD-ak5" firstAttribute="top" secondItem="d3P-M7-ByW" secondAttribute="topMargin" constant="50" id="hiK-jG-dGd"/>
+                                        <constraint firstItem="sZU-GE-moy" firstAttribute="leading" secondItem="d3P-M7-ByW" secondAttribute="leadingMargin" constant="11" id="v2g-gV-oVq"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="2St-e2-fqG"/>
+                                            <exclude reference="2sE-Hk-jAa"/>
+                                            <exclude reference="fJs-Kq-QJs"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.2901960784" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="aqiLabel" destination="UNS-YD-ak5" id="vAY-8d-fUd"/>
+                                    <outlet property="cityLabel" destination="sZU-GE-moy" id="pGi-pp-nQi"/>
+                                    <outlet property="temperatureLabel" destination="4cq-iw-hqN" id="kAA-19-DC8"/>
                                     <segue destination="Ah7-4n-0Wa" kind="show" identifier="showDetail" id="jUr-3t-vfg"/>
                                 </connections>
                             </tableViewCell>
@@ -515,7 +537,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="hWM-lf-OAO"/>
+        <segue reference="RxB-wf-QIq"/>
         <segue reference="jbu-8D-3I6"/>
     </inferredMetricsTieBreakers>
 </document>
