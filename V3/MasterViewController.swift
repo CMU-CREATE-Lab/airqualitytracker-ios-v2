@@ -36,6 +36,8 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
         
         getCurrentLocality()
         getCurrentAirQuality()
+        tableView.delegate = self
+        tableView.dataSource = self
         super.viewDidLoad()
 //        self.navigationItem.leftBarButtonItem = self.editButtonItem()
     }
@@ -190,14 +192,15 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return LocationStore.sharedInstance.count
     }
+    @IBOutlet var cityLabel: UILabel!
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
-        
+        let cell = tableView.dequeueReusableCellWithIdentifier("CustomTableViewCell", forIndexPath: indexPath) as! CustomTableViewCell
         let location = LocationStore.sharedInstance.get(indexPath.row)
-        cell.textLabel?.text = location.description
-        cell.detailTextLabel?.text = location.AQI
-        
+
+        cell.cityLabel?.text = location.description
+        cell.aqiLabel?.text = location.AQI
+
         return cell
     }
     
@@ -208,7 +211,6 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     
     override func viewWillAppear(animated: Bool) {
         self.tableView.reloadData()
-        //        self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {

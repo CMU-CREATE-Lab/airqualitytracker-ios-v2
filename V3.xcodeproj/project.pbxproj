@@ -13,6 +13,7 @@
 		40086C891B275A3D00BD4B62 /* LocationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40086C881B275A3D00BD4B62 /* LocationStore.swift */; };
 		404104E51B30C78A001864F4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404104E41B30C78A001864F4 /* SettingsViewController.swift */; };
 		404104E81B30D4DD001864F4 /* AboutSpeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404104E71B30D4DD001864F4 /* AboutSpeckViewController.swift */; };
+		404887FF1B31F3D900020647 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404887FE1B31F3D900020647 /* CustomTableViewCell.swift */; };
 		407D872A1B260987001C38B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407D87291B260987001C38B2 /* AppDelegate.swift */; };
 		407D872C1B260987001C38B2 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407D872B1B260987001C38B2 /* MasterViewController.swift */; };
 		407D872E1B260987001C38B2 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407D872D1B260987001C38B2 /* DetailViewController.swift */; };
@@ -45,6 +46,7 @@
 		40086C881B275A3D00BD4B62 /* LocationStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationStore.swift; sourceTree = "<group>"; };
 		404104E41B30C78A001864F4 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		404104E71B30D4DD001864F4 /* AboutSpeckViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutSpeckViewController.swift; sourceTree = "<group>"; };
+		404887FE1B31F3D900020647 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		407D87241B260987001C38B2 /* V3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = V3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		407D87281B260987001C38B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		407D87291B260987001C38B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				404104E71B30D4DD001864F4 /* AboutSpeckViewController.swift */,
 				407D872D1B260987001C38B2 /* DetailViewController.swift */,
 				4092077A1B26A807000CE42B /* DismissSegue.swift */,
+				404887FE1B31F3D900020647 /* CustomTableViewCell.swift */,
 			);
 			name = "Top level ";
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 			files = (
 				407D872E1B260987001C38B2 /* DetailViewController.swift in Sources */,
 				4092077B1B26A807000CE42B /* DismissSegue.swift in Sources */,
+				404887FF1B31F3D900020647 /* CustomTableViewCell.swift in Sources */,
 				40086C891B275A3D00BD4B62 /* LocationStore.swift in Sources */,
 				40F963361B29E8AE00E0284B /* GetCurrentGeocode.swift in Sources */,
 				404104E81B30D4DD001864F4 /* AboutSpeckViewController.swift in Sources */,
