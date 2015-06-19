@@ -23,7 +23,8 @@ class GoogleAPI {
     {
         namesAndIDs.removeAll()
         
-        var urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=\(apiKey)&input=\(input)"
+        var urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=\(apiKey)&input=\(input)&components=country:US"
+        //https://developers.google.com/maps/documentation/geocoding/#ComponentFiltering
         urlString = urlString.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
         
         if placesTask.taskIdentifier > 0 && placesTask.state == .Running {

@@ -133,7 +133,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
         var currentDateInSeconds = currentDate.timeIntervalSince1970
         var last24Hours = Int(currentDateInSeconds - (60 * 60 * 24))
         
-        println("last 24 hours is \(last24Hours) and \(Int(last24Hours)) and \(Double(last24Hours))")
+
         var (latMin, latMax, lonMin, lonMax) = createBoundingBox(currentLatitude, currentLongitude: currentLongitude)
         
         var urlString = "https://esdr.cmucreatelab.org/api/v1/feeds?whereAnd=productId=11,latitude%3E=\(latMin),latitude%3C=\(latMax),longitude%3E=\(lonMin),longitude%3C=\(lonMax),maxTimeSecs%3E=\(last24Hours)&fields=id,name,latitude,longitude,channelBounds"

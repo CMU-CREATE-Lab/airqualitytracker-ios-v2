@@ -78,7 +78,7 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
         
         var currentDate = NSDate()
         var currentDateInSeconds = currentDate.timeIntervalSince1970
-        var last24Hours = Int(currentDateInSeconds - (60 * 60 * 24))
+        var last24Hours = currentDateInSeconds - (60 * 60 * 24)
         
         var (latMin, latMax, lonMin, lonMax) = createBoundingBox(currentLatitude, currentLongitude: currentLongitude)
         
