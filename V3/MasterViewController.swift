@@ -131,12 +131,17 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
         
         var currentDate = NSDate()
         var currentDateInSeconds = currentDate.timeIntervalSince1970
-        var last24Hours = currentDateInSeconds - (60 * 60 * 24)
+        var last24Hours = Int(currentDateInSeconds - (60 * 60 * 24))
         
+        println("last 24 hours is \(last24Hours) and \(Int(last24Hours)) and \(Double(last24Hours))")
         var (latMin, latMax, lonMin, lonMax) = createBoundingBox(currentLatitude, currentLongitude: currentLongitude)
         
+        var urlString = "https://esdr.cmucreatelab.org/api/v1/feeds?whereAnd=productId=11,latitude%3E=\(latMin),latitude%3C=\(latMax),longitude%3E=\(lonMin),longitude%3C=\(lonMax),maxTimeSecs%3E=\(last24Hours)&fields=id,name,latitude,longitude,channelBounds"
+        println("url is \(urlString)")
+//        urlString = urlString.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+
         
-        let airQualityURL = NSURL(string: "https://esdr.cmucreatelab.org/api/v1/feeds?whereAnd=productId=11,latitude%3E=\(latMin),latitude%3C=\(latMax),longitude%3E=\(lonMin),longitude%3C=\(lonMax),maxTimeSecs%3E=\(last24Hours)&fields=id,name,latitude,longitude,channelBounds")
+        let airQualityURL = NSURL(string:urlString  )
         
         let sharedSession = NSURLSession.sharedSession()
         let downloadTask: NSURLSessionDownloadTask = sharedSession.downloadTaskWithURL(airQualityURL!, completionHandler: { (data: NSURL!, response: NSURLResponse!, error: NSError!) -> Void in
@@ -145,10 +150,12 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
             let airQualityDictionary: NSDictionary =
             NSJSONSerialization.JSONObjectWithData(dataObject!, options: nil, error: nil) as! NSDictionary //casting
             
-            let currentAir = CurrentAirQuality(airQualityDictionary: airQualityDictionary, currentLatitude: currentLatitude, currentLongitude: currentLongitude)
+            let currentAir = CurrentAirQuality(airQualityDictionary: airQualityDictionary, currentLatitude: currentLatitude, currentLongitude: currentLongitude, last24Hours: last24Hours)
       
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.stationID = currentAir.closestStationID
+                println("closest id is \(self.stationID)")
+
                 self.getAQI()
             })
 

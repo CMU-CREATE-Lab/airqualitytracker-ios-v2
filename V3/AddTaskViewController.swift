@@ -78,7 +78,7 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
         
         var currentDate = NSDate()
         var currentDateInSeconds = currentDate.timeIntervalSince1970
-        var last24Hours = currentDateInSeconds - (60 * 60 * 24)
+        var last24Hours = Int(currentDateInSeconds - (60 * 60 * 24))
         
         var (latMin, latMax, lonMin, lonMax) = createBoundingBox(currentLatitude, currentLongitude: currentLongitude)
         
@@ -92,7 +92,7 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
             let airQualityDictionary: NSDictionary =
             NSJSONSerialization.JSONObjectWithData(dataObject!, options: nil, error: nil) as! NSDictionary //casting
             
-            let currentAir = CurrentAirQuality(airQualityDictionary: airQualityDictionary, currentLatitude: currentLatitude, currentLongitude: currentLongitude)
+            let currentAir = CurrentAirQuality(airQualityDictionary: airQualityDictionary, currentLatitude: currentLatitude, currentLongitude: currentLongitude, last24Hours: last24Hours)
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.stationID = currentAir.closestStationID
