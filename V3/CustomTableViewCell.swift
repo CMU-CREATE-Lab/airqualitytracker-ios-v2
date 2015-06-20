@@ -8,23 +8,20 @@
 
 import UIKit
 
+//class for the cells in master view controller
 class CustomTableViewCell: UITableViewCell {
 
-    @IBOutlet var aqiLabel: UILabel!    
-
+    @IBOutlet var aqiLabel: UILabel!
     @IBOutlet var temperatureLabel: UILabel!
     @IBOutlet var cityLabel: UILabel!
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
 
 }

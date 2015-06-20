@@ -34,7 +34,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
         tableView.dataSource = self
         makeSettingsIcon()
         getCurrentGeocode()
-        getCurrentWeatherData()
+        getCurrentWeatherData(latitude, longitude)
         getCurrentAirQuality()
         super.viewDidLoad()
     }
@@ -291,7 +291,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
         cell.cityLabel?.text = location.description
         cell.aqiLabel?.text = location.AQI
         if (location.description == "Current Location"){
-            cell.temperatureLabel?.text = location.temp //self.currentTemperature
+            cell.temperatureLabel?.text = self.currentTemperature
         }
         else{
             cell.temperatureLabel?.text = location.temp
