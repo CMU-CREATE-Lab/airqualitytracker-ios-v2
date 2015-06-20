@@ -142,23 +142,22 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
         downloadTask.resume()
     }
     
-    //MARK: - creates the bounding box based on discussions with Chris Bartley and Mike Tasota
+    //MARK: - creates the bounding box based on discussions with Chris Bartley and Mike Tasota and research from online sources
     func createBoundingBox(currentLatitude: Double, currentLongitude: Double) -> (Double, Double, Double, Double){
-        var distance = 10 //in kilometers
-        var radius = 6371 //in km
-        var angularRadius: Double = Double(distance * 100) / Double(radius) //check this
+        var channelDistance = 10 //in kilometers
+        var radius = 6371 //radius of earth in km
+        var angularRadius: Double = Double(channelDistance * 100) / Double(radius)
+        //latitude
         var latMin = currentLatitude - angularRadius
         var latMax = currentLatitude + angularRadius
-        
+        //longitude
         var latT = asin(sin(currentLatitude)/cos(angularRadius))
         var deltaLon = acos( (cos(angularRadius) - (sin(latT) * sin(currentLatitude))) / (cos(latT) * cos(currentLatitude)))
         var lonMin = currentLongitude - deltaLon
         var lonMax = currentLongitude + deltaLon
         
         return (latMin, latMax, lonMin, lonMax)
-        
     }
-
     
     //MARK: - gets the most recent air quality based on the station ID
     func getMostRecentAQ() -> Void {
@@ -226,39 +225,36 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
         let forecastURL = NSURL(string: "\(currentLatitude),\(currentLongitude)", relativeToURL: baseURL)
         
         let sharedSession = NSURLSession.sharedSession()
-        let downloadTask: NSURLSessionDownloadTask = sharedSession.downloadTaskWithURL(forecastURL!, completionHandler: { (location: NSURL!, response: NSURLResponse!, error: NSError!) -> Void in
-            
-            if (error == nil) {
-                let dataObject = NSData(contentsOfURL: location)
-                let weatherDictionary: NSDictionary =
-                NSJSONSerialization.JSONObjectWithData(dataObject!, options: nil, error: nil) as! NSDictionary //casting
-                
-                let currentWeather = Current(weatherDictionary: weatherDictionary)
-                
-                var temperatureSymbol: String
-                if (SettingsViewController.variables.unit == true){
-                    temperatureSymbol = "\u{00B0} F" //symbol for degree F
+        let downloadTask: NSURLSessionDownloadTask = sharedSession.downloadTaskWithURL(forecastURL!, completionHandler: { (location: NSURL!, response: NSURLResponse!, error: NSError!) ->
+            Void in
+                if (error != nil){
+                    let issue = UIAlertController(title: "Error", message: "Error in connection", preferredStyle: .Alert)
+                    let okIssue = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                    issue.addAction(okIssue)
+                    let cancelIssue = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+                    issue.addAction(cancelIssue)
+                    self.presentViewController(issue, animated: true, completion: nil)
                 }
-                else{
-                    temperatureSymbol = "\u{00B0} C" //symbol for degree C
+                else {
+                    let dataObject = NSData(contentsOfURL: location)
+                    let weatherDictionary: NSDictionary =
+                    NSJSONSerialization.JSONObjectWithData(dataObject!, options: nil, error: nil) as! NSDictionary
+                    let currentWeather = CurrentWeather(weatherDictionary: weatherDictionary)
+                    var temperatureSymbol: String
+                    //based on user defined settings
+                    if (SettingsViewController.variables.unit){                         temperatureSymbol = "\u{00B0} F" //symbol for degree F
+                    }
+                    else{
+                        temperatureSymbol = "\u{00B0} C" //symbol for degree C
+                    }
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        self.currentTemperature = "\(currentWeather.temperature)" + "\(temperatureSymbol)"
+                        self.currentOzone = "\(currentWeather.ozone)"
+                    })
                 }
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    self.currentTemperature = "\(currentWeather.temperature)" + "\(temperatureSymbol)"
-                    self.currentOzone = "\(currentWeather.ozone)"
-                })
-            }
-            else {
-                let issue = UIAlertController(title: "Error", message: "Error in connection", preferredStyle: .Alert)
-                let okIssue = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                issue.addAction(okIssue)
-                let cancelIssue = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
-                issue.addAction(cancelIssue)
-                self.presentViewController(issue, animated: true, completion: nil)
-            }
             })
-        
         downloadTask.resume()
-}
+    }
 
 
     override func didReceiveMemoryWarning() {
@@ -289,18 +285,17 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("CustomTableViewCell", forIndexPath: indexPath) as! CustomTableViewCell
         let location = LocationStore.sharedInstance.get(indexPath.row)
-
         cell.cityLabel?.text = location.description
         cell.aqiLabel?.text = location.AQI
         if (location.description == "Current Location"){
-            cell.temperatureLabel?.text = self.currentTemperature
+            cell.temperatureLabel?.text = location.temp //self.currentTemperature
         }
         else{
             cell.temperatureLabel?.text = location.temp
         }
-
         return cell
     }
     

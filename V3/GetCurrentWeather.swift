@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct Current {
+struct CurrentWeather {
     
     var currentTime: String?
     var temperature: Int = 0

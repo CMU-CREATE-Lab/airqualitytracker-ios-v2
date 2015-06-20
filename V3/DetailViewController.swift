@@ -82,13 +82,13 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate {
                 let weatherDictionary: NSDictionary =
                 NSJSONSerialization.JSONObjectWithData(dataObject!, options: nil, error: nil) as! NSDictionary //casting
                 
-                let currentWeather = Current(weatherDictionary: weatherDictionary)
-                
+                let currentWeather = CurrentWeather(weatherDictionary: weatherDictionary)
+            
                 var temperatureSymbol: String
-                if (SettingsViewController.variables.unit == true){
+                if (SettingsViewController.variables.unit){
                     temperatureSymbol = "\u{00B0} F" //symbol for degree F
                 }
-                
+
                 else{
                     temperatureSymbol = "\u{00B0} C" //symbol for degree C
                 }

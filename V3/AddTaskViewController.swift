@@ -198,7 +198,7 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
                 let weatherDictionary: NSDictionary =
                 NSJSONSerialization.JSONObjectWithData(dataObject!, options: nil, error: nil) as! NSDictionary //casting
                 
-                let currentWeather = Current(weatherDictionary: weatherDictionary)
+                let currentWeather = CurrentWeather(weatherDictionary: weatherDictionary)
                 
                 var temperatureSymbol: String
                 if (SettingsViewController.variables.unit == true){
