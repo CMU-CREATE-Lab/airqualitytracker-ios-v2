@@ -12,15 +12,12 @@ import CoreLocation
 
 class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     
-    
     var locationManager = CLLocationManager()
     var latitude: Double = 0
     var longitude: Double = 0
-    
     var currentLocation: String = ""
     var stationID: Int = 0
     var airQuality: Int = 0
-    
     var currentTemperature: String  = ""
     var currentOzone: String = ""
     var currentTime: String = ""
@@ -33,86 +30,77 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         
-        //changing the settings button to a settings cog wheel logo
+        tableView.delegate = self
+        tableView.dataSource = self
+        makeSettingsIcon()
+        getCurrentGeocode()
+        getCurrentWeatherData()
+        getCurrentAirQuality()
+        super.viewDidLoad()
+    }
+    
+    //MARK: - function to transform the settings button into the settings icon
+    func makeSettingsIcon(){
         self.settingsButton.title = NSString(string: "\u{2699}") as String
         if let font = UIFont(name: "Helvetica", size: 24.0) {
             self.settingsButton.setTitleTextAttributes([NSFontAttributeName: font], forState: UIControlState.Normal)
         }
-        
-        getCurrentLocality()
-        getCurrentWeatherData()
-        getCurrentAirQuality()
-//        getM()
-        tableView.delegate = self
-        tableView.dataSource = self
-        super.viewDidLoad()
-//        self.navigationItem.leftBarButtonItem = self.editButtonItem()
     }
     
     //MARK: - gets current coordinates
-    func getCurrentLocality() -> Void {
+    func getCurrentGeocode() -> Void {
         
-        setupLocation()
+        setupLocation() //finds the current lat and long
         var currentLatitude = latitude
         var currentLongitude = longitude
         
-        let reverseGeocodeURL = NSURL(string: "http://api.geonames.org/findNearbyPlaceNameJSON?lat=\(currentLatitude)&lng=\(currentLongitude)&username=airvizdev1")
+        var apiNamesURL = "http://api.geonames.org/findNearbyPlaceNameJSON?lat=\(currentLatitude)&lng=\(currentLongitude)&username=airvizdev1"
+        let currentGeocodeURL = NSURL(string: apiNamesURL)
         
         let sharedSession = NSURLSession.sharedSession()
-        let downloadTask: NSURLSessionDownloadTask = sharedSession.downloadTaskWithURL(reverseGeocodeURL!, completionHandler: { (data: NSURL!, response: NSURLResponse!, error: NSError!) -> Void in
+        let downloadTask: NSURLSessionDownloadTask = sharedSession.downloadTaskWithURL(currentGeocodeURL!, completionHandler: {
+            (data: NSURL!, response: NSURLResponse!, error: NSError!) -> Void in
             if(error != nil) {
-                
-                println(error.localizedDescription)
-            }
-
-            if (error == nil) {
-                let dataObject = NSData(contentsOfURL: data)
-                let geoCodeDictionary: NSDictionary =
-                NSJSONSerialization.JSONObjectWithData(dataObject!, options: nil, error: nil) as! NSDictionary //casting
-                
-                let currentLocality = CurrentGeocode(geoCodeDictionary: geoCodeDictionary)
-                self.currentLocation = "\(currentLocality.name)"
-
-            }
-                
-            else {
-                
+                println(error.localizedDescription) //for Debugging
                 let issue = UIAlertController(title: "Error", message: "Error in connection", preferredStyle: .Alert)
-                
                 let okIssue = UIAlertAction(title: "OK", style: .Default, handler: nil)
                 issue.addAction(okIssue)
-                
                 let cancelIssue = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
                 issue.addAction(cancelIssue)
-                
                 self.presentViewController(issue, animated: true, completion: nil)
+            }
+            else {
+                let dataObject = NSData(contentsOfURL: data)
+                let geoCodeDict: NSDictionary =
+                NSJSONSerialization.JSONObjectWithData(dataObject!, options: nil, error: nil) as! NSDictionary
+                
+                let currentLocality = CurrentGeocode(geoCodeDictionary: geoCodeDict)
+                self.currentLocation = "\(currentLocality.name)"
             }
         })
         downloadTask.resume()
     }
     
+    //MARK: - Finds current latitude and longitude
     func setupLocation(){
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.requestAlwaysAuthorization()
-        
         if (CLLocationManager.locationServicesEnabled()){
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
             locationManager.requestAlwaysAuthorization()
             
-            //MN: ask about distance filter
+            //MN: ask about distance filter #########################################
             locationManager.distanceFilter = 1000
             
-            //MN: ask about start and significant change
+            //MN: ask about start and significant change #####################################
             locationManager.startUpdatingLocation()
             //locationManager.startMonitoringSignificantLocationChanges()
             if locationManager.location != nil {
                 latitude = locationManager.location.coordinate.latitude
                 longitude = locationManager.location.coordinate.longitude
             }
-            
         }
-        
     }
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
@@ -121,112 +109,40 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
         longitude = locValue.longitude
     }
 
-    
-    //MARK: - AirQuaility For Current Locality
+    //MARK: - AirQuaility for the user's current location
     
     func getCurrentAirQuality() -> Void {
-        
-        var currentLatitude = latitude
-        var currentLongitude = longitude
         
         var currentDate = NSDate()
         var currentDateInSeconds = currentDate.timeIntervalSince1970
         var last24Hours = Int(currentDateInSeconds - (60 * 60 * 24))
         
-
-        var (latMin, latMax, lonMin, lonMax) = createBoundingBox(currentLatitude, currentLongitude: currentLongitude)
+        //getting the latitude minimum/maximum and longitude minimum/maximum from the virtual bounding box
+        var (latMin, latMax, lonMin, lonMax) = createBoundingBox(latitude, currentLongitude: longitude)
         
-        var urlString = "https://esdr.cmucreatelab.org/api/v1/feeds?whereAnd=productId=11,latitude%3E=\(latMin),latitude%3C=\(latMax),longitude%3E=\(lonMin),longitude%3C=\(lonMax),maxTimeSecs%3E=\(last24Hours)&fields=id,name,latitude,longitude,channelBounds"
-        println("url is \(urlString)")
-//        urlString = urlString.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
-
+        var esdrURL = "https://esdr.cmucreatelab.org/api/v1/feeds?whereAnd=productId=11,latitude%3E=\(latMin),latitude%3C=\(latMax),longitude%3E=\(lonMin),longitude%3C=\(lonMax),maxTimeSecs%3E=\(last24Hours)&fields=id,name,latitude,longitude,channelBounds"
         
-        let airQualityURL = NSURL(string:urlString  )
-        
+        let currentAQURL = NSURL(string: esdrURL)
         let sharedSession = NSURLSession.sharedSession()
-        let downloadTask: NSURLSessionDownloadTask = sharedSession.downloadTaskWithURL(airQualityURL!, completionHandler: { (data: NSURL!, response: NSURLResponse!, error: NSError!) -> Void in
-            
+        let downloadTask: NSURLSessionDownloadTask = sharedSession.downloadTaskWithURL(currentAQURL!, completionHandler: {(data: NSURL!, response: NSURLResponse!, error: NSError!) -> Void in
+
             let dataObject = NSData(contentsOfURL: data)
             let airQualityDictionary: NSDictionary =
-            NSJSONSerialization.JSONObjectWithData(dataObject!, options: nil, error: nil) as! NSDictionary //casting
+            NSJSONSerialization.JSONObjectWithData(dataObject!, options: nil, error: nil) as! NSDictionary
             
-            let currentAir = CurrentAirQuality(airQualityDictionary: airQualityDictionary, currentLatitude: currentLatitude, currentLongitude: currentLongitude, last24Hours: last24Hours)
+            let AQ = CurrentAirQuality(airQualityDictionary: airQualityDictionary, currentLatitude: self.latitude, currentLongitude: self.longitude, last24Hours: last24Hours)
       
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.stationID = currentAir.closestStationID
-                println("closest id is \(self.stationID)")
-
-                self.getAQI()
+                self.stationID = AQ.closestStationID
+                //now calling getAQI, which will invoke the getMostRecentValue method using the stationID
+                self.getMostRecentAQ()
             })
 
         })
         downloadTask.resume()
-
     }
-        
-        func getAQI() -> Void {
-            var placesTask = NSURLSessionDataTask()
-            var session: NSURLSession {
-                return NSURLSession.sharedSession()
-            }
-            println("entering AQI most recent value methods and call...")
-            println("station ID is \(self.stationID)")
-            var AQIURL = "https://esdr.cmucreatelab.org/api/v1/feeds/\(self.stationID)/most-recent"
-            
-            var AQIURLString = AQIURL.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
-            
-            if placesTask.taskIdentifier > 0 && placesTask.state == .Running {
-                placesTask.cancel()
-            }
-
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-            placesTask = session.dataTaskWithURL(NSURL(string: AQIURLString)!) {data, response, error in
-                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-
-                if let dataObject = NSJSONSerialization.JSONObjectWithData(data, options:nil, error:nil) as? NSDictionary{
-                    
-                    if let data = dataObject["data"] as? NSDictionary {
-                        println("first if conditional passed...")
-                        if let channels = data["channels"] as? NSDictionary {
-                            println("second if conditional passed...")
-                            if let val: AnyObject = channels["PM2_5"]{
-                                println("in PM2.5...")
-                                self.getMostRecentValue(channels, identifier: "PM2_5")
-                            }
-                            
-                            else if let val: AnyObject = channels["PM25B_UG_M3"]{
-                                self.getMostRecentValue(channels, identifier: "PM25B_UG_M3")
-                            }
-                            
-                            else if let val: AnyObject = channels["PM25_FL_PERCENT"]{
-                                self.getMostRecentValue(channels, identifier: "PM25_FL_PERCENT")
-                            }
-                            
-                            else if let val: AnyObject = channels["PM25_UG_M3"]{
-                                self.getMostRecentValue(channels, identifier: "PM25_UG_M3")
-                            }
-                        }
-                        
-                    }
-                }
-                dispatch_async(dispatch_get_main_queue()) {
-                    println("sending data to struct from MVC")
-                    let location = LocationForList(description: "Current Location", AQI: "\(self.airQuality)", lat: self.latitude, long: self.longitude, temp: self.currentTemperature, Oz: self.currentOzone)
-                    LocationStore.sharedInstance.add(location)
-                    println("##################################")
-                }
-            }
-            placesTask.resume()
-        }
-
-func getMostRecentValue(channelsDict: NSDictionary, identifier: String){
-    println("in getMostRecentValue()...")
-    let temp: NSDictionary = channelsDict[identifier] as! NSDictionary
-    let mRDS = temp["mostRecentDataSample"] as! NSDictionary
-    self.airQuality  = mRDS["value"] as! Int
-    println("air quality is \(self.airQuality)")
-}
-
+    
+    //MARK: - creates the bounding box based on discussions with Chris Bartley and Mike Tasota
     func createBoundingBox(currentLatitude: Double, currentLongitude: Double) -> (Double, Double, Double, Double){
         var distance = 10 //in kilometers
         var radius = 6371 //in km
@@ -242,6 +158,60 @@ func getMostRecentValue(channelsDict: NSDictionary, identifier: String){
         return (latMin, latMax, lonMin, lonMax)
         
     }
+
+    
+    //MARK: - gets the most recent air quality based on the station ID
+    func getMostRecentAQ() -> Void {
+        
+        var dataTask = NSURLSessionDataTask()
+        var sharedSession: NSURLSession {
+            return NSURLSession.sharedSession()
+        }
+        
+        var mostRecentURL = ("https://esdr.cmucreatelab.org/api/v1/feeds/\(self.stationID)/most-recent").stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+        
+        if dataTask.taskIdentifier > 0 && dataTask.state == .Running {
+            dataTask.cancel()
+        }
+
+        dataTask = sharedSession.dataTaskWithURL(NSURL(string: mostRecentURL)!) {data, response, error in
+            if let dataObject = NSJSONSerialization.JSONObjectWithData(data, options:nil, error:nil) as? NSDictionary {
+                
+                if let data = dataObject["data"] as? NSDictionary {
+                    if let channels = data["channels"] as? NSDictionary {
+                        //now checking which feed the data was taken from
+                        if let val: AnyObject = channels["PM2_5"]{
+                            self.getMostRecentValue(channels, identifier: "PM2_5")
+                        }
+                        else if let val: AnyObject = channels["PM25B_UG_M3"]{
+                            self.getMostRecentValue(channels, identifier: "PM25B_UG_M3")
+                        }
+                        else if let val: AnyObject = channels["PM25_FL_PERCENT"]{
+                            self.getMostRecentValue(channels, identifier: "PM25_FL_PERCENT")
+                        }
+                        else if let val: AnyObject = channels["PM25_UG_M3"]{
+                            self.getMostRecentValue(channels, identifier: "PM25_UG_M3")
+                        }
+                    }
+                }
+            }
+            dispatch_async(dispatch_get_main_queue()) {
+                let location = LocationForList(description: "Current Location", AQI: "\(self.airQuality)", lat: self.latitude, long: self.longitude, temp: self.currentTemperature, Oz: self.currentOzone)
+                LocationStore.sharedInstance.add(location)
+            }
+        }
+        dataTask.resume()
+    }
+
+    /*MARK: - helper function to getMostRecentAQ, this function takes the dictionaries and the feed
+      (PM2.5, PM25BUGM3, PM25FLPERCENT or PM25UGM3) and gets the most recent value
+     */
+    func getMostRecentValue(channelsDict: NSDictionary, identifier: String){
+        let temp: NSDictionary = channelsDict[identifier] as! NSDictionary
+        let mostRecentDataSample = temp["mostRecentDataSample"] as! NSDictionary
+        self.airQuality  = mostRecentDataSample["value"] as! Int
+    }
+
     
     //MARK: - gets the current weather data based on the coordinates
     func getCurrentWeatherData() -> Void {

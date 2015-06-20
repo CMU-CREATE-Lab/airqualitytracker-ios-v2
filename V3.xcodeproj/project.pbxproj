@@ -84,17 +84,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		40086C801B27576D00BD4B62 /* Top level  */ = {
+		40086C801B27576D00BD4B62 /* Top Level */ = {
 			isa = PBXGroup;
 			children = (
 				407D87291B260987001C38B2 /* AppDelegate.swift */,
-				407D872B1B260987001C38B2 /* MasterViewController.swift */,
-				404104E71B30D4DD001864F4 /* AboutSpeckViewController.swift */,
-				407D872D1B260987001C38B2 /* DetailViewController.swift */,
 				4092077A1B26A807000CE42B /* DismissSegue.swift */,
-				404887FE1B31F3D900020647 /* CustomTableViewCell.swift */,
 			);
-			name = "Top level ";
+			name = "Top Level";
 			sourceTree = "<group>";
 		};
 		40086C871B2759F000BD4B62 /* Search Controller  */ = {
@@ -136,8 +132,9 @@
 		407D87261B260987001C38B2 /* V3 */ = {
 			isa = PBXGroup;
 			children = (
-				40086C801B27576D00BD4B62 /* Top level  */,
+				40086C801B27576D00BD4B62 /* Top Level */,
 				407D872F1B260987001C38B2 /* Main.storyboard */,
+				40E5B1E51B3609ED00E79BA6 /* View Controllers */,
 				404104E61B30D449001864F4 /* Settings */,
 				40F963391B29E92700E0284B /* Data Analysis  */,
 				40F11EC51B28D4DB005961A5 /* Structs */,
@@ -172,6 +169,41 @@
 				407D87401B260987001C38B2 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		40E5B1E21B36091C00E79BA6 /* Master View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				407D872B1B260987001C38B2 /* MasterViewController.swift */,
+				404887FE1B31F3D900020647 /* CustomTableViewCell.swift */,
+			);
+			name = "Master View Controller";
+			sourceTree = "<group>";
+		};
+		40E5B1E31B36098100E79BA6 /* AboutPage View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				404104E71B30D4DD001864F4 /* AboutSpeckViewController.swift */,
+			);
+			name = "AboutPage View Controller";
+			sourceTree = "<group>";
+		};
+		40E5B1E41B3609E000E79BA6 /* Detail View Controller  */ = {
+			isa = PBXGroup;
+			children = (
+				407D872D1B260987001C38B2 /* DetailViewController.swift */,
+			);
+			name = "Detail View Controller ";
+			sourceTree = "<group>";
+		};
+		40E5B1E51B3609ED00E79BA6 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				40E5B1E21B36091C00E79BA6 /* Master View Controller */,
+				40E5B1E41B3609E000E79BA6 /* Detail View Controller  */,
+				40E5B1E31B36098100E79BA6 /* AboutPage View Controller */,
+			);
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 		40F11EC51B28D4DB005961A5 /* Structs */ = {
