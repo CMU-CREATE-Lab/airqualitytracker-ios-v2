@@ -26,7 +26,8 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
     var currentTime: String = ""
     var currentOzone: String = ""
     var stationID: Int = 0
-    
+    var aqiCategory: String = ""
+
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -171,6 +172,7 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
         let mostRecentDataSample = temp["mostRecentDataSample"] as! NSDictionary
         let aQ  = mostRecentDataSample["value"] as! Int
         let AQIData  = ConvertToAQI(pmValue: aQ)
+        self.aqiCategory = AQIData.category
         self.AQILabel = "\(AQIData.AQI)"
     }
     
@@ -214,7 +216,7 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
                     self.currentTemperature = "\(currentWeather.temperature)" + "\(temperatureSymbol)"
                     self.currentOzone = "\(currentWeather.ozone)"
                     
-                    let location = LocationForList(description: self.descriptionLabel, AQI: self.AQILabel, lat: self.latitude, long: self.longitude, temp: self.currentTemperature, Oz: self.currentOzone)
+                    let location = LocationForList(description: self.descriptionLabel, AQI: self.AQILabel, lat: self.latitude, long: self.longitude, temp: self.currentTemperature, Oz: self.currentOzone, aqiCategory: self.aqiCategory)
                     LocationStore.sharedInstance.add(location)
                 })
             }

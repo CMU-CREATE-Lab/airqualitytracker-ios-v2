@@ -13,10 +13,17 @@ class ConvertToAQI {
     
     var pmValue: Double
     var AQI: Int = 0
+    var category: String = ""
     
     init(pmValue: Int){
-        self.pmValue = Double(pmValue)
+        if (pmValue < 0){
+            self.pmValue = 0.0
+        }
+        else{
+            self.pmValue = Double(pmValue)
+        }
         self.AQI = convert()
+        self.category = findAQICategory()
     }
     
     //MARK: - convert() converts the pm 2.5 value to AQI 
@@ -30,7 +37,6 @@ class ConvertToAQI {
         var Ip1 = (Ihi - Ilo)/(BPhi - BPlo)
         var Ip2 = (Ip1) * (pmValue - BPlo)
         var Ip = Ip2 + Ilo
-        println("Ip is \(Int(round(Ip)))")
         return Int(round(Ip))
     }
     
@@ -124,6 +130,30 @@ class ConvertToAQI {
             BPhi = 0.0
         }
         return BPhi
+    }
+    
+    //MARK: - finds the AQI category - good, moderate, abd, etc. based on the index of pollution
+    func findAQICategory() -> String{
+        var category: String
+        println("self.aqi is \(self.AQI)")
+        switch self.AQI{
+        case 0...50:
+            category = "Good"
+        case 51...100:
+            println("here in Moderate")
+            category = "Moderate"
+        case 101...150:
+            category = "Unhealthy for Sensitive Groups"
+        case 151...200:
+            category = "Unhealthy"
+        case 201...300:
+            category = "Very Unhealthy"
+        case 301...10000:
+            category = "Hazardous"
+        default:
+            category = "Good"
+        }
+        return category
     }
 
 }

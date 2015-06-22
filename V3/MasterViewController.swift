@@ -21,6 +21,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     var currentTemperature: String  = ""
     var currentOzone: String = ""
     var currentTime: String = ""
+    var aqiCategory: String = ""
     
     @IBOutlet weak var settingsButton: UIBarButtonItem!
     
@@ -195,7 +196,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
                 }
             }
             dispatch_async(dispatch_get_main_queue()) {
-                let location = LocationForList(description: "Current Location", AQI: "\(self.airQuality)", lat: self.latitude, long: self.longitude, temp: self.currentTemperature, Oz: self.currentOzone)
+                let location = LocationForList(description: "Current Location", AQI: "\(self.airQuality)", lat: self.latitude, long: self.longitude, temp: self.currentTemperature, Oz: self.currentOzone, aqiCategory: self.aqiCategory)
                 LocationStore.sharedInstance.add(location)
             }
         }
@@ -210,8 +211,10 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
         let mostRecentDataSample = temp["mostRecentDataSample"] as! NSDictionary
         let aQ  = mostRecentDataSample["value"] as! Int
         let AQIData  = ConvertToAQI(pmValue: aQ) //converts the PM value to AQI
+        self.aqiCategory = AQIData.category
         self.airQuality = AQIData.AQI
     }
+
     
     //MARK: - gets the current weather data based on the coordinates
     func getCurrentWeatherData() -> Void {
@@ -290,6 +293,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
         let cell = tableView.dequeueReusableCellWithIdentifier("CustomTableViewCell", forIndexPath: indexPath) as! CustomTableViewCell
         let location = LocationStore.sharedInstance.get(indexPath.row)
         cell.cityLabel?.text = location.description
+        println("location description is \(location.description)")
         cell.aqiLabel?.text = location.AQI
         if (location.description == "Current Location"){
             cell.temperatureLabel?.text = self.currentTemperature
@@ -297,7 +301,34 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
         else{
             cell.temperatureLabel?.text = location.temp
         }
+
+        cell.aqiCategoryLabel?.text = location.aqiCategory
+        cell.aqiCategoryLabel?.textColor = findAQICategoryColor(location.aqiCategory)
         return cell
+    }
+    
+    //MARK: - finds the color of the AQI based on EPA's guidelines: http://airnow.gov/index.cfm?action=aqibasics.aqi
+    func findAQICategoryColor(aqi: String) -> UIColor{
+    
+        var aqiCategoryColor: UIColor
+    
+        switch aqi{
+        case "Good":
+            aqiCategoryColor = UIColor.greenColor()
+        case "Moderate":
+            aqiCategoryColor = UIColor.yellowColor()
+        case "Unhealthy for Sensitive Groups":
+            aqiCategoryColor = UIColor.orangeColor()
+        case "Unhealthy":
+            aqiCategoryColor = UIColor.redColor()
+        case "Very Unhealthy":
+            aqiCategoryColor = UIColor.purpleColor()
+        case "Hazardous":
+            aqiCategoryColor = UIColor(red: 0.513, green: 0.011, blue: 0.0, alpha: 1.0) //maroon
+        default:
+            aqiCategoryColor = UIColor.greenColor()
+        }
+        return aqiCategoryColor
     }
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

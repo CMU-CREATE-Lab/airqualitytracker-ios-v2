@@ -14,8 +14,9 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var detailDescriptionLabel: UILabel!
     @IBOutlet weak var airQualityStationID: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
-    @IBOutlet weak var summaryLabel: UILabel!
     @IBOutlet weak var ozoneLabel: UILabel!
+    @IBOutlet weak var aqiCategoryLabel: UILabel!
+    
     //boolean to indicate if Detail VC already has weather information or not
     var callCurrentWeather: Bool = false
     var latitude: Double = 0.0
@@ -37,6 +38,8 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate {
                 self.airQualityStationID.text = detail.AQI
                 latitude = detail.lat
                 longitude = detail.long
+                self.aqiCategoryLabel.text = detail.aqiCategory
+                self.aqiCategoryLabel.textColor = findAQICategoryColor(detail.aqiCategory)
                 if (detail.description != "Current Location"){
                     self.temperatureLabel.text = detail.temp
                     self.ozoneLabel.text = detail.Oz
@@ -47,6 +50,30 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate {
                 }
             }
         }
+    }
+    
+    //MARK: - finds the color of the AQI based on EPA's guidelines: http://airnow.gov/index.cfm?action=aqibasics.aqi
+    func findAQICategoryColor(aqi: String) -> UIColor{
+        
+        var aqiCategoryColor: UIColor
+        
+        switch aqi{
+        case "Good":
+            aqiCategoryColor = UIColor.greenColor()
+        case "Moderate":
+            aqiCategoryColor = UIColor.yellowColor()
+        case "Unhealthy for Sensitive Groups":
+            aqiCategoryColor = UIColor.orangeColor()
+        case "Unhealthy":
+            aqiCategoryColor = UIColor.redColor()
+        case "Very Unhealthy":
+            aqiCategoryColor = UIColor.purpleColor()
+        case "Hazardous":
+            aqiCategoryColor = UIColor(red: 0.513, green: 0.011, blue: 0.0, alpha: 1.0) //maroon
+        default:
+            aqiCategoryColor = UIColor.greenColor()
+        }
+        return aqiCategoryColor
     }
     
     override func viewDidLoad() {
