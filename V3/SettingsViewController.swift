@@ -25,11 +25,8 @@ class SettingsViewController: UITableViewController {
         switch unitConversionControl.selectedSegmentIndex {
         case 0:
             variables.unit = true
-            println("unit converted to Farhenheit")
         case 1:
             variables.unit = false
-            println("unit converted to Celcius")
-
         default:
             break
         }

@@ -46,10 +46,7 @@ struct CurrentAirQuality {
                 if let val:AnyObject = tempChannels["PM2_5"] {
                     PM = tempChannels["PM2_5"] as! NSDictionary
                     actualMaxTimeSecs = PM["maxTimeSecs"] as! Int
-                    println("actualMaxTimeSecs is \(actualMaxTimeSecs)")
-                    println("maxTime is \(maxTime)")
                     if (actualMaxTimeSecs >= maxTime){
-                        println("here")
                         pmStationIndexArray.append(i)
                     }
                 }
@@ -115,7 +112,6 @@ struct CurrentAirQuality {
     //from Rosetta Code wiki
     //test by comparing values from http://andrew.hedges.name/experiments/haversine/
     func haversine(lat1:Double, lat2:Double, lon1:Double, lon2:Double) -> Double { //finds the distance in kilometers
-        //        println("lat 1 is \(lat1), lat2 is \(lat2), lon1 is \(lon1) and lon2 is \(lon2)")
         let lat1rad = lat1 * M_PI/180
         let lon1rad = lon1 * M_PI/180
         let lat2rad = lat2 * M_PI/180

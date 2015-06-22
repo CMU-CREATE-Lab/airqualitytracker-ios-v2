@@ -34,7 +34,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
         tableView.dataSource = self
         makeSettingsIcon()
         getCurrentGeocode()
-        getCurrentWeatherData(latitude, longitude)
+        getCurrentWeatherData()
         getCurrentAirQuality()
         super.viewDidLoad()
     }
@@ -203,14 +203,15 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     }
 
     /*MARK: - helper function to getMostRecentAQ, this function takes the dictionaries and the feed
-      (PM2.5, PM25BUGM3, PM25FLPERCENT or PM25UGM3) and gets the most recent value
-     */
+    (PM2.5, PM25BUGM3, PM25FLPERCENT or PM25UGM3) and gets the most recent value
+    */
     func getMostRecentValue(channelsDict: NSDictionary, identifier: String){
         let temp: NSDictionary = channelsDict[identifier] as! NSDictionary
         let mostRecentDataSample = temp["mostRecentDataSample"] as! NSDictionary
-        self.airQuality  = mostRecentDataSample["value"] as! Int
+        let aQ  = mostRecentDataSample["value"] as! Int
+        let AQIData  = ConvertToAQI(pmValue: aQ) //converts the PM value to AQI
+        self.airQuality = AQIData.AQI
     }
-
     
     //MARK: - gets the current weather data based on the coordinates
     func getCurrentWeatherData() -> Void {

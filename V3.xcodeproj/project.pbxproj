@@ -24,6 +24,7 @@
 		409207791B26A6B2000CE42B /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409207781B26A6B2000CE42B /* AddTaskViewController.swift */; };
 		4092077B1B26A807000CE42B /* DismissSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4092077A1B26A807000CE42B /* DismissSegue.swift */; };
 		4092077D1B26B4A7000CE42B /* LocationStructForMasterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4092077C1B26B4A7000CE42B /* LocationStructForMasterVC.swift */; };
+		40EEDFCD1B388992002DCD03 /* ConvertToAQI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EEDFCC1B388992002DCD03 /* ConvertToAQI.swift */; };
 		40F963341B29E88800E0284B /* GetCurrentAirQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F963331B29E88800E0284B /* GetCurrentAirQuality.swift */; };
 		40F963361B29E8AE00E0284B /* GetCurrentGeocode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F963351B29E8AE00E0284B /* GetCurrentGeocode.swift */; };
 		40F963381B29E8CD00E0284B /* GetCurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F963371B29E8CD00E0284B /* GetCurrentWeather.swift */; };
@@ -61,6 +62,7 @@
 		409207781B26A6B2000CE42B /* AddTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
 		4092077A1B26A807000CE42B /* DismissSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissSegue.swift; sourceTree = "<group>"; };
 		4092077C1B26B4A7000CE42B /* LocationStructForMasterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationStructForMasterVC.swift; sourceTree = "<group>"; };
+		40EEDFCC1B388992002DCD03 /* ConvertToAQI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvertToAQI.swift; sourceTree = "<group>"; };
 		40F963331B29E88800E0284B /* GetCurrentAirQuality.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetCurrentAirQuality.swift; sourceTree = "<group>"; };
 		40F963351B29E8AE00E0284B /* GetCurrentGeocode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetCurrentGeocode.swift; sourceTree = "<group>"; };
 		40F963371B29E8CD00E0284B /* GetCurrentWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetCurrentWeather.swift; sourceTree = "<group>"; };
@@ -96,19 +98,18 @@
 		40086C871B2759F000BD4B62 /* Search Controller  */ = {
 			isa = PBXGroup;
 			children = (
-				409207781B26A6B2000CE42B /* AddTaskViewController.swift */,
 				40086C831B27594700BD4B62 /* GoogleAPICall.swift */,
 				40086C851B27596200BD4B62 /* AutoCompleteController.swift */,
 			);
 			name = "Search Controller ";
 			sourceTree = "<group>";
 		};
-		404104E61B30D449001864F4 /* Settings */ = {
+		404104E61B30D449001864F4 /* Settings View Controller  */ = {
 			isa = PBXGroup;
 			children = (
 				404104E41B30C78A001864F4 /* SettingsViewController.swift */,
 			);
-			name = Settings;
+			name = "Settings View Controller ";
 			sourceTree = "<group>";
 		};
 		407D871B1B260987001C38B2 = {
@@ -135,7 +136,6 @@
 				40086C801B27576D00BD4B62 /* Top Level */,
 				407D872F1B260987001C38B2 /* Main.storyboard */,
 				40E5B1E51B3609ED00E79BA6 /* View Controllers */,
-				404104E61B30D449001864F4 /* Settings */,
 				40F963391B29E92700E0284B /* Data Analysis  */,
 				40F11EC51B28D4DB005961A5 /* Structs */,
 				40086C871B2759F000BD4B62 /* Search Controller  */,
@@ -202,8 +202,18 @@
 				40E5B1E21B36091C00E79BA6 /* Master View Controller */,
 				40E5B1E41B3609E000E79BA6 /* Detail View Controller  */,
 				40E5B1E31B36098100E79BA6 /* AboutPage View Controller */,
+				404104E61B30D449001864F4 /* Settings View Controller  */,
+				40E5B1EE1B361E0E00E79BA6 /* Add Task View Controller  */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		40E5B1EE1B361E0E00E79BA6 /* Add Task View Controller  */ = {
+			isa = PBXGroup;
+			children = (
+				409207781B26A6B2000CE42B /* AddTaskViewController.swift */,
+			);
+			name = "Add Task View Controller ";
 			sourceTree = "<group>";
 		};
 		40F11EC51B28D4DB005961A5 /* Structs */ = {
@@ -222,6 +232,7 @@
 				40F963331B29E88800E0284B /* GetCurrentAirQuality.swift */,
 				40F963351B29E8AE00E0284B /* GetCurrentGeocode.swift */,
 				40F963371B29E8CD00E0284B /* GetCurrentWeather.swift */,
+				40EEDFCC1B388992002DCD03 /* ConvertToAQI.swift */,
 			);
 			name = "Data Analysis ";
 			sourceTree = "<group>";
@@ -336,6 +347,7 @@
 				409207791B26A6B2000CE42B /* AddTaskViewController.swift in Sources */,
 				407D872C1B260987001C38B2 /* MasterViewController.swift in Sources */,
 				4092077D1B26B4A7000CE42B /* LocationStructForMasterVC.swift in Sources */,
+				40EEDFCD1B388992002DCD03 /* ConvertToAQI.swift in Sources */,
 				407D872A1B260987001C38B2 /* AppDelegate.swift in Sources */,
 				40086C821B27592B00BD4B62 /* GoogleAPIStructs.swift in Sources */,
 				404104E51B30C78A001864F4 /* SettingsViewController.swift in Sources */,
