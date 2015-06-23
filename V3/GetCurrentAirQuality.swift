@@ -19,9 +19,23 @@ struct CurrentAirQuality {
     var maxTime: Int = 0
     
     init(airQualityDictionary: NSDictionary, currentLatitude: Double, currentLongitude: Double, last24Hours: Int){
+        
         maxTime = last24Hours
-        stationData = airQualityDictionary["data"]! as AnyObject
-        rowArray = stationData["rows"] as! Array<NSDictionary>
+        if let val: AnyObject = (airQualityDictionary["data"]! as AnyObject?){
+            self.stationData = airQualityDictionary["data"]! as AnyObject
+            
+            if let val: Array<NSDictionary> = (stationData["rows"] as? Array<NSDictionary>){
+                self.rowArray = stationData["rows"] as! Array<NSDictionary>
+            }
+            else{
+                rowArray = [[:]]
+            }
+        }
+        else{
+            stationData = []
+            rowArray = [[:]]
+        }
+        
         pmStations = findStationsWithPM(rowArray)
         distanceAndIdArray = findDistanceAndIdArray(pmStations, dataArray: rowArray, latRef: currentLatitude, lonRef: currentLongitude)
         closestStationID = findClosestPMStation(distanceAndIdArray)
@@ -40,8 +54,22 @@ struct CurrentAirQuality {
         if (lengthOfDataArray > 1 ){
             for i in 0...(dataArray.count - 1) {
                 tempDict = dataArray[i]
-                tempChannelBounds = tempDict["channelBounds"] as! NSDictionary
-                tempChannels = tempChannelBounds["channels"] as! NSDictionary
+                
+                if let val: NSDictionary = tempDict["channelBounds"] as? NSDictionary{
+                    tempChannelBounds = tempDict["channelBounds"] as! NSDictionary
+                    
+                    if let val: NSDictionary = tempChannelBounds["channels"] as? NSDictionary{
+                        tempChannels = tempChannelBounds["channels"] as! NSDictionary
+                    }
+                    else{
+                        tempChannels = [:]
+                    }
+                }
+                else{
+                    tempChannelBounds = [:]
+                    tempChannels = [:]
+                }
+                
                 
                 if let val:AnyObject = tempChannels["PM2_5"] {
                     PM = tempChannels["PM2_5"] as! NSDictionary
@@ -95,10 +123,23 @@ struct CurrentAirQuality {
         if (pmStationLength > 1){
             for i in 0...(pmStations.count - 1){
                 tempData = rowArray[pmStations[i]] as NSDictionary
-                lat = tempData["latitude"] as! Double
-                lon = tempData["longitude"] as! Double
+                
+                //unwrapping optional check; if lat present then so will be long, id
+                if let val: Double = tempData["latitude"] as? Double{
+                    lat = tempData["latitude"] as! Double
+                    lon = tempData["longitude"] as! Double
+                    currId = tempData["id"] as! Int
+                }
+                else{
+                    //###########################
+                    //MN: hardcoding lat, long, id of San Francisco if unavailable for now. Need to change this
+                    lat = 37.775205
+                    lon = -122.43
+                    currId = 2479
+                }
+                
                 currDistance = haversine(latRef, lat2: lat, lon1: lonRef, lon2: lon)
-                currId = tempData["id"] as! Int
+                
                 distanceAndIds += [(currDistance, currId)]
             }
         }
