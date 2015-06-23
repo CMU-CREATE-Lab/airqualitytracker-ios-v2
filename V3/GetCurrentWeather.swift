@@ -11,32 +11,48 @@ import UIKit
 
 struct CurrentWeather {
     
-    var currentTime: String?
     var temperature: Int = 0
-    var summary: String
     var ozone: Int
     
     init(weatherDictionary: NSDictionary) {
-        var currentWeather = weatherDictionary["currently"] as! NSDictionary
-        summary = currentWeather["summary"] as! String
-        ozone = currentWeather["ozone"] as! Int
-        var tempTemperature = currentWeather["temperature"] as! Int
-        if (SettingsViewController.variables.unit == false){
-            temperature = convertToCelcius(tempTemperature)
+        
+        if let val: NSDictionary = weatherDictionary["currently"] as? NSDictionary{
+            var currentWeather = val
+            if let val1: Int = currentWeather["ozone"] as? Int{
+                ozone = val1
+            }
+            else{
+                ozone = 0
+            }
+            var tempTemperature: Int = 0
+            if let val2: Int = currentWeather["temperature"] as? Int{
+                 tempTemperature = val2
+            }
+            else{
+                 tempTemperature = 500
+            }
+            
+            if (SettingsViewController.variables.unit == false){
+                temperature = convertToCelcius(tempTemperature)
+            }
+            else{
+                temperature = tempTemperature
+            }
         }
         else{
-            temperature = tempTemperature
+            //#####################################
+            temperature = 500 //MN: if temperaturee cannot be found
+            ozone = 0
         }
         
-        let currentTimeIntVale = currentWeather["time"] as! Int
-        currentTime = dateStringFromUnixTime(currentTimeIntVale)
-
     }
     
     func convertToCelcius(farhenheit: Int) -> Int {
         var celcius: Double = (Double(farhenheit) - 32.0) * (5/9)
         return Int(celcius)
     }
+    
+   
     
     func dateStringFromUnixTime(unixTime: Int) -> String {
         let timeInSeconds = NSTimeInterval(unixTime)
