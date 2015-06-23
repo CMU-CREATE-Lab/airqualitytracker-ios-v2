@@ -140,7 +140,6 @@ class ConvertToAQI {
         case 0...50:
             category = "Good"
         case 51...100:
-            println("here in Moderate")
             category = "Moderate"
         case 101...150:
             category = "Unhealthy for Sensitive Groups"
