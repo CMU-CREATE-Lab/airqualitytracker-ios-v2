@@ -1,6 +1,4 @@
-// GoogleAPIHelper.swift
-// SearchForSpeck
-
+// GoogleAPIStructs.swift
 // Created by Mohak Nahta with hints and prtial code from https://github.com/wiserkuo/Swift-SearchController
 
 import UIKit

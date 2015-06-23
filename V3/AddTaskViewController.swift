@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 var searcher : UISearchController! //the search bar
 
@@ -53,16 +54,18 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
             descriptionLabel = src.areaNamesArray[positionInArray]
             
             googleAPI.fetchPlacesDetail(src.placeIdArray[positionInArray]){ place in
-                
                 self.latitude = place!.coordinate.latitude as Double
                 self.longitude = place!.coordinate.longitude as Double
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     self.getCurrentAirQuality()
                     self.getCurrentWeatherData()
-                    })
-                
+                })
                 //MARK: - calling the segue here as the user is done with search
                 self.performSegueWithIdentifier("dismissAndSave", sender: self)
+            }
+            if (self.latitude == 0.0 && self.longitude  == 0.0){
+                //view controller for the error page; appears if a location, which has not air quality is selected.
+                self.performSegueWithIdentifier("dismissToError", sender: self)
             }
         }
     }
@@ -72,6 +75,8 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         performSegueWithIdentifier("dismissAndCancel", sender: self)
     }
+    
+
     
 //########################MARK: - functions to get data#######################
     //MARK: - AirQuaility for the user's current location
@@ -206,7 +211,8 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
                 let currentWeather = CurrentWeather(weatherDictionary: weatherDictionary)
                 var temperatureSymbol: String
                 //based on user defined settings
-                if (SettingsViewController.variables.unit){                         temperatureSymbol = "\u{00B0} F" //symbol for degree F
+                if (SettingsViewController.variables.unit){
+                    temperatureSymbol = "\u{00B0} F" //symbol for degree F
                 }
                 else{
                     temperatureSymbol = "\u{00B0} C" //symbol for degree C

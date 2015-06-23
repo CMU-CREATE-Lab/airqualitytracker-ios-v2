@@ -21,6 +21,7 @@
 		407D87331B260987001C38B2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 407D87321B260987001C38B2 /* Images.xcassets */; };
 		407D87361B260987001C38B2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 407D87341B260987001C38B2 /* LaunchScreen.xib */; };
 		407D87421B260988001C38B2 /* V3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407D87411B260988001C38B2 /* V3Tests.swift */; };
+		4082F7A91B3A19A0001D8C5D /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4082F7A81B3A19A0001D8C5D /* ErrorViewController.swift */; };
 		409207791B26A6B2000CE42B /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409207781B26A6B2000CE42B /* AddTaskViewController.swift */; };
 		4092077B1B26A807000CE42B /* DismissSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4092077A1B26A807000CE42B /* DismissSegue.swift */; };
 		4092077D1B26B4A7000CE42B /* LocationStructForMasterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4092077C1B26B4A7000CE42B /* LocationStructForMasterVC.swift */; };
@@ -59,6 +60,7 @@
 		407D873B1B260987001C38B2 /* V3Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = V3Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		407D87401B260987001C38B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		407D87411B260988001C38B2 /* V3Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V3Tests.swift; sourceTree = "<group>"; };
+		4082F7A81B3A19A0001D8C5D /* ErrorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
 		409207781B26A6B2000CE42B /* AddTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
 		4092077A1B26A807000CE42B /* DismissSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissSegue.swift; sourceTree = "<group>"; };
 		4092077C1B26B4A7000CE42B /* LocationStructForMasterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationStructForMasterVC.swift; sourceTree = "<group>"; };
@@ -171,6 +173,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		4082F7AA1B3A1A38001D8C5D /* Error View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4082F7A81B3A19A0001D8C5D /* ErrorViewController.swift */,
+			);
+			name = "Error View Controller";
+			sourceTree = "<group>";
+		};
 		40E5B1E21B36091C00E79BA6 /* Master View Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -204,6 +214,7 @@
 				40E5B1E31B36098100E79BA6 /* AboutPage View Controller */,
 				404104E61B30D449001864F4 /* Settings View Controller  */,
 				40E5B1EE1B361E0E00E79BA6 /* Add Task View Controller  */,
+				4082F7AA1B3A1A38001D8C5D /* Error View Controller */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -345,6 +356,7 @@
 				40F963361B29E8AE00E0284B /* GetCurrentGeocode.swift in Sources */,
 				404104E81B30D4DD001864F4 /* AboutSpeckViewController.swift in Sources */,
 				409207791B26A6B2000CE42B /* AddTaskViewController.swift in Sources */,
+				4082F7A91B3A19A0001D8C5D /* ErrorViewController.swift in Sources */,
 				407D872C1B260987001C38B2 /* MasterViewController.swift in Sources */,
 				4092077D1B26B4A7000CE42B /* LocationStructForMasterVC.swift in Sources */,
 				40EEDFCD1B388992002DCD03 /* ConvertToAQI.swift in Sources */,
