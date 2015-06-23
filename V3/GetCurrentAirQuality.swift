@@ -22,10 +22,10 @@ struct CurrentAirQuality {
         
         maxTime = last24Hours
         if let val: AnyObject = (airQualityDictionary["data"]! as AnyObject?){
-            self.stationData = airQualityDictionary["data"]! as AnyObject
+            self.stationData = val
             
-            if let val: Array<NSDictionary> = (stationData["rows"] as? Array<NSDictionary>){
-                self.rowArray = stationData["rows"] as! Array<NSDictionary>
+            if let val1: Array<NSDictionary> = (stationData["rows"] as? Array<NSDictionary>){
+                self.rowArray = val1
             }
             else{
                 rowArray = [[:]]
@@ -56,10 +56,10 @@ struct CurrentAirQuality {
                 tempDict = dataArray[i]
                 
                 if let val: NSDictionary = tempDict["channelBounds"] as? NSDictionary{
-                    tempChannelBounds = tempDict["channelBounds"] as! NSDictionary
+                    tempChannelBounds = val
                     
-                    if let val: NSDictionary = tempChannelBounds["channels"] as? NSDictionary{
-                        tempChannels = tempChannelBounds["channels"] as! NSDictionary
+                    if let val1: NSDictionary = tempChannelBounds["channels"] as? NSDictionary{
+                        tempChannels = val1
                     }
                     else{
                         tempChannels = [:]
@@ -72,7 +72,7 @@ struct CurrentAirQuality {
                 
                 
                 if let val:AnyObject = tempChannels["PM2_5"] {
-                    PM = tempChannels["PM2_5"] as! NSDictionary
+                    PM = val as! NSDictionary
                     actualMaxTimeSecs = PM["maxTimeSecs"] as! Int
                     if (actualMaxTimeSecs >= maxTime){
                         pmStationIndexArray.append(i)
@@ -80,21 +80,21 @@ struct CurrentAirQuality {
                 }
                     
                 else if let val:AnyObject = tempChannels["PM25B_UG_M3"] {
-                    PM = tempChannels["PM2_5"] as! NSDictionary
+                    PM = val as! NSDictionary
                     actualMaxTimeSecs = PM["maxTimeSecs"] as! Int
                     if (actualMaxTimeSecs >= maxTime){
                         pmStationIndexArray.append(i)
                     }
                 }
                 else if let val:AnyObject = tempChannels["PM25_FL_PERCENT"] {
-                    PM = tempChannels["PM2_5"] as! NSDictionary
+                    PM = val as! NSDictionary
                     actualMaxTimeSecs = PM["maxTimeSecs"] as! Int
                     if (actualMaxTimeSecs >= maxTime){
                         pmStationIndexArray.append(i)
                     }
                 }
                 else if let val:AnyObject = tempChannels["PM25_UG_M3"] {
-                    PM = tempChannels["PM2_5"] as! NSDictionary
+                    PM = val as! NSDictionary
                     actualMaxTimeSecs = PM["maxTimeSecs"] as! Int
                     if (actualMaxTimeSecs >= maxTime){
                         pmStationIndexArray.append(i)

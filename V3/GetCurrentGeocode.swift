@@ -19,10 +19,31 @@ struct CurrentGeocode {
     
     
     init(geoCodeDictionary: NSDictionary) {
-        currentLocalityArray = geoCodeDictionary["geonames"]![0] as! NSDictionary
-        name = currentLocalityArray["name"] as! String
-        stateName = currentLocalityArray["adminName1"] as? String
-        stateCode = getStateCode(stateName!)
+        
+        if let val: AnyObject = geoCodeDictionary["geonames"]![0] as? NSDictionary{
+            currentLocalityArray = geoCodeDictionary["geonames"]![0] as! NSDictionary
+            
+            if let val1: String = currentLocalityArray["name"] as? String{
+                name = val1
+            }
+            
+            else{
+                name = "NA"
+            }
+            
+            if let val2: String = currentLocalityArray["adminName1"] as? String{
+                stateName = val2
+            }
+            else{
+                stateName = "NA"
+            }
+        }
+        else{
+            currentLocalityArray = []
+            name = "NA"
+            stateName = "NA"
+        }
+        stateCode = self.getStateCode(stateName!)
     }
     
     func getStateCode(stateFullName: String) -> String {
