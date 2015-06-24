@@ -307,19 +307,22 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("CustomTableViewCell", forIndexPath: indexPath) as! CustomTableViewCell
+        println("in tableView")
         let location = LocationStore.sharedInstance.get(indexPath.row)
         cell.cityLabel?.text = location.description
-        println("location description is \(location.description)")
+        
         cell.aqiLabel?.text = location.AQI
+        println("in tableView 1...")
         if (location.description == "Current Location"){
             cell.temperatureLabel?.text = self.currentTemperature
         }
         else{
             cell.temperatureLabel?.text = location.temp
         }
-
+        println("in tableView 2...")
         cell.aqiCategoryLabel?.text = location.aqiCategory
         cell.aqiCategoryLabel?.textColor = findAQICategoryColor(location.aqiCategory)
+        println("in tableView 3...")
         return cell
     }
     

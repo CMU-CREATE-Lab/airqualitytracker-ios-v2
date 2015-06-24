@@ -11,7 +11,9 @@ import CoreLocation
 
 var searcher : UISearchController! //the search bar
 
-
+//daily quota for google api reached 
+//when searching for Wynn Las Vegas, the error is in the json serialization(print before get aq)
+//change it to if let...
 class AddTaskViewController: UIViewController, UISearchBarDelegate {
     
     @IBOutlet weak var searchBarView: UIView!
@@ -24,7 +26,6 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
     var latitude: Double = 0.0
     var longitude: Double = 0.0
     var currentTemperature: String  = ""
-    var currentTime: String = ""
     var currentOzone: String = ""
     var stationID: Int = 0
     var aqiCategory: String = ""
@@ -56,15 +57,18 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
             googleAPI.fetchPlacesDetail(src.placeIdArray[positionInArray]){ place in
                 self.latitude = place!.coordinate.latitude as Double
                 self.longitude = place!.coordinate.longitude as Double
+                println("searchBarDidEndEditing lat and long done...")
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     self.getCurrentAirQuality()
                     self.getCurrentWeatherData()
                 })
+                println("searchBarDidEndEditing dispatch done...")
                 //MARK: - calling the segue here as the user is done with search
                 self.performSegueWithIdentifier("dismissAndSave", sender: self)
             }
-            if (self.latitude == 0.0 && self.longitude  == 0.0){
+            if (self.latitude == 0.0 || self.longitude  == 0.0){
                 //view controller for the error page; appears if a location, which has not air quality is selected.
+                println("searchBarDidEndEditing lat and lon are 0")
                 self.performSegueWithIdentifier("dismissToError", sender: self)
             }
         }
@@ -83,6 +87,7 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
     
     func getCurrentAirQuality() -> Void {
         
+        println("in get AQ")
         var currentDate = NSDate()
         var currentDateInSeconds = currentDate.timeIntervalSince1970
         var last24Hours = Int(currentDateInSeconds - (60 * 60 * 24))
@@ -100,7 +105,9 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
             let airQualityDictionary: NSDictionary =
             NSJSONSerialization.JSONObjectWithData(dataObject!, options: nil, error: nil) as! NSDictionary
             
+            println("beforegetAQ...")
             let AQ = CurrentAirQuality(airQualityDictionary: airQualityDictionary, currentLatitude: self.latitude, currentLongitude: self.longitude, last24Hours: last24Hours)
+            println("getAQ -> AQ done...")
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.stationID = AQ.closestStationID
@@ -154,7 +161,9 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
                 if let dataObject = NSJSONSerialization.JSONObjectWithData(data, options:nil, error:nil) as? NSDictionary {
                     
                     if let data = dataObject["data"] as? NSDictionary {
+                        println("mostRecentAQ data done...")
                         if let channels = data["channels"] as? NSDictionary {
+                            println("mostRecentAQ channels done...")
                             //now checking which feed the data was taken from
                             if let val: AnyObject = channels["PM2_5"]{
                                 self.getMostRecentValue(channels, identifier: "PM2_5")
@@ -192,6 +201,7 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
         println("gmrv aqi label is \(AQIData.AQI)")
         self.aqiCategory = AQIData.category
         self.AQILabel = "\(AQIData.AQI)"
+        println("mostRecentAQ done...")
     }
     
     //MARK: - gets the current weather data based on the coordinates
@@ -234,6 +244,7 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
                     
                     self.currentTemperature = "\(currentWeather.temperature)" + "\(temperatureSymbol)"
                     self.currentOzone = "\(currentWeather.ozone)"
+                    println("weather done...")
                     
                     println("\(self.descriptionLabel)")
                     println("\(self.AQILabel)")
