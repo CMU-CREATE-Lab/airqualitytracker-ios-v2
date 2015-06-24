@@ -87,7 +87,6 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
     
     func getCurrentAirQuality() -> Void {
         
-        println("in get AQ")
         var currentDate = NSDate()
         var currentDateInSeconds = currentDate.timeIntervalSince1970
         var last24Hours = Int(currentDateInSeconds - (60 * 60 * 24))
@@ -102,19 +101,17 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
         let downloadTask: NSURLSessionDownloadTask = sharedSession.downloadTaskWithURL(currentAQURL!, completionHandler: {(data: NSURL!, response: NSURLResponse!, error: NSError!) -> Void in
             
             let dataObject = NSData(contentsOfURL: data)
-            let airQualityDictionary: NSDictionary =
-            NSJSONSerialization.JSONObjectWithData(dataObject!, options: nil, error: nil) as! NSDictionary
+            if let airQualityDictionary: NSDictionary =
+                NSJSONSerialization.JSONObjectWithData(dataObject!, options: nil, error: nil) as? NSDictionary{
             
-            println("beforegetAQ...")
             let AQ = CurrentAirQuality(airQualityDictionary: airQualityDictionary, currentLatitude: self.latitude, currentLongitude: self.longitude, last24Hours: last24Hours)
-            println("getAQ -> AQ done...")
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.stationID = AQ.closestStationID
                 //now calling getAQI, which will invoke the getMostRecentValue method using the stationID
                 self.getMostRecentAQ()
             })
-            
+            }
         })
         downloadTask.resume()
     }
@@ -196,12 +193,8 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
         let mostRecentDataSample = temp["mostRecentDataSample"] as! NSDictionary
         let aQ  = mostRecentDataSample["value"] as! Int
         let AQIData  = ConvertToAQI(pmValue: aQ)
-        println("**************************")
-        println("gmrv aqi category is \(AQIData.category)")
-        println("gmrv aqi label is \(AQIData.AQI)")
         self.aqiCategory = AQIData.category
         self.AQILabel = "\(AQIData.AQI)"
-        println("mostRecentAQ done...")
     }
     
     //MARK: - gets the current weather data based on the coordinates
@@ -243,9 +236,7 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     
                     self.currentTemperature = "\(currentWeather.temperature)" + "\(temperatureSymbol)"
-                    self.currentOzone = "\(currentWeather.ozone)"
-                    println("weather done...")
-                    
+                    self.currentOzone = "\(currentWeather.ozone)"                    
                     println("\(self.descriptionLabel)")
                     println("\(self.AQILabel)")
                     println("\(self.latitude), \(self.longitude)")

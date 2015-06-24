@@ -71,11 +71,12 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
             }
             else {
                 let dataObject = NSData(contentsOfURL: data)
-                let geoCodeDict: NSDictionary =
-                NSJSONSerialization.JSONObjectWithData(dataObject!, options: nil, error: nil) as! NSDictionary
+                if let geoCodeDict: NSDictionary =
+                    NSJSONSerialization.JSONObjectWithData(dataObject!, options: nil, error: nil) as? NSDictionary{
                 
-                let currentLocality = CurrentGeocode(geoCodeDictionary: geoCodeDict)
-                self.currentLocation = "\(currentLocality.name)"
+                    let currentLocality = CurrentGeocode(geoCodeDictionary: geoCodeDict)
+                    self.currentLocation = "\(currentLocality.name)"
+                }
             }
         })
         downloadTask.resume()
@@ -84,11 +85,11 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     //MARK: - Finds current latitude and longitude
     func setupLocation(){
         self.locationManager.requestWhenInUseAuthorization()
-        self.locationManager.requestAlwaysAuthorization()
+//        self.locationManager.requestAlwaysAuthorization()//####################
         if (CLLocationManager.locationServicesEnabled()){
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-            locationManager.requestAlwaysAuthorization()
+//            locationManager.requestAlwaysAuthorization()
             
             //MN: ask about distance filter #########################################
             locationManager.distanceFilter = 1000
@@ -127,17 +128,17 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
         let downloadTask: NSURLSessionDownloadTask = sharedSession.downloadTaskWithURL(currentAQURL!, completionHandler: {(data: NSURL!, response: NSURLResponse!, error: NSError!) -> Void in
 
             let dataObject = NSData(contentsOfURL: data)
-            let airQualityDictionary: NSDictionary =
-            NSJSONSerialization.JSONObjectWithData(dataObject!, options: nil, error: nil) as! NSDictionary
+            if let airQualityDictionary: NSDictionary =
+                NSJSONSerialization.JSONObjectWithData(dataObject!, options: nil, error: nil) as? NSDictionary{
             
-            let AQ = CurrentAirQuality(airQualityDictionary: airQualityDictionary, currentLatitude: self.latitude, currentLongitude: self.longitude, last24Hours: last24Hours)
-      
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.stationID = AQ.closestStationID
-                //now calling getAQI, which will invoke the getMostRecentValue method using the stationID
-                self.getMostRecentAQ()
-            })
-
+                let AQ = CurrentAirQuality(airQualityDictionary: airQualityDictionary, currentLatitude: self.latitude, currentLongitude: self.longitude, last24Hours: last24Hours)
+          
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.stationID = AQ.closestStationID
+                    //now calling getAQI, which will invoke the getMostRecentValue method using the stationID
+                    self.getMostRecentAQ()
+                })
+            }
         })
         downloadTask.resume()
     }
@@ -257,20 +258,21 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
                 }
                 else {
                     let dataObject = NSData(contentsOfURL: location)
-                    let weatherDictionary: NSDictionary =
-                    NSJSONSerialization.JSONObjectWithData(dataObject!, options: nil, error: nil) as! NSDictionary
-                    let currentWeather = CurrentWeather(weatherDictionary: weatherDictionary)
-                    var temperatureSymbol: String
-                    //based on user defined settings
-                    if (SettingsViewController.variables.unit){                         temperatureSymbol = "\u{00B0} F" //symbol for degree F
+                    if let weatherDictionary: NSDictionary =
+                        NSJSONSerialization.JSONObjectWithData(dataObject!, options: nil, error: nil) as? NSDictionary{
+                        let currentWeather = CurrentWeather(weatherDictionary: weatherDictionary)
+                        var temperatureSymbol: String
+                        //based on user defined settings
+                        if (SettingsViewController.variables.unit){                         temperatureSymbol = "\u{00B0} F" //symbol for degree F
+                        }
+                        else{
+                            temperatureSymbol = "\u{00B0} C" //symbol for degree C
+                        }
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.currentTemperature = "\(currentWeather.temperature)" + "\(temperatureSymbol)"
+                            self.currentOzone = "\(currentWeather.ozone)"
+                        })
                     }
-                    else{
-                        temperatureSymbol = "\u{00B0} C" //symbol for degree C
-                    }
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        self.currentTemperature = "\(currentWeather.temperature)" + "\(temperatureSymbol)"
-                        self.currentOzone = "\(currentWeather.ozone)"
-                    })
                 }
             })
         downloadTask.resume()
@@ -307,22 +309,18 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("CustomTableViewCell", forIndexPath: indexPath) as! CustomTableViewCell
-        println("in tableView")
         let location = LocationStore.sharedInstance.get(indexPath.row)
         cell.cityLabel?.text = location.description
         
         cell.aqiLabel?.text = location.AQI
-        println("in tableView 1...")
         if (location.description == "Current Location"){
             cell.temperatureLabel?.text = self.currentTemperature
         }
         else{
             cell.temperatureLabel?.text = location.temp
         }
-        println("in tableView 2...")
         cell.aqiCategoryLabel?.text = location.aqiCategory
         cell.aqiCategoryLabel?.textColor = findAQICategoryColor(location.aqiCategory)
-        println("in tableView 3...")
         return cell
     }
     
