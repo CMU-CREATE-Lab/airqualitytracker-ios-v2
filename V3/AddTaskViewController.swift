@@ -138,37 +138,47 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
             return NSURLSession.sharedSession()
         }
         
-        var mostRecentURL = ("https://esdr.cmucreatelab.org/api/v1/feeds/\(self.stationID)/most-recent").stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
-        
-        if dataTask.taskIdentifier > 0 && dataTask.state == .Running {
-            dataTask.cancel()
+        if (self.stationID == 0){ //if there is no station within the bounding box
+            self.AQILabel = "N/A"
+            self.aqiCategory = "Not Available"
         }
         
-        dataTask = sharedSession.dataTaskWithURL(NSURL(string: mostRecentURL)!) {data, response, error in
-            if let dataObject = NSJSONSerialization.JSONObjectWithData(data, options:nil, error:nil) as? NSDictionary {
-                
-                if let data = dataObject["data"] as? NSDictionary {
-                    if let channels = data["channels"] as? NSDictionary {
-                        //now checking which feed the data was taken from
-                        if let val: AnyObject = channels["PM2_5"]{
-                            self.getMostRecentValue(channels, identifier: "PM2_5")
-                        }
-                        else if let val: AnyObject = channels["PM25B_UG_M3"]{
-                            self.getMostRecentValue(channels, identifier: "PM25B_UG_M3")
-                        }
-                        else if let val: AnyObject = channels["PM25_FL_PERCENT"]{
-                            self.getMostRecentValue(channels, identifier: "PM25_FL_PERCENT")
-                        }
-                        else if let val: AnyObject = channels["PM25_UG_M3"]{
-                            self.getMostRecentValue(channels, identifier: "PM25_UG_M3")
+        else{
+            var mostRecentURL = ("https://esdr.cmucreatelab.org/api/v1/feeds/\(self.stationID)/most-recent").stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+            
+            if dataTask.taskIdentifier > 0 && dataTask.state == .Running {
+                dataTask.cancel()
+            }
+            
+            dataTask = sharedSession.dataTaskWithURL(NSURL(string: mostRecentURL)!) {data, response, error in
+                if let dataObject = NSJSONSerialization.JSONObjectWithData(data, options:nil, error:nil) as? NSDictionary {
+                    
+                    if let data = dataObject["data"] as? NSDictionary {
+                        if let channels = data["channels"] as? NSDictionary {
+                            //now checking which feed the data was taken from
+                            if let val: AnyObject = channels["PM2_5"]{
+                                self.getMostRecentValue(channels, identifier: "PM2_5")
+                            }
+                            else if let val: AnyObject = channels["PM25B_UG_M3"]{
+                                self.getMostRecentValue(channels, identifier: "PM25B_UG_M3")
+                            }
+                            else if let val: AnyObject = channels["PM25_FL_PERCENT"]{
+                                self.getMostRecentValue(channels, identifier: "PM25_FL_PERCENT")
+                            }
+                            else if let val: AnyObject = channels["PM25_UG_M3"]{
+                                self.getMostRecentValue(channels, identifier: "PM25_UG_M3")
+                            }
+                            else{
+                                self.AQILabel = "N/A"
+                                self.aqiCategory = "Not Available"
+                            }
                         }
                     }
                 }
             }
+            dataTask.resume()
         }
-        dataTask.resume()
     }
-    
     /*MARK: - helper function to getMostRecentAQ, this function takes the dictionaries and the feed
     (PM2.5, PM25BUGM3, PM25FLPERCENT or PM25UGM3) and gets the most recent value
     */
@@ -177,6 +187,9 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
         let mostRecentDataSample = temp["mostRecentDataSample"] as! NSDictionary
         let aQ  = mostRecentDataSample["value"] as! Int
         let AQIData  = ConvertToAQI(pmValue: aQ)
+        println("**************************")
+        println("gmrv aqi category is \(AQIData.category)")
+        println("gmrv aqi label is \(AQIData.AQI)")
         self.aqiCategory = AQIData.category
         self.AQILabel = "\(AQIData.AQI)"
     }
@@ -221,6 +234,14 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
                     
                     self.currentTemperature = "\(currentWeather.temperature)" + "\(temperatureSymbol)"
                     self.currentOzone = "\(currentWeather.ozone)"
+                    
+                    println("\(self.descriptionLabel)")
+                    println("\(self.AQILabel)")
+                    println("\(self.latitude), \(self.longitude)")
+                    println("\(self.currentTemperature)")
+                    println("\(self.currentOzone)")
+                    println("\(self.aqiCategory)")
+                    
                     
                     let location = LocationForList(description: self.descriptionLabel, AQI: self.AQILabel, lat: self.latitude, long: self.longitude, temp: self.currentTemperature, Oz: self.currentOzone, aqiCategory: self.aqiCategory)
                     LocationStore.sharedInstance.add(location)

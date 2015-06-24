@@ -135,7 +135,6 @@ class ConvertToAQI {
     //MARK: - finds the AQI category - good, moderate, abd, etc. based on the index of pollution
     func findAQICategory() -> String{
         var category: String
-        println("self.aqi is \(self.AQI)")
         switch self.AQI{
         case 0...50:
             category = "Good"
@@ -150,7 +149,7 @@ class ConvertToAQI {
         case 301...10000:
             category = "Hazardous"
         default:
-            category = "Good"
+            category = "NA"
         }
         return category
     }

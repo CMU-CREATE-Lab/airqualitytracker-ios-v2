@@ -39,7 +39,6 @@ struct CurrentAirQuality {
         pmStations = findStationsWithPM(rowArray)
         distanceAndIdArray = findDistanceAndIdArray(pmStations, dataArray: rowArray, latRef: currentLatitude, lonRef: currentLongitude)
         closestStationID = findClosestPMStation(distanceAndIdArray)
-        
     }
     
     func findStationsWithPM(dataArray:Array<NSDictionary>) -> Array<Int> {

@@ -20,7 +20,6 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     var airQuality: Int = 0
     var currentTemperature: String  = ""
     var currentOzone: String = ""
-    var currentTime: String = ""
     var aqiCategory: String = ""
     
     @IBOutlet weak var settingsButton: UIBarButtonItem!
@@ -168,41 +167,58 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
             return NSURLSession.sharedSession()
         }
         
-        var mostRecentURL = ("https://esdr.cmucreatelab.org/api/v1/feeds/\(self.stationID)/most-recent").stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
-        
-        if dataTask.taskIdentifier > 0 && dataTask.state == .Running {
-            dataTask.cancel()
+        if (self.stationID == 0){ //if there is no station within the bounding box
+            self.airQuality = Int.min //this means it will display as NA
+            self.aqiCategory = "Not Available"
         }
+        
+        else{
+            var mostRecentURL = ("https://esdr.cmucreatelab.org/api/v1/feeds/\(self.stationID)/most-recent").stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+            
+            if dataTask.taskIdentifier > 0 && dataTask.state == .Running {
+                dataTask.cancel()
+            }
 
-        dataTask = sharedSession.dataTaskWithURL(NSURL(string: mostRecentURL)!) {data, response, error in
-            if let dataObject = NSJSONSerialization.JSONObjectWithData(data, options:nil, error:nil) as? NSDictionary {
-                
-                if let data = dataObject["data"] as? NSDictionary {
-                    if let channels = data["channels"] as? NSDictionary {
-                        //now checking which feed the data was taken from
-                        if let val: AnyObject = channels["PM2_5"]{
-                            self.getMostRecentValue(channels, identifier: "PM2_5")
-                        }
-                        else if let val: AnyObject = channels["PM25B_UG_M3"]{
-                            self.getMostRecentValue(channels, identifier: "PM25B_UG_M3")
-                        }
-                        else if let val: AnyObject = channels["PM25_FL_PERCENT"]{
-                            self.getMostRecentValue(channels, identifier: "PM25_FL_PERCENT")
-                        }
-                        else if let val: AnyObject = channels["PM25_UG_M3"]{
-                            self.getMostRecentValue(channels, identifier: "PM25_UG_M3")
+            dataTask = sharedSession.dataTaskWithURL(NSURL(string: mostRecentURL)!) {data, response, error in
+                if let dataObject = NSJSONSerialization.JSONObjectWithData(data, options:nil, error:nil) as? NSDictionary {
+                    
+                    if let data = dataObject["data"] as? NSDictionary {
+                        if let channels = data["channels"] as? NSDictionary {
+                            //now checking which feed the data was taken from
+                            if let val: AnyObject = channels["PM2_5"]{
+                                self.getMostRecentValue(channels, identifier: "PM2_5")
+                            }
+                            else if let val: AnyObject = channels["PM25B_UG_M3"]{
+                                self.getMostRecentValue(channels, identifier: "PM25B_UG_M3")
+                            }
+                            else if let val: AnyObject = channels["PM25_FL_PERCENT"]{
+                                self.getMostRecentValue(channels, identifier: "PM25_FL_PERCENT")
+                            }
+                            else if let val: AnyObject = channels["PM25_UG_M3"]{
+                                self.getMostRecentValue(channels, identifier: "PM25_UG_M3")
+                            }
+                            else{
+                                self.airQuality = Int.min
+                                self.aqiCategory = "Not Available"
+                            }
                         }
                     }
                 }
+                dispatch_async(dispatch_get_main_queue()) {
+                    var finalAQI: String = ""
+                    if (self.airQuality == Int.min){
+                        finalAQI = "N/A"
+                    }
+                    else{
+                        finalAQI = "\(self.airQuality)"
+                    }
+                    let location = LocationForList(description: "Current Location", AQI: finalAQI, lat: self.latitude, long: self.longitude, temp: self.currentTemperature, Oz: self.currentOzone, aqiCategory: self.aqiCategory)
+                    LocationStore.sharedInstance.add(location)
+                }
             }
-            dispatch_async(dispatch_get_main_queue()) {
-                let location = LocationForList(description: "Current Location", AQI: "\(self.airQuality)", lat: self.latitude, long: self.longitude, temp: self.currentTemperature, Oz: self.currentOzone, aqiCategory: self.aqiCategory)
-                LocationStore.sharedInstance.add(location)
-            }
+            dataTask.resume()
         }
-        dataTask.resume()
     }
-
     /*MARK: - helper function to getMostRecentAQ, this function takes the dictionaries and the feed
     (PM2.5, PM25BUGM3, PM25FLPERCENT or PM25UGM3) and gets the most recent value
     */
@@ -326,7 +342,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
         case "Hazardous":
             aqiCategoryColor = UIColor(red: 0.513, green: 0.011, blue: 0.0, alpha: 1.0) //maroon
         default:
-            aqiCategoryColor = UIColor.greenColor()
+            aqiCategoryColor = UIColor.blackColor()
         }
         return aqiCategoryColor
     }

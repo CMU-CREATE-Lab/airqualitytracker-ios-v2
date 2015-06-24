@@ -71,7 +71,7 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate {
         case "Hazardous":
             aqiCategoryColor = UIColor(red: 0.513, green: 0.011, blue: 0.0, alpha: 1.0) //maroon
         default:
-            aqiCategoryColor = UIColor.greenColor()
+            aqiCategoryColor = UIColor.blackColor()
         }
         return aqiCategoryColor
     }
