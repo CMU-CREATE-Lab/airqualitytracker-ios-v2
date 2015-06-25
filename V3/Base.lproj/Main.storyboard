@@ -468,13 +468,13 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Purifier" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vzz-s6-0qm">
                                 <rect key="frame" x="500" y="463" width="54" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recommended" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tzr-Ym-6ZP">
                                 <rect key="frame" x="468" y="492" width="118" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Masks" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="40e-UZ-zk0">
@@ -569,8 +569,12 @@
                         <outlet property="airQualityStationID" destination="OjH-1b-xgT" id="ahc-gZ-XeD"/>
                         <outlet property="aqiCategoryLabel" destination="vvO-fj-EKg" id="Gda-fv-IXp"/>
                         <outlet property="detailDescriptionLabel" destination="Lei-5M-9Gs" id="sCT-F7-F6f"/>
+                        <outlet property="kidsAndEldersAdviceLabel" destination="4dd-ev-GvF" id="azC-Kf-jCG"/>
+                        <outlet property="masksAdviceLabel" destination="ngs-Mv-uGr" id="LNe-vR-AR6"/>
                         <outlet property="ozoneLabel" destination="qVS-XH-Jjb" id="zmi-cO-y3c"/>
+                        <outlet property="purifierAdviceLabel" destination="Tzr-Ym-6ZP" id="put-sf-2PI"/>
                         <outlet property="temperatureLabel" destination="hDt-tj-oDG" id="CYw-Rc-AJf"/>
+                        <outlet property="workoutAdviceLabel" destination="0m1-yP-KuA" id="7Hg-Rn-Y8D"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lrm-kH-fPn" sceneMemberID="firstResponder"/>

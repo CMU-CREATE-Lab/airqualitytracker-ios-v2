@@ -16,6 +16,11 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var ozoneLabel: UILabel!
     @IBOutlet weak var aqiCategoryLabel: UILabel!
+    @IBOutlet weak var workoutAdviceLabel: UILabel!
+    @IBOutlet weak var kidsAndEldersAdviceLabel: UILabel!
+    @IBOutlet weak var masksAdviceLabel: UILabel!
+    @IBOutlet weak var purifierAdviceLabel: UILabel!
+    var aqiCategory: String = ""
     
     //boolean to indicate if Detail VC already has weather information or not
     var callCurrentWeather: Bool = false
@@ -38,6 +43,7 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate {
                 self.airQualityStationID.text = detail.AQI
                 latitude = detail.lat
                 longitude = detail.long
+                self.aqiCategory = detail.aqiCategory
                 self.aqiCategoryLabel.text = detail.aqiCategory
                 self.aqiCategoryLabel.textColor = findAQICategoryColor(detail.aqiCategory)
                 if (detail.description != "Current Location"){
@@ -82,6 +88,7 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate {
         if (callCurrentWeather){
             getCurrentWeatherData()
         }
+        updateHealthSection()
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -137,8 +144,50 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate {
         downloadTask.resume()
     }
     
+    //update Health Labels according to the AQI
+    func updateHealthSection(){
+        if (aqiCategory == "Good"){
+            self.workoutAdviceLabel.text = "Suitable"
+            self.kidsAndEldersAdviceLabel.text = "Outdoors"
+            self.masksAdviceLabel.text = "Unnecessary"
+            self.purifierAdviceLabel.text = "Unncessary"
+        }
+        else if (aqiCategory == "Moderate"){
+            self.workoutAdviceLabel.text = "Suitable"
+            self.kidsAndEldersAdviceLabel.text = "Outdoors"
+            self.masksAdviceLabel.text = "Unnecessary"
+            self.purifierAdviceLabel.text = "Unncessary"
+        }
+        else if (aqiCategory == "Unhealthy for Sensitive Groups"){
+            self.workoutAdviceLabel.text = "Not Recommended"
+            self.kidsAndEldersAdviceLabel.text = "Less Outdoors"
+            self.masksAdviceLabel.text = "Unnecessary"
+            self.purifierAdviceLabel.text = "Unncessary"
+        }
+        else if (aqiCategory == "Unhealthy"){
+            self.workoutAdviceLabel.text = "Not Suitable"
+            self.kidsAndEldersAdviceLabel.text = "Avoid Outdoors"
+            self.masksAdviceLabel.text = "Recommended"
+            self.purifierAdviceLabel.text = "Recommended"
+        }
+        else if (aqiCategory == "Very Unhealthy"){
+            self.workoutAdviceLabel.text = "Not Suitable"
+            self.kidsAndEldersAdviceLabel.text = "Indoors"
+            self.masksAdviceLabel.text = "Recommended"
+            self.purifierAdviceLabel.text = "Recommended"
+        }
+        else if (aqiCategory == "Hazardous"){
+            self.workoutAdviceLabel.text = "Risky"
+            self.kidsAndEldersAdviceLabel.text = "Indoors"
+            self.masksAdviceLabel.text = "Necessary"
+            self.purifierAdviceLabel.text = "Necessary"
+        }
 
 
+
+
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
