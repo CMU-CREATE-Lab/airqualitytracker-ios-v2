@@ -9,6 +9,7 @@
 import Foundation
 
 //this takes in a PM value and converts to AQI
+//breakpoints from https://en.wikipedia.org/wiki/Air_quality_index#United_States
 class ConvertToAQI {
     
     var pmValue: Double
@@ -43,13 +44,13 @@ class ConvertToAQI {
     func getIhi() -> Int{
         var Ihi: Int
         switch pmValue {
-        case 0.0...15.4:
+        case 0.0...12.0:
             Ihi = 50
-        case 15.5...40.4:
+        case 12.1...35.4:
             Ihi = 100
-        case 40.5...65.4:
+        case 35.5...55.4:
             Ihi = 150
-        case 65.5...150.4:
+        case 55.5...150.4:
             Ihi = 200
         case 150.5...250.4:
             Ihi = 300
@@ -66,13 +67,13 @@ class ConvertToAQI {
     func getIlo() -> Int{
         var Ilo: Int
         switch pmValue {
-        case 0.0...15.4:
+        case 0.0...12.0:
             Ilo = 0
-        case 15.5...40.4:
+        case 12.1...35.4:
             Ilo = 51
-        case 40.5...65.4:
+        case 35.5...55.4:
             Ilo = 101
-        case 65.5...150.4:
+        case 55.5...150.4:
             Ilo = 151
         case 150.5...250.4:
             Ilo = 201
@@ -89,13 +90,13 @@ class ConvertToAQI {
     func getBPlo() -> Double{
         var BPlo: Double
         switch pmValue {
-        case 0.0...15.4:
+        case 0.0...12.0:
             BPlo = 0.0
-        case 15.5...40.4:
+        case 12.1...35.4:
             BPlo = 15.5
-        case 40.5...65.4:
+        case 35.5...55.4:
             BPlo = 40.5
-        case 65.5...150.4:
+        case 55.5...150.4:
             BPlo = 65.5
         case 150.5...250.4:
             BPlo = 150.5
@@ -112,13 +113,13 @@ class ConvertToAQI {
     func getBPhi() -> Double{
         var BPhi: Double
         switch pmValue {
-        case 0.0...15.4:
+        case 0.0...12.0:
             BPhi = 15.4
-        case 15.5...40.4:
+        case 12.1...35.4:
             BPhi = 40.4
-        case 40.5...65.4:
+        case 35.5...55.4:
             BPhi = 65.4
-        case 65.5...150.4:
+        case 55.5...150.4:
             BPhi = 150.4
         case 150.5...250.4:
             BPhi = 250.4

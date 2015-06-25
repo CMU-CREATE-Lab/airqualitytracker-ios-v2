@@ -57,18 +57,15 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
             googleAPI.fetchPlacesDetail(src.placeIdArray[positionInArray]){ place in
                 self.latitude = place!.coordinate.latitude as Double
                 self.longitude = place!.coordinate.longitude as Double
-                println("searchBarDidEndEditing lat and long done...")
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     self.getCurrentAirQuality()
                     self.getCurrentWeatherData()
                 })
-                println("searchBarDidEndEditing dispatch done...")
                 //MARK: - calling the segue here as the user is done with search
                 self.performSegueWithIdentifier("dismissAndSave", sender: self)
             }
             if (self.latitude == 0.0 || self.longitude  == 0.0){
                 //view controller for the error page; appears if a location, which has not air quality is selected.
-                println("searchBarDidEndEditing lat and lon are 0")
                 self.performSegueWithIdentifier("dismissToError", sender: self)
             }
         }
@@ -99,19 +96,19 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
         let currentAQURL = NSURL(string: esdrURL)
         let sharedSession = NSURLSession.sharedSession()
         let downloadTask: NSURLSessionDownloadTask = sharedSession.downloadTaskWithURL(currentAQURL!, completionHandler: {(data: NSURL!, response: NSURLResponse!, error: NSError!) -> Void in
-            
-            let dataObject = NSData(contentsOfURL: data)
-            if let airQualityDictionary: NSDictionary =
-                NSJSONSerialization.JSONObjectWithData(dataObject!, options: nil, error: nil) as? NSDictionary{
-            
-            let AQ = CurrentAirQuality(airQualityDictionary: airQualityDictionary, currentLatitude: self.latitude, currentLongitude: self.longitude, last24Hours: last24Hours)
-            
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.stationID = AQ.closestStationID
-                //now calling getAQI, which will invoke the getMostRecentValue method using the stationID
-                self.getMostRecentAQ()
-            })
+            if let dataObject = NSData(contentsOfURL: currentAQURL!){
+                if let airQualityDictionary: NSDictionary =
+                    NSJSONSerialization.JSONObjectWithData(dataObject, options: nil, error: nil) as? NSDictionary{
+                
+                let AQ = CurrentAirQuality(airQualityDictionary: airQualityDictionary, currentLatitude: self.latitude, currentLongitude: self.longitude, last24Hours: last24Hours)
+                
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.stationID = AQ.closestStationID
+                    //now calling getAQI, which will invoke the getMostRecentValue method using the stationID
+                    self.getMostRecentAQ()
+                })
             }
+        }
         })
         downloadTask.resume()
     }
@@ -236,7 +233,11 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     
                     self.currentTemperature = "\(currentWeather.temperature)" + "\(temperatureSymbol)"
-                    self.currentOzone = "\(currentWeather.ozone)"                    
+                    self.currentOzone = "\(currentWeather.ozone)"
+                    if (self.AQILabel == nil){
+                        self.AQILabel = "N/A"
+                        self.aqiCategory = "Not Available"
+                    }
                     println("\(self.descriptionLabel)")
                     println("\(self.AQILabel)")
                     println("\(self.latitude), \(self.longitude)")
