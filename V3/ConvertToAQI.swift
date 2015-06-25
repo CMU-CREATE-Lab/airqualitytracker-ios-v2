@@ -16,12 +16,12 @@ class ConvertToAQI {
     var AQI: Int = 0
     var category: String = ""
     
-    init(pmValue: Int){
+    init(pmValue: Double){
         if (pmValue < 0){
             self.pmValue = 0.0
         }
         else{
-            self.pmValue = Double(pmValue)
+            self.pmValue = pmValue
         }
         self.AQI = convert()
         self.category = findAQICategory()

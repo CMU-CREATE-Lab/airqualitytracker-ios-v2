@@ -19,8 +19,9 @@ struct LocationForList {
     var temp: String
     var Oz: String
     var aqiCategory: String
+    var pmValue: Double
     
-    init(description: String, AQI: String, lat: Double, long: Double, temp: String, Oz: String, aqiCategory: String) {
+    init(description: String, AQI: String, lat: Double, long: Double, temp: String, Oz: String, aqiCategory: String, pmValue: Double) {
         //doing this string arithmetic to ensure that only the first location identifier is displayed 
         //for example: If the user searches for CREATE Lab, Forbes Avenue, Pittsburgh, PA, the app will only dispay CREATE LAB
         
@@ -40,5 +41,6 @@ struct LocationForList {
         self.temp = temp
         self.Oz = Oz
         self.aqiCategory = aqiCategory
+        self.pmValue = pmValue
     }
 }

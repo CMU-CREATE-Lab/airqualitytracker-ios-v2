@@ -21,6 +21,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     var currentTemperature: String  = ""
     var currentOzone: String = ""
     var aqiCategory: String = ""
+    var pmValue: Double = 0.0
     
     @IBOutlet weak var settingsButton: UIBarButtonItem!
     
@@ -213,7 +214,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
                     else{
                         finalAQI = "\(self.airQuality)"
                     }
-                    let location = LocationForList(description: "Current Location", AQI: finalAQI, lat: self.latitude, long: self.longitude, temp: self.currentTemperature, Oz: self.currentOzone, aqiCategory: self.aqiCategory)
+                    let location = LocationForList(description: "Current Location", AQI: finalAQI, lat: self.latitude, long: self.longitude, temp: self.currentTemperature, Oz: self.currentOzone, aqiCategory: self.aqiCategory, pmValue: self.pmValue)
                     LocationStore.sharedInstance.add(location)
                 }
             }
@@ -226,7 +227,8 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     func getMostRecentValue(channelsDict: NSDictionary, identifier: String){
         let temp: NSDictionary = channelsDict[identifier] as! NSDictionary
         let mostRecentDataSample = temp["mostRecentDataSample"] as! NSDictionary
-        let aQ  = mostRecentDataSample["value"] as! Int
+        let aQ  = mostRecentDataSample["value"] as! Double
+        self.pmValue = aQ
         let AQIData  = ConvertToAQI(pmValue: aQ) //converts the PM value to AQI
         self.aqiCategory = AQIData.category
         self.airQuality = AQIData.AQI
@@ -312,7 +314,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
         let location = LocationStore.sharedInstance.get(indexPath.row)
         cell.cityLabel?.text = location.description
         
-        cell.aqiLabel?.text = location.AQI
+        cell.aqiLabel?.text = "\(location.pmValue)" + " µ/m³"// location.AQI
         if (location.description == "Current Location"){
             cell.temperatureLabel?.text = self.currentTemperature
         }
