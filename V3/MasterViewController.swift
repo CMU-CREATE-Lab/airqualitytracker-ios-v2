@@ -37,6 +37,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
         getCurrentGeocode()
         getCurrentWeatherData()
         getCurrentAirQuality()
+//        refresh()
         super.viewDidLoad()
     }
     
@@ -146,7 +147,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     
     //MARK: - creates the bounding box based on discussions with Chris Bartley and Mike Tasota and research from online sources
     func createBoundingBox(currentLatitude: Double, currentLongitude: Double) -> (Double, Double, Double, Double){
-        var channelDistance = 10 //in kilometers
+        var channelDistance = 20 //in kilometers
         var radius = 6371 //radius of earth in km
         var angularRadius: Double = Double(channelDistance * 100) / Double(radius)
         //latitude
@@ -216,6 +217,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
                     }
                     let location = LocationForList(description: "Current Location", AQI: finalAQI, lat: self.latitude, long: self.longitude, temp: self.currentTemperature, Oz: self.currentOzone, aqiCategory: self.aqiCategory, pmValue: self.pmValue)
                     LocationStore.sharedInstance.add(location)
+                    self.refresh()
                 }
             }
             dataTask.resume()
@@ -281,6 +283,10 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     }
 
 
+    func refresh(){
+        self.tableView.reloadData()
+
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -301,15 +307,18 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     // MARK: - Table View
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        println("in table view number of sections")
+        println("table view is \(tableView))")
         return 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        println("in table view rows")
         return LocationStore.sharedInstance.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
+        println("in table view cell")
         let cell = tableView.dequeueReusableCellWithIdentifier("CustomTableViewCell", forIndexPath: indexPath) as! CustomTableViewCell
         let location = LocationStore.sharedInstance.get(indexPath.row)
         cell.cityLabel?.text = location.description
@@ -351,15 +360,21 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     }
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        println("in table view bool")
         // Return false if you do not want the specified item to be editable.
         return true
     }
     
     override func viewWillAppear(animated: Bool) {
+        println("in view did appear")
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
         self.tableView.reloadData()
+        })
     }
     
+    
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        println(" in table view editing style")
         if editingStyle == .Delete {
             LocationStore.sharedInstance.removeTaskAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)

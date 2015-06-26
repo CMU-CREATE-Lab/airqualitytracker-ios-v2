@@ -117,7 +117,7 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
     
     //MARK: - creates the bounding box based on discussions with Chris Bartley and Mike Tasota and research from online sources
     func createBoundingBox(currentLatitude: Double, currentLongitude: Double) -> (Double, Double, Double, Double){
-        var channelDistance = 10 //in kilometers
+        var channelDistance = 20 //in kilometers
         var radius = 6371 //radius of earth in km
         var angularRadius: Double = Double(channelDistance * 100) / Double(radius)
         //latitude
