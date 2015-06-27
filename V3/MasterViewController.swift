@@ -307,18 +307,14 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     // MARK: - Table View
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        println("in table view number of sections")
-        println("table view is \(tableView))")
         return 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        println("in table view rows")
         return LocationStore.sharedInstance.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        println("in table view cell")
         let cell = tableView.dequeueReusableCellWithIdentifier("CustomTableViewCell", forIndexPath: indexPath) as! CustomTableViewCell
         let location = LocationStore.sharedInstance.get(indexPath.row)
         cell.cityLabel?.text = location.description
@@ -360,13 +356,11 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     }
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        println("in table view bool")
         // Return false if you do not want the specified item to be editable.
         return true
     }
     
     override func viewWillAppear(animated: Bool) {
-        println("in view did appear")
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
         self.tableView.reloadData()
         })
@@ -374,7 +368,6 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        println(" in table view editing style")
         if editingStyle == .Delete {
             LocationStore.sharedInstance.removeTaskAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)

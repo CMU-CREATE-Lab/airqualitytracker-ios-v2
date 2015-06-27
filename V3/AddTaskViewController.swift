@@ -152,9 +152,7 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
                 if let dataObject = NSJSONSerialization.JSONObjectWithData(data, options:nil, error:nil) as? NSDictionary {
                     
                     if let data = dataObject["data"] as? NSDictionary {
-                        println("mostRecentAQ data done...")
                         if let channels = data["channels"] as? NSDictionary {
-                            println("mostRecentAQ channels done...")
                             //now checking which feed the data was taken from
                             if let val: AnyObject = channels["PM2_5"]{
                                 self.getMostRecentValue(channels, identifier: "PM2_5")
