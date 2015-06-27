@@ -12,6 +12,7 @@ class AutoCompleteController: UITableViewController {
     var areaNamesArray : [String] = []
     var placeIdArray : [String] = []
     var filteredData : [String] = []
+    var coordinateArray: [(String)] = []
     var googleAPI = GoogleAPI()
     var selectedIndex = NSIndexPath()
     var selected : Bool!
@@ -56,10 +57,12 @@ extension AutoCompleteController : UISearchResultsUpdating {
         selected = false
         self.areaNamesArray.removeAll()
         self.placeIdArray.removeAll()
+        self.coordinateArray.removeAll()
         googleAPI.fetchPlacesAutoComplete(searchController.searchBar.text){ predictions in
             for prediction: NameAndID in predictions {
                 self.areaNamesArray.append(prediction.description)
                 self.placeIdArray.append(prediction.place_id)
+                self.coordinateArray.append(prediction.coordinateForList)
             }
             
             self.filteredData = self.areaNamesArray

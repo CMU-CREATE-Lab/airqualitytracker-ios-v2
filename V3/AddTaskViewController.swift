@@ -54,6 +54,8 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
         if src.selected! {
             var positionInArray = src.selectedIndex.row
             descriptionLabel = src.areaNamesArray[positionInArray]
+            var coordinatesL = src.coordinateArray[positionInArray]
+            println("des and coordinatesL are \(descriptionLabel) \(coordinatesL)")
             
             googleAPI.fetchPlacesDetail(src.placeIdArray[positionInArray]){ place in
                 self.latitude = place!.coordinate.latitude as Double

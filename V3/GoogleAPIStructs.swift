@@ -9,10 +9,20 @@ import CoreLocation
 class NameAndID {
     let description : String
     let place_id : String
+//    let coordinate:CLLocationCoordinate2D
+    let coordinateForList: String
     
     init(dictionary:NSDictionary){
-        description = dictionary["description"] as! String
-        place_id = dictionary["place_id"] as! String
+//        description = dictionary["description"] as! String
+//        place_id = dictionary["place_id"] as! String
+        description = dictionary["name"] as! String
+        place_id = dictionary["l"] as! String
+        let lat = dictionary["lat"] as! String
+        let lng = dictionary["lon"] as! String
+//        coordinate = CLLocationCoordinate2DMake(lat, lng)
+        coordinateForList = "\(lat), \(lng)"
+//        coordinateForList = "\(String(stringInterpolationSegment: lat))" + "," + "\(String(stringInterpolationSegment: lng))"
+        println("coordinates for list \(coordinateForList)")
     }
 }
 
@@ -21,12 +31,12 @@ class Detail {
     let coordinate:CLLocationCoordinate2D
     let coordinateForList: String
     
-    init(dictionary:NSDictionary){
-        
-        address  = dictionary["formatted_address"] as! String
-        let location = dictionary["geometry"]?["location"] as! NSDictionary
-        let lat = location["lat"] as! CLLocationDegrees
-        let lng = location["lng"] as! CLLocationDegrees
+//    init(dictionary:NSDictionary){
+    init(){
+        address  = "5000 Forbes" //dictionary["formatted_address"] as! String
+//        let location = dictionary["geometry"]?["location"] as! NSDictionary
+        let lat = 40.4 //location["lat"] as! CLLocationDegrees
+        let lng = -79.1 //location["lng"] as! CLLocationDegrees
         coordinate = CLLocationCoordinate2DMake(lat, lng)
         coordinateForList = "\(String(stringInterpolationSegment: lat))" + "," + "\(String(stringInterpolationSegment: lng))"
     }
