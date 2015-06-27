@@ -18,7 +18,7 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
     
     @IBOutlet weak var searchBarView: UIView!
     
-    let googleAPI = GoogleAPI()
+    let APICall = AutoCompleteAPI()
     let src = AutoCompleteController()
     
     var descriptionLabel: String! = ""
@@ -54,19 +54,13 @@ class AddTaskViewController: UIViewController, UISearchBarDelegate {
         if src.selected! {
             var positionInArray = src.selectedIndex.row
             descriptionLabel = src.areaNamesArray[positionInArray]
-            var coordinatesL = src.coordinateArray[positionInArray]
-            println("des and coordinatesL are \(descriptionLabel) \(coordinatesL)")
-            
-            googleAPI.fetchPlacesDetail(src.placeIdArray[positionInArray]){ place in
-                self.latitude = place!.coordinate.latitude as Double
-                self.longitude = place!.coordinate.longitude as Double
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            (self.latitude, self.longitude) = src.coordinateArray[positionInArray]
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     self.getCurrentAirQuality()
                     self.getCurrentWeatherData()
                 })
                 //MARK: - calling the segue here as the user is done with search
                 self.performSegueWithIdentifier("dismissAndSave", sender: self)
-            }
             if (self.latitude == 0.0 || self.longitude  == 0.0){
                 //view controller for the error page; appears if a location, which has not air quality is selected.
                 self.performSegueWithIdentifier("dismissToError", sender: self)

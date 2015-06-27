@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		40086C821B27592B00BD4B62 /* GoogleAPIStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40086C811B27592B00BD4B62 /* GoogleAPIStructs.swift */; };
-		40086C841B27594700BD4B62 /* GoogleAPICall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40086C831B27594700BD4B62 /* GoogleAPICall.swift */; };
-		40086C861B27596200BD4B62 /* AutoCompleteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40086C851B27596200BD4B62 /* AutoCompleteController.swift */; };
+		40086C841B27594700BD4B62 /* AutoCompleteAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40086C831B27594700BD4B62 /* AutoCompleteAPI.swift */; };
+		40086C861B27596200BD4B62 /* AutoCompleteAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40086C851B27596200BD4B62 /* AutoCompleteAPIController.swift */; };
 		40086C891B275A3D00BD4B62 /* LocationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40086C881B275A3D00BD4B62 /* LocationStore.swift */; };
 		404104E51B30C78A001864F4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404104E41B30C78A001864F4 /* SettingsViewController.swift */; };
 		404104E81B30D4DD001864F4 /* AboutSpeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404104E71B30D4DD001864F4 /* AboutSpeckViewController.swift */; };
@@ -43,8 +43,8 @@
 
 /* Begin PBXFileReference section */
 		40086C811B27592B00BD4B62 /* GoogleAPIStructs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleAPIStructs.swift; sourceTree = "<group>"; };
-		40086C831B27594700BD4B62 /* GoogleAPICall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleAPICall.swift; sourceTree = "<group>"; };
-		40086C851B27596200BD4B62 /* AutoCompleteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoCompleteController.swift; sourceTree = "<group>"; };
+		40086C831B27594700BD4B62 /* AutoCompleteAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoCompleteAPI.swift; sourceTree = "<group>"; };
+		40086C851B27596200BD4B62 /* AutoCompleteAPIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoCompleteAPIController.swift; sourceTree = "<group>"; };
 		40086C881B275A3D00BD4B62 /* LocationStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationStore.swift; sourceTree = "<group>"; };
 		404104E41B30C78A001864F4 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		404104E71B30D4DD001864F4 /* AboutSpeckViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutSpeckViewController.swift; sourceTree = "<group>"; };
@@ -100,8 +100,8 @@
 		40086C871B2759F000BD4B62 /* Search Controller  */ = {
 			isa = PBXGroup;
 			children = (
-				40086C831B27594700BD4B62 /* GoogleAPICall.swift */,
-				40086C851B27596200BD4B62 /* AutoCompleteController.swift */,
+				40086C831B27594700BD4B62 /* AutoCompleteAPI.swift */,
+				40086C851B27596200BD4B62 /* AutoCompleteAPIController.swift */,
 			);
 			name = "Search Controller ";
 			sourceTree = "<group>";
@@ -364,9 +364,9 @@
 				40086C821B27592B00BD4B62 /* GoogleAPIStructs.swift in Sources */,
 				404104E51B30C78A001864F4 /* SettingsViewController.swift in Sources */,
 				40F963381B29E8CD00E0284B /* GetCurrentWeather.swift in Sources */,
-				40086C841B27594700BD4B62 /* GoogleAPICall.swift in Sources */,
+				40086C841B27594700BD4B62 /* AutoCompleteAPI.swift in Sources */,
 				40F963341B29E88800E0284B /* GetCurrentAirQuality.swift in Sources */,
-				40086C861B27596200BD4B62 /* AutoCompleteController.swift in Sources */,
+				40086C861B27596200BD4B62 /* AutoCompleteAPIController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

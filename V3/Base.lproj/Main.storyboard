@@ -602,13 +602,21 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="450" id="zlP-j5-2y5"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search Powered by WUL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t1M-Qu-oEL">
+                                <rect key="frame" x="244" y="202" width="193" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.94451583059210531" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
                             <constraint firstItem="yY8-01-KTH" firstAttribute="top" secondItem="3Qv-Iq-cax" secondAttribute="bottom" constant="20" id="2Nq-43-LFZ"/>
                             <constraint firstItem="xge-C4-SqW" firstAttribute="top" secondItem="yY8-01-KTH" secondAttribute="bottom" constant="479" id="3pq-xk-bed"/>
                             <constraint firstAttribute="trailingMargin" secondItem="yY8-01-KTH" secondAttribute="trailing" constant="-15" id="ADI-JS-NNR"/>
                             <constraint firstItem="yY8-01-KTH" firstAttribute="leading" secondItem="g2Q-EW-uf5" secondAttribute="leadingMargin" constant="23" id="HfY-pm-oNz"/>
+                            <constraint firstAttribute="centerY" secondItem="t1M-Qu-oEL" secondAttribute="centerY" constant="87.5" id="bK9-hy-G9Z"/>
                             <constraint firstItem="xge-C4-SqW" firstAttribute="top" secondItem="yY8-01-KTH" secondAttribute="bottom" constant="509" id="feN-cE-xbI"/>
+                            <constraint firstAttribute="centerX" secondItem="t1M-Qu-oEL" secondAttribute="centerX" constant="-40.5" id="hRd-cG-QDb"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
